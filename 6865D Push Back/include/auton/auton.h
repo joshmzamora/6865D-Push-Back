@@ -3,7 +3,7 @@
 
 void skillsAuton();
 void redRingAuton();
-void blueRingAuton();
+void blueRightAuton();
 void redGoalAuton();
 void blueGoalAuton();
 void redAWP();

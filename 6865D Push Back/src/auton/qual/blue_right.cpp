@@ -1,6 +1,6 @@
 
 #include "lemlib/chassis/chassis.hpp"
-void blueRingAuton() {
+void blueRightAuton() {
 	
 	
 }

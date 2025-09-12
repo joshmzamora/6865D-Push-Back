@@ -1,7 +1,12 @@
 #include "main.h"
 #include "pros/rtos.hpp"
+#include "lemlib/chassis/chassis.hpp"
+#include "subsystem/intake.h"
+#include "subsystem/latch.h"
+#include "subsystem/drivetrain.h"
 
-void redRingAuton() {
+
+void redRightAuton() {
 	chassis.setPose(53, 47.5, -90);
 	intake.move(IN);
 	chassis.moveToPose(24, 48, -90, 3000);

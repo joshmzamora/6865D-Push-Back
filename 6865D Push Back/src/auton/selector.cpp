@@ -209,7 +209,7 @@ void autonSelector() {
         }
         else if (currentSide == RING) {
             if (isElim);
-            else blueRingAuton();
+            else blueRightAuton();
         
         }
     }
@@ -220,8 +220,8 @@ void autonSelector() {
         }
         else if (currentSide == RING) {
             if (isElim);
-            else redRingAuton();
-        
+           // else redRingAuton();
+      
         }
     }
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "intake.h"
 #include "main.h"
 #include "pros/motor_group.hpp"
 
@@ -10,10 +11,12 @@ enum IntakeState {
 };
 
 extern pros::Motor intake;
-extern pros::Motor hooks;
+extern pros::Motor top_intake;
 
 void intakeTopGoal();
 void intakeMiddleGoal();
+void intakeHood();
+void outtakeHood();
 void intakeStop();
 void outtakeMiddleGoal();
 void outtakeBottomGoal();

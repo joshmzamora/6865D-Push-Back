@@ -15,16 +15,9 @@ extern pros::Motor hood;
 extern pros::Motor basket;
 extern pros::Motor top_intake;
 
-void intakeTopGoal();
-void outtakeTopGoal();
-void intakeMiddleGoal();
-
-void intakeStop();
-void outtakeMiddleGoal();
-void outtakeBottomGoal();
 void runIntake();
 
-IntakeState getIntakeState();
-void setIntakeState(IntakeState state);
+std::vector<IntakeState> getIntakeState();
+void setIntakeState(std::vector<IntakeState> state);
 
 double getIntakeRotations();

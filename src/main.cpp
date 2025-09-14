@@ -4,13 +4,14 @@
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
 #include "subsystem/latch.h"
-#include "subsystem/neutral_mech.h"
+//#include "subsystem/neutral_mech.h"
 #include "util/colorsort.h"
 
 void printScreen() {
 	while (true) {
 	
-	controller.print(0, 0, "X:%.2f Y: %.2f", chassis.getPose().x, chassis.getPose().y);
+	//controller.print(0, 0, "X:%.2f Y: %.2f", chassis.getPose().x, chassis.getPose().y);
+	//controller.print(std::uint8_t line, std::uint8_t col, const char *fmt, Params args...)
 	pros::delay(20);
 	}
 }
@@ -46,7 +47,6 @@ void opcontrol() {
 			runLatchToggle();
 			runIntake();
 			runDoinkyToggle();
-			runNeutralMech();
 			int yAxis = returnExponential(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
 			int xAxis = returnExponential(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), 2, 6);
 			chassis.arcade(yAxis, xAxis);

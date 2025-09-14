@@ -17,7 +17,7 @@ void redRightAuton() {
 	chassis.waitUntilDone();
 
 	engageLatch();
-	intakeTopGoal();
+	//intakeTopGoal();
 	// pros::delay(1000);
 	// chassis.moveToPose(0, 38, -75, 5000);
 }

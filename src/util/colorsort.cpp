@@ -1,15 +1,18 @@
 #include "auton/selector.h"
 #include "main.h"
 #include "pros/distance.hpp"
+#include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
 #include <iostream>
+#include <vector>
 
 
 pros::Optical optical(PORT_OPTICAL);
 pros::Distance distance(PORT_DISTANCE);
 
 #define STOP_DISTANCE 50
-#define WAIT_TIME 500
+#define WAIT_TIME 20 
+#define STOP_TIME 10000
 
 bool holdBlock = false;
 
@@ -24,47 +27,41 @@ Alliance getColor(double hue) {
 void colorSort() {
   optical.set_led_pwm(100);
   while (true) {
-    IntakeState prevIntakeState = getIntakeState();
+    controller.print(1, 1, "%f %f %f %f", getIntakeState()[0], getIntakeState()[1], getIntakeState()[2], getIntakeState()[3]);
+     std::vector<IntakeState> states = getIntakeState();
+    //IntakeState prevIntakeState = getIntakeState();
+    //std::vector<int> states = getIntakeState();
+    //std::cout << "\rIntake State: " << states[0] << " " << states[1] << " " << states[2] << " " << states[3] << std::endl;
+   // std::cout << "\rDistance: " << distance.get() << std::endl;
+    //controller.print(1, 1, "D:%.2d", distance.get());
     Alliance seenColor = getColor(optical.get_hue());
     int startingIntakeRot = getIntakeRotations();
-    bool seen = false;
-     if (seenColor != currentAlliance && seenColor != OTHER) {
-     
-     
-      
-       seen = true;
-      // pros::delay(300);
-       
-       while (distance.get()<STOP_DISTANCE) {
-         pros::delay(20);
-          intake.move(OUT);
-        hood.move(OUT);
+    
+    if (seenColor != currentAlliance && seenColor != OTHER) {
+      bool resetSort = false;
+        std::cout << "Seen Opposite Color" << std::endl;
+        while (distance.get_distance() > 20) {
+          
+          if (getColor(optical.get_hue()) == currentAlliance &&
+          seenColor != OTHER) {
+            resetSort = true;
+            break;
+          }
+          pros::delay(20);
         }
-        setIntakeState(BLOCKED);
-
-        pros::delay(WAIT_TIME);
-        setIntakeState(prevIntakeState);
-        seen=false;
-      
-    }
-    else if (holdBlock && seenColor == currentAlliance && seenColor != OTHER) {
-      setIntakeState(STOPPED);
+        if (!resetSort) {
+          pros::delay(WAIT_TIME);
+          controller.rumble(".");
+          std::cout << "sorting" << std::endl;
+          setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED});
+          setIntakeState({BLOCKED, BLOCKED, BLOCKED, BLOCKED});
+          while (distance.get_distance() < STOP_DISTANCE ) {
+            setIntakeState({IN, OUT, OUT, IN});
+            
+          }
+          setIntakeState({states[0], states[1], states[2], states[3]});
+        }
   }
-    // if (seenColor != currentAlliance && seenColor != OTHER) {
-    //   while (distance.get()<STOP_DISTANCE) {
-    //     pros::delay(20);
-    //     top_intake.move(IN);
-    //     controller.rumble("........");
-    //   }
-    //   setIntakeState(BLOCKED);
-
-    //   pros::delay(WAIT_TIME);
-    //   setIntakeState(prevIntakeState);
-    // }
-    // else if (holdBlock && seenColor == currentAlliance && seenColor != OTHER) {
-    //   setIntakeState(STOPPED);
-    // }
-    // pros::delay(20);
     
     
 }

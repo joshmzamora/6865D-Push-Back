@@ -2,8 +2,8 @@
 #include "main.h"
 
 #define PORT_OPTICAL 6
-#define PORT_INERTIAL 7
-#define PORT_ROTATION_HORIZONTAL -20
+#define PORT_INERTIAL 8
+#define PORT_ROTATION_HORIZONTAL (-7)
 #define PORT_ROTATION_VERTICAL 21
 #define PORT_DISTANCE 9
 

@@ -219,8 +219,9 @@ void autonSelector() {
             else;
         }
         else if (currentSide == RING) {
+            redRightAuton();
             if (isElim);
-           // else redRingAuton();
+            redRightAuton();
       
         }
     }

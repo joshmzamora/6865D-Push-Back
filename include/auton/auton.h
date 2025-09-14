@@ -2,9 +2,9 @@
 #include "main.h"
 
 void skillsAuton();
-void redRingAuton();
+void redRightAuton();
 void blueRightAuton();
-void redGoalAuton();
-void blueGoalAuton();
+void redLeftAuton();
+void blueLeftAuton();
 void redAWP();
 void blueAWP();

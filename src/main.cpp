@@ -10,8 +10,8 @@
 void printScreen() {
 	while (true) {
 	
-	//controller.print(0, 0, "X:%.2f Y: %.2f", chassis.getPose().x, chassis.getPose().y);
-	//controller.print(std::uint8_t line, std::uint8_t col, const char *fmt, Params args...)
+	controller.print(0, 0, "X:%.2f Y: %.2f", chassis.getPose().x, chassis.getPose().y);
+	
 	pros::delay(20);
 	}
 }
@@ -41,7 +41,7 @@ void autonomous() {
 
 void opcontrol() {
 
-	// autonomous();	
+	//autonomous();	
 
 	while (true) {
 			runLatchToggle();

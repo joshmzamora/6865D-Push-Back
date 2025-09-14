@@ -11,12 +11,14 @@ enum IntakeState {
 };
 
 extern pros::Motor intake;
+extern pros::Motor hood;
+extern pros::Motor basket;
 extern pros::Motor top_intake;
 
 void intakeTopGoal();
+void outtakeTopGoal();
 void intakeMiddleGoal();
-void intakeHood();
-void outtakeHood();
+
 void intakeStop();
 void outtakeMiddleGoal();
 void outtakeBottomGoal();

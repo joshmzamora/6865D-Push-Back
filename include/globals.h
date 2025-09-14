@@ -10,7 +10,7 @@
 #define PORT_TOP_INTAKE (-1)
 #define PORT_INTAKE 5
 #define PORT_BASKET (-2)
-#define PORT_HOOD (-3)
+#define PORT_HOOD (3)
 
 #define PORT_DRIVE_LEFT_FRONT (-16)  //front
 #define PORT_DRIVE_LEFT_TOP (-19) //back

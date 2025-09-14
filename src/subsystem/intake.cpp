@@ -1,4 +1,5 @@
 
+#include "intake.h"
 #include "globals.h"
 #include "main.h"
 
@@ -13,7 +14,7 @@ void intakeTopGoal(){
     intake.move(IN);
     top_intake.move(IN);
     basket.move(OUT);
-    hood.move(OUT);
+    hood.move(IN);
 }
 
 void intakeMiddleGoal(){
@@ -23,17 +24,13 @@ void intakeMiddleGoal(){
     basket.move(OUT);
 }
 
-void intakeHood(){
-    intakeState = IN;
-    intake.move(IN);
-    top_intake.move(OUT);
-    hood.move(IN);
-}
 
-void outtakeHood(){
-    intakeState = IN;
+
+void outtakeTopGoal(){
+    intakeState = OUT;
     intake.move(IN);
-    top_intake.move(OUT);
+    top_intake.move(IN);
+    basket.move(OUT);
     hood.move(OUT);
 }
 
@@ -46,7 +43,7 @@ void intakeStop(){
 }
 
 void outtakeMiddleGoal(){
-    intakeState = IN;
+    intakeState = OUT;
     intake.move(IN);
     top_intake.move(OUT);
     basket.move(OUT);
@@ -59,18 +56,19 @@ void intakeBasket(){
 }
 
 void outtakeBottomGoal(){
-    intakeState = IN;
+    intakeState = OUT;
     intake.move(OUT);
     basket.move(OUT);
 }
 
 void runIntake() {
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) && controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) ) intakeTopGoal();
-    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y) ) intakeHood();
-    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT) ) outtakeHood();
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) && controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) ) intakeMiddleGoal();
+    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y) ) intakeTopGoal();
+    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT) ) outtakeTopGoal();
     else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) intakeBasket(); 
+    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) outtakeBottomGoal(); 
     else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) outtakeMiddleGoal();
-    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1))  intakeTopGoal();
+    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1))  outtakeTopGoal();
     else if (intakeState != BLOCKED) intakeStop();
 }
 
@@ -80,9 +78,9 @@ IntakeState getIntakeState() {
 
 void setIntakeState(IntakeState state) {
     intakeState = state;
-    top_intake.move(state);
+    hood.move(state);
 }
 
 double getIntakeRotations() {
-    return top_intake.get_position();
+    return intake.get_position();
 }

@@ -47,7 +47,6 @@ void opcontrol() {
 			runIntake();
 			runDoinkyToggle();
 			runNeutralMech();
-			colorSort();
 			int yAxis = returnExponential(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
 			int xAxis = returnExponential(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), 2, 6);
 			chassis.arcade(yAxis, xAxis);

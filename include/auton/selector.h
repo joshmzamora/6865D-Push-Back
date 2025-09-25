@@ -2,16 +2,9 @@
 #include "main.h"
 #include "selector.h"
 
-enum Alliance {
-    RED,
-    BLUE,
-    OTHER
-};
+enum Alliance { RED, BLUE, OTHER };
 
-enum Side {
-    GOAL,
-    RING
-};
+enum Side { LEFT, RIGHT };
 
 extern Alliance currentAlliance;
 extern Side currentSide;

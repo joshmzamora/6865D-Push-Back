@@ -19,11 +19,11 @@
       <change afterPath="$PROJECT_DIR$/include/globals.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/include/subsystem/drivetrain.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/include/subsystem/intake.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/subsystem/latch.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/subsystem/Wing.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/include/util.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/subsystem/drivetrain.cpp" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/subsystem/intake.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/latch.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/Wing.cpp" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/util.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/customTargets.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />

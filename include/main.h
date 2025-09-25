@@ -35,12 +35,13 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
-#include "pros/apix.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "pros/apix.h"
+
 /**
  * You should add more #includes here
  */
-//#include "okapi/api.hpp"
+// #include "okapi/api.hpp"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -77,17 +78,18 @@ void opcontrol(void);
 
  */
 
-#include "util/util.h"
-#include "util/colorsort.h"
+#include "auton/auton.h"
+#include "auton/selector.h"
 #include "globals.h"
-#include "subsystem/latch.h"
+#include "subsystem/wing.h"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
-#include "auton/selector.h"
-#include "auton/auton.h"
+#include "util/colorsort.h"
+#include "util/util.h"
 
-//#include <iostream>
+
+// #include <iostream>
 #include <stdio.h>
 #endif
 
-#endif  // _PROS_MAIN_H_
+#endif // _PROS_MAIN_H_

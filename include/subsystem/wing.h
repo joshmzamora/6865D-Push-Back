@@ -1,0 +1,9 @@
+#pragma once
+#include "main.h"
+void runWingToggle();
+void autoClamp();
+void engageLeftWing();
+void engageRightWing();
+void disengageLeftWing();
+void disengageRightWing();
+bool isWinged();

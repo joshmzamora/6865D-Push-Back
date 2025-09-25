@@ -83,7 +83,6 @@ void opcontrol(void);
 #include "subsystem/latch.h"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
-#include "subsystem/doinky.h"
 #include "auton/selector.h"
 #include "auton/auton.h"
 

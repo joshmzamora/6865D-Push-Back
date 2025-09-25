@@ -3,7 +3,7 @@
 #include "pros/misc.h"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
-#include "subsystem/latch.h"
+#include "subsystem/loaderMech.h"
 //#include "subsystem/neutral_mech.h"
 #include "util/colorsort.h"
 
@@ -46,7 +46,7 @@ void opcontrol() {
 	while (true) {
 			runLatchToggle();
 			runIntake();
-			runDoinkyToggle();
+			runLoaderMechToggle();
 			int yAxis = returnExponential(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
 			int xAxis = returnExponential(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), 2, 6);
 			chassis.arcade(yAxis, xAxis);

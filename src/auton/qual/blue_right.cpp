@@ -3,10 +3,10 @@
 #include "subsystem/loaderMech.h"
 void blueRightAuton() {
 
-  chassis.setPose(47, -17, 270);
-  setIntakeState({IN, IN, IN, IN});
-  chassis.moveToPose(22, -22, 270, 3000); // get 3 blocks
-  chassis.waitUntilDone();
+  chassis.setPose(47, 16, 270);
+  //setIntakeState({IN, IN, IN, IN});
+  //chassis.moveToPose(22, -22, 270, 3000); // get 3 blocks
+  //chassis.waitUntilDone();
 //   chassis.moveToPose(8, -38, 0, 3000);
 //   chassis.waitUntilDone();
 //   chassis.moveToPose(6, -42, 20, 3000); // get 2 blocks

@@ -7,25 +7,24 @@
 pros::adi::Pneumatics wingLeft(PORT_ADI_WING_LEFT, false);
 pros::adi::Pneumatics wingRight(PORT_ADI_WING_RIGHT, false);
 
-void runWingToggle() {
+void runLeftWingToggle() {
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
     wingLeft.toggle();
+    disengageRightWing();
   }
-  else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+}
+void runRightWingToggle() {
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
     wingRight.toggle();
+    disengageLeftWing();
   }
 }
+  void engageLeftWing() { wingLeft.extend(); }
 
-void engageLeftWing() { wingLeft.extend(); }
+  void engageRightWing() { wingRight.extend(); }
 
-void engageRightWing() { wingRight.extend(); }
+  void disengageLeftWing() { wingLeft.retract(); }
 
-void disengageLeftWing() {
-  wingLeft.retract();
-}
+  void disengageRightWing() { wingRight.retract(); }
 
-void disengageRightWing() {
-  wingRight.retract();
-}
-
-bool isWinged() { return wingLeft.is_extended(); }
+  bool isWinged() { return wingLeft.is_extended(); }

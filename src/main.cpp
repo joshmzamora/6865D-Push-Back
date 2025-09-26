@@ -4,7 +4,6 @@
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
-// #include "subsystem/neutral_mech.h"
 #include "util/colorsort.h"
 
 void printScreen() {
@@ -26,6 +25,7 @@ void initialize() {
   disengageRightWing();
   gui();
   chassis.calibrate();
+  
 }
 
 void disabled() {}
@@ -37,9 +37,12 @@ void autonomous() { autonSelector(); }
 void opcontrol() {
 
   // autonomous();
-  // blueRightAuton();
-  while (true) {
-    runWingToggle();
+  //initialize();
+  //redRightAuton();
+
+      while (true) {
+    runLeftWingToggle();
+    runRightWingToggle();
     runIntake();
     runLoaderMechToggle();
     int yAxis = returnExponential(
@@ -47,6 +50,8 @@ void opcontrol() {
     int xAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), 2, 6);
     chassis.arcade(yAxis, xAxis);
+    printf("X: %.2f Y: %.2f Theta: %.2f\n", chassis.getPose().x,
+           chassis.getPose().y, formatHeading(chassis.getPose().theta));
     pros::delay(20);
   }
 }

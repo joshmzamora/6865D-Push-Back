@@ -1,6 +1,7 @@
 #pragma once
 #include "main.h"
-void runWingToggle();
+void runLeftWingToggle();
+void runRightWingToggle();
 void autoClamp();
 void engageLeftWing();
 void engageRightWing();

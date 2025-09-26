@@ -6,7 +6,8 @@
 #include "subsystem/intake.h"
 
 void redRightAuton() {
-  chassis.setPose(0, 0, 0);
+  chassis.setPose(-47, -16, 90);
   setIntakeState({IN, IN, IN, IN});
-  chassis.moveToPoint(0, 52, 5000, {.minSpeed = 25});
+  chassis.moveToPose(-22, -22, 70, 5000);
+  chassis.waitUntilDone();
 }

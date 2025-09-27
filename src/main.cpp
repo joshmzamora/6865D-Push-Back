@@ -38,9 +38,9 @@ void opcontrol() {
 
   // autonomous();
   //initialize();
-  redRightAuton();
+  //redRightAuton();
 
-      while (true) {
+   while (true) {
     runLeftWingToggle();
     runRightWingToggle();
     runIntake();

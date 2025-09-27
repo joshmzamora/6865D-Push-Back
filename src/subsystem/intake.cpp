@@ -16,21 +16,29 @@ void runIntake() {
   if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
       intakeState != BLOCKED)
     setIntakeState({IN, OUT, OUT, STOPPED}); // intake Middle Goal
+
+  
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
            intakeState != BLOCKED)
-    setIntakeState({IN, IN, STOPPED, IN}); // intake Top Goal
+    setIntakeState({IN, IN, OUT, OUT}); // intake Top Goal
+
+  
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
-    setIntakeState({IN, STOPPED, IN, STOPPED}); // intake Basket
+    setIntakeState({IN, IN, STOPPED, IN}); // intake Basket
+
+  
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
            intakeState != BLOCKED)
     setIntakeState({OUT, STOPPED, OUT, STOPPED}); // outtake Basket
+
+  
   else if (intakeState != BLOCKED)
     setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED});
 }
 
-void intakeBasket() { setIntakeState({IN, STOPPED, IN, STOPPED}); }
-void intakeTop() { setIntakeState({IN, IN, STOPPED, IN}); }
+void intakeBasket() { setIntakeState({IN, IN, STOPPED, IN}); }
+void intakeTop() { setIntakeState({IN, IN, OUT, OUT}); }
 void intakeMiddle() { setIntakeState({IN, OUT, OUT, STOPPED}); }
 void outtakeBasket() { setIntakeState({OUT, STOPPED, OUT, STOPPED}); }
 void stopIntake() { setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED}); }

@@ -1,6 +1,5 @@
 #include "drivetrain.h"
 #include "lemlib/chassis/trackingWheel.hpp"
-#include "main.h"
 #include "pros/rotation.hpp"
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
@@ -22,7 +21,7 @@ pros::MotorGroup driveRight({PORT_DRIVE_RIGHT_FRONT, PORT_DRIVE_RIGHT_TOP,
 lemlib::Drivetrain drivetrain(
     &driveLeft,                 // left motor group
     &driveRight,                // right motor group
-    10,                         // 10 inch track width
+    13,                         // 13 inch track width
     lemlib::Omniwheel::NEW_325, // using new 4" omnis
     450,                        // drivetrain rpm is 300
     2 // chase power is 2. If we had traction wheels, it would have been 8
@@ -78,7 +77,7 @@ pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
 pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 lemlib::Omniwheel::NEW_2,
-                                                -3.375);
+                                                -5.5);
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2, 0.875);
 

@@ -17,7 +17,7 @@ void printScreen() {
 }
 
 void initialize() {
-  pros::Task colorSortTask(colorSort);
+  //pros::Task colorSortTask(colorSort);
   // pros::Task redirectTask(macro_redirect);
   // pros::Task collapseTask(macro_collapse);
   pros::Task printTask(printScreen);
@@ -38,7 +38,7 @@ void opcontrol() {
 
   // autonomous();
   //initialize();
-  //redRightAuton();
+  redRightAuton();
 
       while (true) {
     runLeftWingToggle();

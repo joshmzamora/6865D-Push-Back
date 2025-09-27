@@ -13,26 +13,27 @@ IntakeState basketState = STOPPED;
 IntakeState hoodState = STOPPED;
 
 void runIntake() {
-  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
-      controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
+  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
       intakeState != BLOCKED)
     setIntakeState({IN, OUT, OUT, STOPPED}); // intake Middle Goal
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y) &&
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
            intakeState != BLOCKED)
-    setIntakeState({IN, IN, OUT, IN}); // intake Top Goal
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT))
-    setIntakeState({IN, IN, OUT, OUT}); // outtake Top Goal
+    setIntakeState({IN, IN, STOPPED, IN}); // intake Top Goal
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
     setIntakeState({IN, STOPPED, IN, STOPPED}); // intake Basket
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
            intakeState != BLOCKED)
     setIntakeState({OUT, STOPPED, OUT, STOPPED}); // outtake Basket
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
-    setIntakeState({OUT, IN, IN, STOPPED}); // outtake Middle Goal
   else if (intakeState != BLOCKED)
     setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED});
 }
+
+void intakeBasket() { setIntakeState({IN, STOPPED, IN, STOPPED}); }
+void intakeTop() { setIntakeState({IN, IN, STOPPED, IN}); }
+void intakeMiddle() { setIntakeState({IN, OUT, OUT, STOPPED}); }
+void outtakeBasket() { setIntakeState({OUT, STOPPED, OUT, STOPPED}); }
+void stopIntake() { setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED}); }
 
 std::vector<IntakeState> getIntakeState() {
   std::vector<IntakeState> states;

@@ -14,8 +14,11 @@ extern pros::Motor intake;
 extern pros::Motor hood;
 extern pros::Motor basket;
 extern pros::Motor top_intake;
-
-void runIntake();
+void intakeBasket(); 
+void intakeTop() ;
+void intakeMiddle(); 
+void outtakeBasket(); 
+void stopIntake(); void runIntake();
 
 std::vector<IntakeState> getIntakeState();
 void setIntakeState(std::vector<IntakeState> state);

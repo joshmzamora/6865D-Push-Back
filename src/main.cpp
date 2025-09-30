@@ -17,7 +17,7 @@ void printScreen() {
 }
 
 void initialize() {
-  //pros::Task colorSortTask(colorSort);
+ //pros::Task colorSortTask(colorSort);
   // pros::Task redirectTask(macro_redirect);
   // pros::Task collapseTask(macro_collapse);
   pros::Task printTask(printScreen);
@@ -38,7 +38,7 @@ void opcontrol() {
 
   // autonomous();
   //initialize();
-  //redRightAuton();
+  
 
    while (true) {
     runLeftWingToggle();
@@ -50,8 +50,8 @@ void opcontrol() {
     int xAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), 2, 6);
     chassis.arcade(yAxis, xAxis);
-    printf("X: %.2f Y: %.2f Theta: %.2f\n", chassis.getPose().x,
-           chassis.getPose().y, formatHeading(chassis.getPose().theta));
+    // printf("X: %.2f Y: %.2f Theta: %.2f\n", chassis.getPose().x,
+    //        chassis.getPose().y, formatHeading(chassis.getPose().theta));
     pros::delay(20);
   }
 }

@@ -7,7 +7,7 @@
 #include <exception>
 #include <string>
 
-Alliance currentAlliance = RED;
+Alliance currentAlliance = BLUE;
 Side currentSide = RIGHT;
 bool isElim = false;
 bool isSkills = false;
@@ -226,7 +226,7 @@ void autonSelector() {
       else
         ;
     } else if (currentSide == RIGHT) {
-      redRightAuton();
+      
       if (isElim)
         ;
       redRightAuton();

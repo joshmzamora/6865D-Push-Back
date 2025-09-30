@@ -35,7 +35,7 @@ lemlib::Drivetrain drivetrain(
 
 // lateral motion controller
 lemlib::ControllerSettings
-    linearController(35, // proportional gain (kP) between 145-160
+    linearController(15, // proportional gain (kP) between 145-160
                      0,   // integral gain (kI)
                      75,  // derivative gain (kD)
                      0,   // anti windup

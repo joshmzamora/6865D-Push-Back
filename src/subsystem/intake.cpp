@@ -25,7 +25,7 @@ void runIntake() {
   
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
-    setIntakeState({IN, IN, STOPPED, IN}); // intake Basket
+    setIntakeState({IN, STOPPED, IN, STOPPED}); // intake Basket
 
   
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
@@ -37,7 +37,7 @@ void runIntake() {
     setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED});
 }
 
-void intakeBasket() { setIntakeState({IN, IN, STOPPED, IN}); }
+void intakeBasket() { setIntakeState({IN, STOPPED, IN, STOPPED}); }
 void intakeTop() { setIntakeState({IN, IN, OUT, OUT}); }
 void intakeMiddle() { setIntakeState({IN, OUT, OUT, STOPPED}); }
 void outtakeBasket() { setIntakeState({OUT, STOPPED, OUT, STOPPED}); }

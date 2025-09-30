@@ -16,7 +16,7 @@ pros::Distance distance(PORT_DISTANCE);
 bool holdBlock = false;
 
 Alliance getColor(double hue) {
-  if (hue > 190 && hue < 230)
+  if (hue > 120 && hue < 230)
     return BLUE;
   else if (hue > 0 && hue < 25)
     return RED;
@@ -55,9 +55,11 @@ void colorSort() {
         // setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED});
         controller.rumble(".");
         std::cout << "sorting" << std::endl;
-        // setIntakeState({BLOCKED, BLOCKED, BLOCKED, BLOCKED});
-        while (distance.get_distance() < STOP_DISTANCE) {
-          setIntakeState({IN, OUT, OUT, IN});
+        setIntakeState({BLOCKED, BLOCKED, BLOCKED, BLOCKED});
+        intakeMiddle();
+        if (distance.get_distance() < STOP_DISTANCE) {
+           
+          setIntakeState({states[0], states[1], states[2], states[3]});
         }
         setIntakeState({states[0], states[1], states[2], states[3]});
       }

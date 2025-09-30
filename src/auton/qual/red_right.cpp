@@ -11,27 +11,30 @@
 // chassis.moveToPoint(24, 24, 3000);
 // chassis.waitUntilDone();
 void redRightAuton() {
- intakeBasket();
- 
+ //intakeBasket();
+ setIntakeState({IN, STOPPED, IN, STOPPED});
   chassis.setPose(-52, -18, 90);
-  chassis.moveToPoint(-31, -18, 900);
+  chassis.moveToPoint(-35, -18, 900, {.maxSpeed=25});
   chassis.waitUntilDone();
-
-  chassis.moveToPoint(-16, -20, 3000, {.maxSpeed = 25}); //get 1 block
+  chassis.moveToPoint(-30, -18, 900, {.maxSpeed=25});
   chassis.waitUntilDone();
   chassis.turnToHeading(115, 1000);
   chassis.waitUntilDone();
-  chassis.moveToPoint(-13, -21, 3000); //get 2 blocks
+  chassis.moveToPoint(-15, -20, 3000, {.maxSpeed = 25}); //get 1 block
   chassis.waitUntilDone();
-  chassis.moveToPoint(-11, -11, 3000); //go to low goal
+  chassis.turnToHeading(45, 1000);
+  chassis.waitUntilDone();
+  chassis.moveToPoint(-20, 6, 3000, {.maxSpeed = 25}); //go to low goal
   chassis.waitUntilDone();
   outtakeBasket();
-  pros::delay(1000);
+  pros::delay(3000);
   stopIntake(); 
-  chassis.turnToHeading(225, 1000);
-  chassis.waitUntilDone();
-  chassis.moveToPose(-48, -48, -90, 5000, {.maxSpeed = 40});
-  chassis.waitUntilDone();
+  // chassis.turnToHeading(225, 1000);
+  // chassis.waitUntilDone();
+
+  // chassis.moveToPose(-48, -48, -90, 5000,
+  //                    {.forwards = false, .maxSpeed = 40}); // go to match loader
+  // chassis.waitUntilDone();
 
   // chassis.turnToHeading(-90, 1000);
   // chassis.waitUntilDone();

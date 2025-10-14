@@ -5,6 +5,7 @@
 
 enum IntakeState {
     IN = 127,
+    STOPBLOCKS = -15,
     OUT = -127,
     STOPPED = 0,
     BLOCKED

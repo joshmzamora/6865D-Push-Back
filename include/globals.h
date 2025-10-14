@@ -1,16 +1,14 @@
 #pragma once
 #include "main.h"
 
-#define PORT_OPTICAL 6
-#define PORT_INERTIAL 10
+#define PORT_OPTICAL 10
+#define PORT_INERTIAL 2
 #define PORT_ROTATION_HORIZONTAL (-7)
 #define PORT_ROTATION_VERTICAL 20
 #define PORT_DISTANCE 9
 
-#define PORT_TOP_INTAKE (-1)
-#define PORT_INTAKE 5
-#define PORT_BASKET (-2)
-#define PORT_HOOD (3)
+#define PORT_INTAKE (-1)
+#define PORT_HOOD (-2)
 
 #define PORT_DRIVE_LEFT_FRONT (-16)  //front
 #define PORT_DRIVE_LEFT_TOP (-19) //back
@@ -21,10 +19,8 @@
 
 #define PORT_ADI_WING_LEFT 'C'
 #define PORT_ADI_WING_RIGHT 'H'
-#define PORT_ADI_LOADER_MECH_RIGHT 'A'
+#define PORT_ADI_LOADER_MECH_RIGHT 'E'
 #define PORT_ADI_LOADER_MECH_LEFT 'B'
-#define PORT_ADI_FLIPOUT 'E'
-#define PORT_ADI_LIFT_LEFT 'B'
-#define PORT_ADI_LIFT_RIGHT 'G'
+#define PORT_ADI_MIDDLE_GOAL 'A'
 
 #define PORT_ADI_LIMIT 'H'

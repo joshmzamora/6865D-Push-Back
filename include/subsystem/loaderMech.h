@@ -4,4 +4,4 @@
 void runLoaderMechToggle();
 void engageLoaderMech();
 void disengageLoaderMech();
-bool isDoinked();
+bool isLoaderMechEngaged();

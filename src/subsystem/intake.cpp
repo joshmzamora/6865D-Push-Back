@@ -1,11 +1,11 @@
 #include "intake.h"
 #include "globals.h"
 #include "main.h"
+#include "subsystem/middleGoalMech.h"
 #include <vector>
 
 pros::Motor intake(PORT_INTAKE);
 pros::Motor hood(PORT_HOOD);
-pros::adi::Pneumatics middleGoal(PORT_ADI_MIDDLE_GOAL, false);
 IntakeState intakeState = STOPPED;
 IntakeState hoodState = STOPPED;
 
@@ -25,25 +25,28 @@ void setIntakeState(std::vector<IntakeState> state) {
 
 void intakeIn() {
   setIntakeState({IN, STOPBLOCKS});
-  middleGoal.retract();
+  disengageMiddleGoalMech();
 }
 
 void intakeOut() {
   setIntakeState({OUT, OUT});
-  middleGoal.retract();
+  disengageMiddleGoalMech();
 }
 
 void intakeMiddle() {
   setIntakeState({IN, OUT});
-  middleGoal.extend();
+  engageMiddleGoalMech();
 }
 
 void intakeTopGoal() {
   setIntakeState({IN, IN});
-  middleGoal.retract();
+  disengageMiddleGoalMech();
 }
 
-void stopIntake() { setIntakeState({STOPPED, STOPBLOCKS}); }
+void stopIntake() {
+  setIntakeState({STOPPED, STOPBLOCKS});
+  disengageMiddleGoalMech();
+}
 
 void runIntake() {
   if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
@@ -58,7 +61,7 @@ void runIntake() {
            intakeState != BLOCKED)
     intakeTopGoal();
 
-  else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1) &&
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
            intakeState != BLOCKED)
     intakeMiddle();
 

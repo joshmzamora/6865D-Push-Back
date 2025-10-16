@@ -1,26 +1,22 @@
 #include "loaderMech.h"
 #include "main.h"
 
-pros::adi::Pneumatics loaderMechLeft(PORT_ADI_LOADER_MECH_LEFT, false);
-pros::adi::Pneumatics loaderMechRight(PORT_ADI_LOADER_MECH_RIGHT, false);
+pros::adi::Pneumatics loaderMech(PORT_ADI_LOADER_MECH, false);
 
 void runLoaderMechToggle() {
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-    loaderMechLeft.toggle();
-    loaderMechRight.toggle();
+    loaderMech.toggle();
   }
   
 }
 void disengageLoaderMech() {
-  loaderMechLeft.retract();
-  loaderMechRight.retract();
+  loaderMech.retract();
 }
 
 void engageLoaderMech() {
-  loaderMechLeft.extend();
-  loaderMechRight.extend();
+  loaderMech.extend();
 }
 
-bool isDoinked() {
-  return loaderMechLeft.is_extended() && loaderMechRight.is_extended();
+bool isLoaderMechEngaged() {
+  return loaderMech.is_extended();
 }

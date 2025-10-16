@@ -3,23 +3,27 @@
 #include "pros/distance.hpp"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
+#include "subsystem/middleGoalMech.h"
 #include <iostream>
 #include <vector>
 
 pros::Optical optical(PORT_OPTICAL);
-pros::Distance distance(PORT_DISTANCE);
+pros::Distance sortSensor(PORT_DISTANCE);
 
-#define STOP_DISTANCE 50
+#define STOP_DISTANCE 180
 #define WAIT_TIME 20
-#define STOP_TIME 10000
+#define STOP_TIME 1000
 
 bool holdBlock = false;
 
 Alliance getColor(double hue) {
-  if (hue > 120 && hue < 230)
-    return BLUE;
-  else if (hue > 0 && hue < 25)
+  if (hue > 170 && hue < 230) {
+    std::cout << "BLUE" << std::endl;
+    return BLUE;  
+  } else if (hue > 0 && hue < 25) {
+    std::cout << "RED" << std::endl;
     return RED;
+  }
   return OTHER;
 }
 
@@ -35,34 +39,34 @@ void colorSort() {
     // std::cout << "\rDistance: " << distance.get() << std::endl;
     // controller.print(1, 1, "D:%.2d", distance.get());
     std::vector<IntakeState> states = getIntakeState();
+    IntakeState prevIntakeState = states[0];
+    IntakeState prevHoodState = states[1];
     Alliance seenColor = getColor(optical.get_hue());
     int startingIntakeRot = getIntakeRotations();
-
     if (seenColor != currentAlliance && seenColor != OTHER) {
       bool resetSort = false;
-      std::cout << "Seen Opposite Color" << std::endl;
-      while (distance.get_distance() > 20) {
+      
+      while (sortSensor.get_distance() > 20) {
+        
         if (getColor(optical.get_hue()) == currentAlliance &&
-            seenColor != OTHER) {
+        seenColor != OTHER) {
           resetSort = true;
           break;
         }
         pros::delay(20);
       }
-
       if (!resetSort) {
         pros::delay(WAIT_TIME);
-        // setIntakeState({STOPPED, STOPPED, STOPPED, STOPPED});
-        controller.rumble(".");
-        std::cout << "sorting" << std::endl;
-        setIntakeState({BLOCKED, BLOCKED, BLOCKED, BLOCKED});
-        intakeMiddle();
-        if (distance.get_distance() < STOP_DISTANCE) {
-           
-          setIntakeState({states[0], states[1], states[2], states[3]});
-        }
-        setIntakeState({states[0], states[1], states[2], states[3]});
+
+        setIntakeState({STOPPED, STOPPED});
+        setIntakeState({BLOCKED, BLOCKED});
+        engageMiddleGoalMech();
+        //setIntakeState({BLOCKED, IN});
+        pros::delay(STOP_TIME);
+        disengageMiddleGoalMech();
+        setIntakeState({prevIntakeState, prevHoodState});
       }
+    
       pros::delay(20);
     }
   }

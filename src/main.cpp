@@ -17,7 +17,7 @@ void printScreen() {
 }
 
 void initialize() {
- //pros::Task colorSortTask(colorSort);
+ pros::Task colorSortTask(colorSort);
   // pros::Task redirectTask(macro_redirect);
   // pros::Task collapseTask(macro_collapse);
   pros::Task printTask(printScreen);
@@ -36,8 +36,7 @@ void autonomous() { autonSelector(); }
 
 void opcontrol() {
 
-  // autonomous();
-  //initialize();
+ // blueLeftAuton();
   
 
    while (true) {

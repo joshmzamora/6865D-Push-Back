@@ -1,6 +1,9 @@
 #include "drivetrain.h"
+#include "auton/selector.h"
 #include "lemlib/chassis/trackingWheel.hpp"
+#include "pros/misc.h"
 #include "pros/rotation.hpp"
+#include <iostream>
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
@@ -35,15 +38,15 @@ lemlib::Drivetrain drivetrain(
 
 // lateral motion controller
 lemlib::ControllerSettings
-    linearController(15, // proportional gain (kP) between 145-160
-                     0,   // integral gain (kI)
-                     75,  // derivative gain (kD)
-                     0,   // anti windup
-                     1,   // small error range, in inches
-                     100, // small error range timeout, in milliseconds
-                     3,   // large error range, in inches
-                     500, // large error range timeout, in milliseconds
-                     20   // maximum acceleration (slew)
+    linearController(2,  // proportional gain (kP)
+                     0,  // integral gain (kI)
+                     10, // derivative gain (kD)
+                     0,  // anti windup
+                     0,  // small error range, in inches
+                     0,  // small error range timeout, in milliseconds
+                     0,  // large error range, in inches
+                     0,  // large error range timeout, in milliseconds
+                     0   // maximum acceleration (slew)
     );
 
 // angular motion controller
@@ -77,7 +80,7 @@ pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
 pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 lemlib::Omniwheel::NEW_2,
-                                                1.75);
+                                                -2);
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2, 1.125);
 
@@ -96,4 +99,73 @@ lemlib::Chassis chassis = lemlib::Chassis(drivetrain, linearController,
 void arcadeDrive(double leftAxis, double rightAxis) {
   driveLeft.move(leftAxis);
   driveRight.move(rightAxis);
+}
+
+/*
+###############
+-  PID CONTROLLER -
+###############
+*/
+
+void pidController() {
+  
+  // --- TUNING PARAMETERS ---
+  const double KP_STEP = 0.5;
+  const double KD_STEP = 5.0;
+
+  // Get the CURRENT lateral controller settings by accessing the object
+  // directly 'linearController' is defined globally in your provided code.
+  lemlib::ControllerSettings &currentLinear =
+      linearController; // Use reference (&) to modify the global object
+
+  double newKp = currentLinear.kP;
+  double newKd = currentLinear.kD;
+
+  bool pidChanged = false;
+
+  // --- KP ADJUSTMENTS (X and A buttons) ---
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+    newKp += KP_STEP;
+    pidChanged = true;
+    std::cout << "Lateral kP increased to: " << newKp << std::endl;
+  } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+    newKp -= KP_STEP;
+    pidChanged = true;
+    std::cout << "Lateral kP decreased to: " << newKp << std::endl;
+  }
+
+  // --- KD ADJUSTMENTS (Y and B buttons) ---
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+    newKd += KD_STEP;
+    pidChanged = true;
+    std::cout << "Lateral kD increased to: " << newKd << std::endl;
+  } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    newKd -= KD_STEP;
+    pidChanged = true;
+    std::cout << "Lateral kD decreased to: " << newKd << std::endl;
+  }
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+    chassis.moveToPoint(0,24,10000);
+  } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
+    chassis.moveToPoint(0,0,10000, {.forwards=false});
+    }
+
+  // --- APPLY NEW SETTINGS ---
+  if (pidChanged) {
+    // 1. Update the global linearController struct directly
+    currentLinear.kP = newKp;
+    currentLinear.kD = newKd;
+
+    // 2. The LemLib chassis object is typically initialized only once,
+    // but by updating the 'linearController' object (which the chassis uses),
+    // the changes should take effect immediately in older versions of the
+    // library. If the changes don't take effect immediately, you may need to
+    // re-initialize the chassis or re-pass the controller objects, depending on
+    // your LemLib version.
+  }
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+    lemlib::ControllerSettings &lateralSettings = linearController;
+        std::cout << "kP: " << lateralSettings.kP << std::endl;
+    std::cout << "kD: " << lateralSettings.kD << std::endl;
+    }
 }

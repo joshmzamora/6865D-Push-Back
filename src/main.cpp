@@ -8,10 +8,7 @@
 
 void printScreen() {
   while (true) {
-
-    controller.print(0, 0, "X:%.2f Y: %.2f", chassis.getPose().x,
-                     chassis.getPose().y);
-
+    controller.print(0, 0, "X:%.2f Y: %.2f T: %.2f", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
     pros::delay(20);
   }
 }
@@ -36,10 +33,11 @@ void autonomous() { autonSelector(); }
 
 void opcontrol() {
 
- // blueLeftAuton();
-  
+  //blueLeftAuton();
 
-   while (true) {
+
+  while (true) {
+    pidController();
     runLeftWingToggle();
     runRightWingToggle();
     runIntake();

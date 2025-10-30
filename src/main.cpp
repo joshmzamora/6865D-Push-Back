@@ -38,8 +38,6 @@ void opcontrol() {
 
   while (true) {
     pidController();
-    runLeftWingToggle();
-    runRightWingToggle();
     runIntake();
     runLoaderMechToggle();
     int yAxis = returnExponential(

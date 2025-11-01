@@ -1,45 +1,52 @@
 
+#include "auton/selector.h"
 #include "lemlib/chassis/chassis.hpp"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
 void blueLeftAuton() {  
  //Set robot's starting position and state
-chassis.setPose(46, -8, -90);
+chassis.setPose(47, -8, -90);
 intakeIn();
-
- // Move to grab the next 2 blocks
- chassis.moveToPose(8, -45,-180, 3000);
- chassis.waitUntilDone();
+// Move to grab the next 2 blocks
+chassis.moveToPose(8, -44,-180, 3000);
+chassis.waitUntilDone();
 engageLoaderMech();
 
- chassis.moveToPoint(8, -48, 3000);
+intakeIn();
+ chassis.moveToPoint(8, -46, 3000);
  chassis.waitUntilDone();
- pros::delay(1000); // Allow time to secure blocks
+ pros::delay(500); // Allow time to secure blocks
 disengageLoaderMech();
  //Move back
  chassis.moveToPoint(24, -30, 3000, {.forwards = false, .maxSpeed = 70});
  chassis.waitUntilDone();
-
- //  Turn to face the long goal
- chassis.moveToPoint(48, -48, 3000, {.forwards=false, .maxSpeed = 70});
-
+//  //  Turn to face the long goal
+ chassis.moveToPoint(53, -53, 3000, {.forwards=false, .maxSpeed = 70});
  chassis.waitUntilDone();
- // Approach the long goal to score
+
  chassis.turnToHeading(90, 1000);
  chassis.waitUntilDone();
- chassis.moveToPoint(30, -48, 3000, {.forwards = false});
- chassis.waitUntilDone();
 
- // Score the blocks
+//  //  chassis.setPose(48,-48,90);
+//  //  // Approach the long goal to score
+chassis.moveToPoint(30, -55, 3000, {.forwards = false});
+chassis.waitUntilDone();
+
+ //  // Score the blocks
  engageLoaderMech();
- intakeTopGoal();
+ setIntakeState(IN, OUT);
  pros::delay(3000); // Run intakes to score
-
- // // Move to the match loader area
- chassis.moveToPoint(60, -48, 3000);
+ intakeIn();
+// // Move to the match loader area
+ chassis.moveToPoint(55, -57, 3000);
  chassis.waitUntilDone();
-
+ 
+ pros::delay(2000);
+ chassis.moveToPoint(30, -57, 3000, {.forwards = false});
+ chassis.waitUntilDone();
+ 
+ setIntakeState(IN, OUT);
  // Autonomous routine is complete
 
 

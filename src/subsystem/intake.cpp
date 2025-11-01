@@ -2,6 +2,8 @@
 #include "globals.h"
 #include "main.h"
 #include "subsystem/middleGoalMech.h"
+#include "subsystem/loaderMech.h"
+
 #include <vector>
 
 pros::Motor intake(PORT_INTAKE);
@@ -48,19 +50,16 @@ void runIntake() {
   if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
       intakeState != BLOCKED)
     intakeOut();
-
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
     intakeIn();
-
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
            intakeState != BLOCKED)
     intakeTopGoal();
-
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
            intakeState != BLOCKED)
     intakeMiddle();
-
+  
   else if (intakeState != BLOCKED) {
     stopIntake();
   }

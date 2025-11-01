@@ -4,10 +4,7 @@
 pros::adi::Pneumatics middleGoal(PORT_ADI_MIDDLE_GOAL, false);
 
 void runMiddleGoalToggle() {
-  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
-    middleGoal.toggle();
-  }
-  
+ 
 }
 void disengageMiddleGoalMech() {
   middleGoal.retract();

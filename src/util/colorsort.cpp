@@ -23,15 +23,15 @@ void colorSort() {
   optical.set_led_pwm(0);
   
   while (true) {
-    std::vector<IntakeState> states = getIntakeState();
-    IntakeState prevIntakeState = states[0];
-    IntakeState prevHoodState = states[1];
+    
+    IntakeState prevIntakeState = getIntakeState();
+    IntakeState prevHoodState = getHoodState();
     Alliance seenColor = getColor(optical.get_hue());
     // std::cout << optical.get_hue() << std::endl;
     
     if (seenColor != currentAlliance && seenColor != OTHER) {
-        setIntakeState({STOPPED, STOPPED});
-        setIntakeState({BLOCKED, BLOCKED});
+        setIntakeState(STOPPED, STOPPED);
+        setIntakeState(BLOCKED, BLOCKED);
         hood.move(127);
         intake.move(127);
         while (true) {
@@ -41,10 +41,10 @@ void colorSort() {
             break;
           }
         }
-        setIntakeState({prevIntakeState, prevHoodState});
+        setIntakeState(prevIntakeState, prevHoodState);
       }
     if (seenColor == currentAlliance) {
-      setIntakeState({prevIntakeState, prevHoodState});
+      setIntakeState(prevIntakeState, prevHoodState);
       }
       pros::delay(20);
   }

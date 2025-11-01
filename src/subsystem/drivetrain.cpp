@@ -82,10 +82,10 @@ pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
 pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 lemlib::Omniwheel::NEW_2,
-                                                4);
+                                                4);//4
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2,
-                                              .875);
+                                              .875);//1.25
 
 lemlib::OdomSensors odomSensors(
     &vertical_tracking_wheel, // vertical tracking wheel 1
@@ -149,11 +149,11 @@ void pidController() {
     chassis.setPose(0,0,0);
   } 
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-    chassis.moveToPoint(0,24,10000);
-    //chassis.turnToHeading(90, 10000);
+    //chassis.moveToPoint(0,24,10000);
+    chassis.turnToHeading(90, 10000);
   } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
-    chassis.moveToPoint(0,0,10000, {.forwards=false});
-    //chassis.turnToHeading(0, 10000);
+    //chassis.moveToPoint(0,0,10000, {.forwards=false});
+    chassis.turnToHeading(0, 10000);
     }
 
   // --- APPLY NEW SETTINGS ---

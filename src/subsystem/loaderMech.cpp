@@ -6,11 +6,19 @@ pros::adi::Pneumatics loaderMechLeft(PORT_ADI_LOADER_MECH_LEFT, false);
 pros::adi::Pneumatics loaderMechRight(PORT_ADI_LOADER_MECH_RIGHT, false);
 
 void runLoaderMechToggle() {
-  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-    loaderMechLeft.toggle();
-    loaderMechRight.toggle();
+
+  static bool toggle{false};
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+    if (!toggle) {
+      engageLoaderMech();
+      toggle = !toggle;
+    } else {
+      disengageLoaderMech();
+      toggle = !toggle;
+    }
   }
-  
+
+ 
 }
 void disengageLoaderMech() {
   loaderMechLeft.retract();

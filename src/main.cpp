@@ -30,11 +30,11 @@ void competition_initialize() {}
 void autonomous() { autonSelector(); }
 
 void opcontrol() {
-  
-  blueLeftAuton();
+  //engageLoaderMech();
+  //blueLeftAuton();
 
   while (true) {
-    pidController();
+    //pidController();
     runIntake();
     runLoaderMechToggle();
     int yAxis = returnExponential(

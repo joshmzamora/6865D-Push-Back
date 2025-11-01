@@ -1,4 +1,5 @@
 #include "auton/selector.h"
+#include "auton.h"
 #include "main.h"
 #include "subsystem/drivetrain.h"
 #include <charconv>
@@ -210,26 +211,26 @@ void autonSelector() {
   else if (currentAlliance == BLUE) {
     if (currentSide == LEFT) {
       if (isElim)
-        ;
+        blueLeftAuton();
       else
-        ;
+        blueLeftAuton();
     } else if (currentSide == RIGHT) {
       if (isElim)
-        ;
+        blueRightAuton();
       else
         blueRightAuton();
     }
   } else if (currentAlliance == RED) {
     if (currentSide == LEFT) {
       if (isElim)
-        ;
+        redLeftAuton();
       else
-        ;
+        redLeftAuton();
     } else if (currentSide == RIGHT) {
-      
       if (isElim)
-        ;
-      redRightAuton();
+        redRightAuton();
+      else
+        redRightAuton();
     }
   }
 }

@@ -20,7 +20,8 @@ void intakeMiddle();
 void stopIntake();
 void runIntake();
 
-std::vector<IntakeState> getIntakeState();
-void setIntakeState(std::vector<IntakeState> state);
+IntakeState getIntakeState();
+IntakeState getHoodState();
+void setIntakeState(IntakeState intake, IntakeState hood);
 
 double getIntakeRotations();

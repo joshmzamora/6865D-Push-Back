@@ -1,15 +1,12 @@
 #include "auton/selector.h"
-#include "main.h"
-#include "pros/distance.hpp"
-#include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
-#include "subsystem/middleGoalMech.h"
-#include <iostream>
 #include <vector>
 
 pros::Optical optical(PORT_OPTICAL);
+pros::Optical optical2(PORT_OPTICAL_2);
 
-#define STOP_TIME 400
+#define STOP_TIME 300
+#define BLOCK_DISTANCE 50
 
 bool holdBlock = false;
 
@@ -23,20 +20,27 @@ Alliance getColor(double hue) {
 }
 
 void colorSort() {
-  optical.set_led_pwm(100);
+  optical.set_led_pwm(0);
   
   while (true) {
     std::vector<IntakeState> states = getIntakeState();
     IntakeState prevIntakeState = states[0];
     IntakeState prevHoodState = states[1];
     Alliance seenColor = getColor(optical.get_hue());
-    //std::cout << optical.get_hue() << std::endl;
+    // std::cout << optical.get_hue() << std::endl;
+    
     if (seenColor != currentAlliance && seenColor != OTHER) {
         setIntakeState({STOPPED, STOPPED});
         setIntakeState({BLOCKED, BLOCKED});
         hood.move(127);
         intake.move(127);
-        pros::delay(STOP_TIME);
+        while (true) {
+          pros::delay(20);
+          Alliance newSeenColor = getColor(optical.get_hue());
+          if (newSeenColor == currentAlliance || newSeenColor == OTHER) {
+            break;
+          }
+        }
         setIntakeState({prevIntakeState, prevHoodState});
       }
     if (seenColor == currentAlliance) {

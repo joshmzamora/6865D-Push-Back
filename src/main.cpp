@@ -14,14 +14,12 @@ void printScreen() {
 }
 
 void initialize() {
- pros::Task colorSortTask(colorSort);
+ //pros::Task colorSortTask(colorSort);
   // pros::Task redirectTask(macro_redirect);
   // pros::Task collapseTask(macro_collapse);
-  pros::Task printTask(printScreen);
-  disengageLeftWing();
-  disengageRightWing();
-  gui();
-  chassis.calibrate();
+ pros::Task printTask(printScreen);
+ gui();
+ chassis.calibrate();
   
 }
 
@@ -32,9 +30,8 @@ void competition_initialize() {}
 void autonomous() { autonSelector(); }
 
 void opcontrol() {
-
-  //blueLeftAuton();
-
+  
+  blueLeftAuton();
 
   while (true) {
     pidController();

@@ -3,7 +3,9 @@
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "pros/misc.h"
 #include "pros/rotation.hpp"
+#include "subsystem/drivetrain.h"
 #include <iostream>
+
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
@@ -26,7 +28,7 @@ lemlib::Drivetrain drivetrain(
     &driveRight,                // right motor group
     13,                         // 13 inch track width
     lemlib::Omniwheel::NEW_325, // using new 4" omnis
-    450,                        // drivetrain rpm is 300
+    450,                        // drivetrain rpm is 450
     2 // chase power is 2. If we had traction wheels, it would have been 8
 );
 
@@ -38,15 +40,15 @@ lemlib::Drivetrain drivetrain(
 
 // lateral motion controller
 lemlib::ControllerSettings
-    linearController(2,  // proportional gain (kP)
-                     0,  // integral gain (kI)
-                     10, // derivative gain (kD)
-                     0,  // anti windup
-                     0,  // small error range, in inches
-                     0,  // small error range timeout, in milliseconds
-                     0,  // large error range, in inches
-                     0,  // large error range timeout, in milliseconds
-                     0   // maximum acceleration (slew)
+    linearController(9,  // proportional gain (kP)
+                     0,   // integral gain (kI)
+                     45,   // derivative gain (kD)
+                     3,   // anti windup
+                     1,   // small error range, in inches
+                     100, // small error range timeout, in milliseconds
+                     3,   // large error range, in inches
+                     500, // large error range timeout, in milliseconds
+                     20   // maximum acceleration (slew)
     );
 
 // angular motion controller
@@ -80,12 +82,13 @@ pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
 pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 lemlib::Omniwheel::NEW_2,
-                                                -2);
+                                                4);
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
-                                              lemlib::Omniwheel::NEW_2, 1.125);
+                                              lemlib::Omniwheel::NEW_2,
+                                              .875);
 
 lemlib::OdomSensors odomSensors(
-    &vertical_tracking_wheel, // vertical tracking wheel 1, set to null
+    &vertical_tracking_wheel, // vertical tracking wheel 1
     nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
     &horizontal_tracking_wheel, // horizontal tracking wheel 1
     nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a
@@ -133,7 +136,6 @@ void pidController() {
     pidChanged = true;
     std::cout << "Lateral kP decreased to: " << newKp << std::endl;
   }
-
   // --- KD ADJUSTMENTS (Y and B buttons) ---
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
     newKd += KD_STEP;
@@ -143,11 +145,15 @@ void pidController() {
     newKd -= KD_STEP;
     pidChanged = true;
     std::cout << "Lateral kD decreased to: " << newKd << std::endl;
-  }
+  } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+    chassis.setPose(0,0,0);
+  } 
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
     chassis.moveToPoint(0,24,10000);
+    //chassis.turnToHeading(90, 10000);
   } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
     chassis.moveToPoint(0,0,10000, {.forwards=false});
+    //chassis.turnToHeading(0, 10000);
     }
 
   // --- APPLY NEW SETTINGS ---
@@ -168,4 +174,11 @@ void pidController() {
         std::cout << "kP: " << lateralSettings.kP << std::endl;
     std::cout << "kD: " << lateralSettings.kD << std::endl;
     }
+}
+
+void odometryPosition() {
+  while (true) {
+    std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
+              << ", " << chassis.getPose().theta << ")" << std::endl;
+  }
 }

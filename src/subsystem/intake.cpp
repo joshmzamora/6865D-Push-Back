@@ -9,16 +9,14 @@ pros::Motor hood(PORT_HOOD);
 IntakeState intakeState = STOPPED;
 IntakeState hoodState = STOPPED;
 
-std::vector<IntakeState> getIntakeState() {
-  std::vector<IntakeState> states;
-  states.push_back(intakeState);
-  states.push_back(hoodState);
-  return states;
-}
+IntakeState getIntakeState() { return intakeState; }
+IntakeState getHoodState() { return hoodState; }
 
-void setIntakeState(IntakeState intake, IntakeState hood) {
-  intakeState = intake;
-  hoodState = hood;
+void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
+  intakeState = intakeSt;
+  hoodState = hoodSt;
+  intake.move(intakeState);
+  hood.move(hoodState);
 }
 
 void intakeIn() {

@@ -16,35 +16,33 @@ std::vector<IntakeState> getIntakeState() {
   return states;
 }
 
-void setIntakeState(std::vector<IntakeState> state) {
-  intakeState = state[0];
-  hoodState = state[1];
-  intake.move(intakeState);
-  hood.move(hoodState);
+void setIntakeState(IntakeState intake, IntakeState hood) {
+  intakeState = intake;
+  hoodState = hood;
 }
 
 void intakeIn() {
-  setIntakeState({IN, STOPBLOCKS});
+  setIntakeState(IN, STOPBLOCKS);
   disengageMiddleGoalMech();
 }
 
 void intakeOut() {
-  setIntakeState({OUT, OUT});
+  setIntakeState(OUT, OUT);
   disengageMiddleGoalMech();
 }
 
 void intakeMiddle() {
-  setIntakeState({IN, OUT});
+  setIntakeState(IN, OUT);
   engageMiddleGoalMech();
 }
 
 void intakeTopGoal() {
-  setIntakeState({IN, IN});
+  setIntakeState(IN, IN);
   disengageMiddleGoalMech();
 }
 
 void stopIntake() {
-  setIntakeState({STOPPED, STOPBLOCKS});
+  setIntakeState(STOPPED, STOPBLOCKS);
   disengageMiddleGoalMech();
 }
 

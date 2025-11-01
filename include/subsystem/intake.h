@@ -5,7 +5,7 @@
 
 enum IntakeState {
     IN = 127,
-    STOPBLOCKS = -15,
+    STOPBLOCKS = -16,
     OUT = -127,
     STOPPED = 0,
     BLOCKED
@@ -13,13 +13,12 @@ enum IntakeState {
 
 extern pros::Motor intake;
 extern pros::Motor hood;
-extern pros::Motor basket;
-extern pros::Motor top_intake;
-void intakeBasket(); 
-void intakeTop() ;
+void intakeIn(); 
+void intakeOut(); 
+void intakeTopGoal();
 void intakeMiddle(); 
-void outtakeBasket(); 
-void stopIntake(); void runIntake();
+void stopIntake();
+void runIntake();
 
 std::vector<IntakeState> getIntakeState();
 void setIntakeState(std::vector<IntakeState> state);

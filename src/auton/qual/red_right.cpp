@@ -6,47 +6,44 @@
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
 
-// chassis.setPose(0, 0, 0);
-
-// chassis.moveToPoint(24, 24, 3000);
-// chassis.waitUntilDone();
 void redRightAuton() {
-//  //intakeBasket();
-//  setIntakeState({IN, STOPPED, IN, STOPPED});
-//   chassis.setPose(-52, -18, 90);
-//   chassis.moveToPoint(-35, -18, 900, {.maxSpeed=25});
-//   chassis.waitUntilDone();
-//   chassis.moveToPoint(-30, -18, 900, {.maxSpeed=25});
-//   chassis.waitUntilDone();
-//   chassis.turnToHeading(115, 1000);
-//   chassis.waitUntilDone();
-//   chassis.moveToPoint(-15, -20, 3000, {.maxSpeed = 25}); //get 1 block
-//   chassis.waitUntilDone();
-//   chassis.turnToHeading(45, 1000);
-//   chassis.waitUntilDone();
-//   chassis.moveToPoint(-20, 6, 3000, {.maxSpeed = 25}); //go to low goal
-//   chassis.waitUntilDone();
-//   outtakeBasket();
-//   pros::delay(3000);
-//   stopIntake(); 
-//   // chassis.turnToHeading(225, 1000);
-//   // chassis.waitUntilDone();
+  chassis.setPose(-46, -8, 90);
+  intakeIn();
+  // Move to grab the next 2 blocks
+  chassis.moveToPose(-8, -48, 180, 3000, {.lead=.45});
+  chassis.waitUntilDone();
 
-//   // chassis.moveToPose(-48, -48, -90, 5000,
-//   //                    {.forwards = false, .maxSpeed = 40}); // go to match loader
-//   // chassis.waitUntilDone();
+  intakeIn();
+  pros::delay(500); // Allow time to secure blocks
 
-//   // chassis.turnToHeading(-90, 1000);
-//   // chassis.waitUntilDone();
-//   // chassis.moveToPoint(-57, -48, 5000);
-//   // chassis.waitUntilDone();
-//   // engageLoaderMech();
-//   // chassis.moveToPoint(-57, -48, 5000, {.maxSpeed = 20}); //get match loader blocks
-//   // chassis.waitUntilDone();
-//   // chassis.moveToPoint(-48, -48, 5000, {.forwards = false});
-//   // chassis.waitUntilDone();
-//   // chassis.turnToHeading(90, 2000);
-//   // chassis.waitUntilDone();
-//   // chassis.moveToPoint(-31, -48, 5000); //go to long goal
-//   // chassis.waitUntilDone();
+  // Move back
+  chassis.moveToPoint(-24, -30, 3000, {.forwards = false, .maxSpeed = 70});
+  chassis.waitUntilDone();
+  //  //  Turn to face the long goal
+  chassis.moveToPoint(-53, -48, 3000, {.forwards = false, .maxSpeed = 70});
+  chassis.waitUntilDone();
+
+  chassis.turnToHeading(-90, 1000);
+  chassis.waitUntilDone();
+
+  //  //  chassis.setPose(48,-48,90);
+  //  //  // Approach the long goal to score
+  chassis.moveToPoint(-30, -50, 3000, {.forwards = false});
+  chassis.waitUntilDone();
+  chassis.turnToHeading(-90, 1000);
+  chassis.waitUntilDone();
+  //  // Score the blocks
+  engageLoaderMech();
+  intakeTopGoal();
+  pros::delay(3000); // Run intakes to score
+  intakeIn();
+  // // Move to the match loader area
+  chassis.moveToPoint(-67, -50, 3000, {.maxSpeed= 60});
+  chassis.waitUntilDone();
+
+  pros::delay(2000);
+  chassis.moveToPoint(-30, -50, 3000, {.forwards = false});
+  chassis.waitUntilDone();
+
+  intakeTopGoal();
 }

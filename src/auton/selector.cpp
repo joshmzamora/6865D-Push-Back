@@ -9,7 +9,7 @@
 #include <string>
 
 Alliance currentAlliance = RED;
-Side currentSide = RIGHT;
+Side currentSide = LEFT;
 bool isElim = false;
 bool isSkills = false;
 

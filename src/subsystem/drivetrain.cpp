@@ -28,7 +28,7 @@ lemlib::Drivetrain drivetrain(
     &driveRight,                // right motor group
     13,                         // 13 inch track width
     lemlib::Omniwheel::NEW_325, // using new 4" omnis
-    450,                        // drivetrain rpm is 450
+    480,                        // drivetrain rpm is 450
     2 // chase power is 2. If we had traction wheels, it would have been 8
 );
 
@@ -85,7 +85,7 @@ lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 4);//4
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2,
-                                              .875);//1.25
+                                              -1.25);//1.25
 
 lemlib::OdomSensors odomSensors(
     &vertical_tracking_wheel, // vertical tracking wheel 1

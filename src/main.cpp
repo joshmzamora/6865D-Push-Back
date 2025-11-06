@@ -1,11 +1,13 @@
 #include "main.h"
 #include "auton/auton.h"
 #include "auton/selector.h"
+#include "util/odomLift.h"
 #include "pros/misc.h"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
 #include "util/goalSense.h"
+
 
 void printScreen() {
   while (true) {
@@ -32,12 +34,13 @@ void autonomous() { blueLeftAuton(); }
 
 void opcontrol() {
  
- redRightAuton();
+ //redRightAuton();
   chassis.setPose(0,0,0);
   while (true) {
     //pidController();
     runIntake();
     runLoaderMechToggle();
+    runOdomLiftToggle();
     runGoalSense();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);

@@ -3,9 +3,6 @@
 
 pros::adi::Pneumatics middleGoal(PORT_ADI_MIDDLE_GOAL, false);
 
-void runMiddleGoalToggle() {
- 
-}
 void disengageMiddleGoalMech() {
   middleGoal.retract();
 }
@@ -17,3 +14,4 @@ void engageMiddleGoalMech() {
 bool isDoinked() {
   return middleGoal.is_extended();
 }
+

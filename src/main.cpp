@@ -7,6 +7,7 @@
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
 #include "util/goalSense.h"
+#include "util/doublePark.h"
 
 
 void printScreen() {
@@ -42,6 +43,7 @@ void opcontrol() {
     runLoaderMechToggle();
     runOdomLiftToggle();
     runGoalSense();
+    runDoubleParkToggle();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
     int xAxis = returnExponential(

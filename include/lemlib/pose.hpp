@@ -93,7 +93,7 @@ class Pose {
          * lemlib::Pose poseB(5.2, 22, 2.22);
          * // multiply the two poses
          * float result = poseA * poseB; // 246
-         * @endcode
+         * @endcodea
          */
         float operator*(const Pose& other) const;
         /**

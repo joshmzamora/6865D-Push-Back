@@ -3,7 +3,6 @@
 #include <vector>
 
 pros::Optical optical(PORT_OPTICAL);
-pros::Optical optical2(PORT_OPTICAL_2);
 
 #define STOP_TIME 300
 #define BLOCK_DISTANCE 50

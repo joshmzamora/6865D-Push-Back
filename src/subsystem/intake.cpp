@@ -32,8 +32,8 @@ void intakeOut() {
 }
 
 void intakeMiddle() {
-  setIntakeState(IN, OUT);
-  engageMiddleGoalMech();
+  setIntakeState(IN, MIDDLEGOAL);
+  //engageMiddleGoalMech();
 }
 
 void intakeTopGoal() {

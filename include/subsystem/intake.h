@@ -4,7 +4,8 @@
 #include "pros/motor_group.hpp"
 
 enum IntakeState {
-    IN = 127,
+  IN = 127,
+  MIDDLEGOAL = 64,
     STOPBLOCKS = -16,
     OUT = -127,
     STOPPED = 0,

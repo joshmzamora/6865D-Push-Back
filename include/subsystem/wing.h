@@ -1,10 +1,6 @@
 #pragma once
 #include "main.h"
-void runLeftWingToggle();
-void runRightWingToggle();
-void autoClamp();
+void runWingToggle();
 void engageLeftWing();
-void engageRightWing();
 void disengageLeftWing();
-void disengageRightWing();
 bool isWinged();

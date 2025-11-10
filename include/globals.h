@@ -10,19 +10,17 @@
 #define PORT_INTAKE (-1)
 #define PORT_HOOD (-8)
 
-#define PORT_DRIVE_LEFT_FRONT (-16)  //front
-#define PORT_DRIVE_LEFT_TOP (-19) //back
-#define PORT_DRIVE_LEFT_BOTTOM (-18) //middle
+#define PORT_DRIVE_LEFT_FRONT (-16)  // front
+#define PORT_DRIVE_LEFT_TOP (-19)    // back
+#define PORT_DRIVE_LEFT_BOTTOM (-18) // middle
 #define PORT_DRIVE_RIGHT_FRONT 12
-#define PORT_DRIVE_RIGHT_TOP 7 //reversed
+#define PORT_DRIVE_RIGHT_TOP 7 // reversed
 #define PORT_DRIVE_RIGHT_BOTTOM 13
 
-
 #define PORT_ADI_LOADER_MECH_LEFT 'B'
-#define PORT_ADI_LOADER_MECH_RIGHT 'E'
-#define PORT_ADI_DOUBLE_PARK_LEFT 'B'
-#define PORT_ADI_DOUBLE_PARK_RIGHT 'C'
-#define PORT_ADI_ODOM_LIFT 'D'
-#define PORT_ADI_MIDDLE_GOAL 'A'
-#define PORT_ADI_WING_RIGHT 'F'
-
+#define PORT_ADI_LOADER_MECH_RIGHT 'D'
+#define PORT_ADI_DOUBLE_PARK_LEFT 'A'
+#define PORT_ADI_DOUBLE_PARK_RIGHT 'E'
+#define PORT_ADI_ODOM_LIFT 'C'
+#define PORT_ADI_MIDDLE_GOAL 'Z'
+#define PORT_ADI_WING_LEFT 'G'

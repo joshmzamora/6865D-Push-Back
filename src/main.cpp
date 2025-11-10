@@ -5,6 +5,7 @@
 #include "pros/misc.h"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
+#include "subsystem/wing.h"
 #include "subsystem/loaderMech.h"
 #include "util/goalSense.h"
 #include "util/doublePark.h"
@@ -44,6 +45,7 @@ void opcontrol() {
     runOdomLiftToggle();
     runGoalSense();
     runDoubleParkToggle();
+    runWingToggle();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
     int xAxis = returnExponential(

@@ -5,7 +5,7 @@
 #define PORT_INERTIAL 9
 #define PORT_ROTATION_HORIZONTAL 6
 #define PORT_ROTATION_VERTICAL (2)
-#define PORT_DISTANCE 14
+#define PORT_DISTANCE 3
 
 #define PORT_INTAKE (-1)
 #define PORT_HOOD (-8)

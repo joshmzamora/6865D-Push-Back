@@ -3,8 +3,6 @@
 #include "main.h"
 #include "subsystem/loaderMech.h"
 #include "subsystem/middleGoalMech.h"
-
-
 #include <vector>
 
 pros::Motor intake(PORT_INTAKE);
@@ -60,17 +58,9 @@ void runIntake() {
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
            intakeState != BLOCKED)
     intakeMiddle();
-  else if (controller.get_digital_new_press(
-               pros::E_CONTROLLER_DIGITAL_LEFT)) { // double park override and
-                                                   // fine tuning
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
-        intakeState != BLOCKED)
-      setIntakeState(DOUBLE_PARK_OUT, STOPPED);
-    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
-             intakeState != BLOCKED)
-      setIntakeState(DOUBLE_PARK_IN, STOPPED);
-  } else if (intakeState != BLOCKED) {
+  else if (intakeState != BLOCKED) {
     stopIntake();
   }
+  
 }
 double getIntakeRotations() { return intake.get_position(); }

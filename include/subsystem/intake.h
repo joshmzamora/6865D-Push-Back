@@ -4,19 +4,22 @@
 #include "pros/motor_group.hpp"
 
 enum IntakeState {
-    IN = 127,
-    STOPBLOCKS = -16,
-    OUT = -127,
-    STOPPED = 0,
-    BLOCKED
+  IN = 127,
+  MIDDLEGOAL = 64,
+  STOP_BLOCKS = -16,
+  OUT = -127,
+  STOPPED = 0,
+  DOUBLE_PARK_IN = 15,
+  DOUBLE_PARK_OUT = -15,
+  BLOCKED
 };
 
 extern pros::Motor intake;
 extern pros::Motor hood;
-void intakeIn(); 
-void intakeOut(); 
+void intakeIn();
+void intakeOut();
 void intakeTopGoal();
-void intakeMiddle(); 
+void intakeMiddle();
 void stopIntake();
 void runIntake();
 

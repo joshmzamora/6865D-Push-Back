@@ -1,8 +1,9 @@
 #include "intake.h"
 #include "globals.h"
 #include "main.h"
-#include "subsystem/middleGoalMech.h"
 #include "subsystem/loaderMech.h"
+#include "subsystem/middleGoalMech.h"
+
 
 #include <vector>
 
@@ -22,7 +23,7 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
 }
 
 void intakeIn() {
-  setIntakeState(IN, STOPBLOCKS);
+  setIntakeState(IN, STOP_BLOCKS);
   disengageMiddleGoalMech();
 }
 
@@ -33,7 +34,7 @@ void intakeOut() {
 
 void intakeMiddle() {
   setIntakeState(IN, MIDDLEGOAL);
-  //engageMiddleGoalMech();
+  // engageMiddleGoalMech();
 }
 
 void intakeTopGoal() {
@@ -42,7 +43,7 @@ void intakeTopGoal() {
 }
 
 void stopIntake() {
-  setIntakeState(STOPPED, STOPBLOCKS);
+  setIntakeState(STOPPED, STOP_BLOCKS);
   disengageMiddleGoalMech();
 }
 
@@ -59,8 +60,16 @@ void runIntake() {
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
            intakeState != BLOCKED)
     intakeMiddle();
-  
-  else if (intakeState != BLOCKED) {
+  else if (controller.get_digital_new_press(
+               pros::E_CONTROLLER_DIGITAL_LEFT)) { // double park override and
+                                                   // fine tuning
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
+        intakeState != BLOCKED)
+      setIntakeState(STOP_BLOCKS, STOPPED);
+    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
+             intakeState != BLOCKED)
+      setIntakeState(IN, STOPPED);
+  } else if (intakeState != BLOCKED) {
     stopIntake();
   }
 }

@@ -15,8 +15,8 @@ void doublePark() {
     double distance = doubleParkSensor.get_distance();
     if (distance < 50) { //first stage
         setIntakeState(STOPPED, STOPPED);
-        holdingBlock = true;
         engageOdomLift();
+        holdingBlock = true;
     }
     pros::delay(20);
   }

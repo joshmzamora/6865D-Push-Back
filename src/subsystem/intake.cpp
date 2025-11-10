@@ -65,14 +65,10 @@ void runIntake() {
                                                    // fine tuning
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
         intakeState != BLOCKED)
-<<<<<<< HEAD
       setIntakeState(DOUBLE_PARK_OUT, STOPPED);
-=======
-      setIntakeState(STOP_BLOCKS, STOPPED);
->>>>>>> 70709f8672c46d8438e4abea5ce39ddca0b59d12
     else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
              intakeState != BLOCKED)
-      setIntakeState(IN, STOPPED);
+      setIntakeState(DOUBLE_PARK_IN, STOPPED);
   } else if (intakeState != BLOCKED) {
     stopIntake();
   }

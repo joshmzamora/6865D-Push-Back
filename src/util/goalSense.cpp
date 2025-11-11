@@ -93,7 +93,7 @@ void middleGoalSense() {
 }
 
 void runGoalSense() {
-  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
     middleGoalSense();
   }
 }

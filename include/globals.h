@@ -1,6 +1,7 @@
 #pragma once
 #include "main.h"
 
+extern bool doubleParking;
 #define PORT_OPTICAL 15
 #define PORT_INERTIAL 9
 #define PORT_ROTATION_HORIZONTAL 6

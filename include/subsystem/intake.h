@@ -18,6 +18,8 @@ extern pros::Motor intake;
 extern pros::Motor hood;
 void intakeIn();
 void intakeOut();
+void doubleParkIntakeIn();
+void doubleParkIntakeOut();
 void intakeTopGoal();
 void intakeMiddle();
 void stopIntake();

@@ -3,7 +3,7 @@
 #include "odomLift.h"
 #include "pros/misc.h"
 
-pros::adi::Pneumatics odomLift(PORT_ADI_ODOM_LIFT, true);
+pros::adi::Pneumatics odomLift(PORT_ADI_ODOM_LIFT, false);
 
 void disengageOdomLift() { odomLift.retract(); }
 

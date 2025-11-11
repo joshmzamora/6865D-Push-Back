@@ -11,7 +11,7 @@ pros::adi::Pneumatics doubleParkLeft(PORT_ADI_DOUBLE_PARK_LEFT, false);
 pros::adi::Pneumatics doubleParkRight(PORT_ADI_DOUBLE_PARK_RIGHT, false);
 
 bool holdingBlock = true;
-
+bool doubleParking = false;
 
 void doublePark() {
   while (!holdingBlock) {
@@ -37,13 +37,13 @@ void disengageDoublePark() {
 void runDoubleParkToggle() {
   static bool toggle{false};
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-    if (!toggle) {
-      engageDoublePark();
-      toggle = !toggle;
-    } else {
-      disengageDoublePark();
-      toggle = !toggle;
-    }
+     if (!doubleParking) {
+       engageDoublePark();
+       doubleParking = !doubleParking;
+     } else {
+       disengageDoublePark();
+       doubleParking = !doubleParking;
+     }
   }
   // if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
   //   doubleParkLeft.extend();

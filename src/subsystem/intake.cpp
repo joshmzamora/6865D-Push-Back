@@ -1,9 +1,6 @@
 #include "intake.h"
 #include "globals.h"
-#include "main.h"
-#include "subsystem/loaderMech.h"
 #include "subsystem/middleGoalMech.h"
-#include <vector>
 
 pros::Motor intake(PORT_INTAKE);
 pros::Motor hood(PORT_HOOD);
@@ -30,6 +27,13 @@ void intakeOut() {
   disengageMiddleGoalMech();
 }
 
+void doubleParkIntakeIn() {
+  setIntakeState(DOUBLE_PARK_IN, STOPPED);
+}
+
+void doubleParkIntakeOut() {
+  setIntakeState(DOUBLE_PARK_OUT, STOPPED);
+}
 void intakeMiddle() {
   setIntakeState(IN, MIDDLEGOAL);
   // engageMiddleGoalMech();
@@ -46,12 +50,20 @@ void stopIntake() {
 }
 
 void runIntake() {
-  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
+  if (doubleParking &&
+      controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
       intakeState != BLOCKED)
-    intakeOut();
+    doubleParkIntakeIn();
+  else if (doubleParking &&
+           controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
+           intakeState != BLOCKED)
+    doubleParkIntakeOut();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
     intakeIn();
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
+           intakeState != BLOCKED)
+    intakeOut();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
            intakeState != BLOCKED)
     intakeTopGoal();
@@ -60,7 +72,6 @@ void runIntake() {
     intakeMiddle();
   else if (intakeState != BLOCKED) {
     stopIntake();
-  }
-  
+  } 
 }
 double getIntakeRotations() { return intake.get_position(); }

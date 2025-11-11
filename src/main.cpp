@@ -10,12 +10,15 @@
 #include "subsystem/loaderMech.h"
 #include "util/goalSense.h"
 #include "util/doublePark.h"
+#include <iostream>
 
 
 void printScreen() {
   while (true) {
     controller.print(0, 0, "X:%.2f Y: %.2f T: %.2f", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
     pros::delay(20);
+    std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
+              << ")" << std::endl;
   }
 }
 
@@ -38,8 +41,7 @@ void autonomous() { blueLeftAuton(); }
 
 void opcontrol() {
  
- //redRightAuton();
- chassis.setPose(0, 0, 0);
+  moveForward();
 
   while (true) {
     //pidController();

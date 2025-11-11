@@ -7,6 +7,7 @@
 #include "subsystem/loaderMech.h"
 
 void redRightAuton() {
+  
   chassis.setPose(-46, -8, 90);
   intakeIn();
   // Move to grab the next 2 blocks

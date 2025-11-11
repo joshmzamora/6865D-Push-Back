@@ -17,37 +17,19 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
   hood.move(hoodState);
 }
 
-void intakeIn() {
-  setIntakeState(IN, STOP_BLOCKS);
-  disengageMiddleGoalMech();
-}
+void intakeIn() { setIntakeState(IN, STOP_BLOCKS); }
 
-void intakeOut() {
-  setIntakeState(OUT, OUT);
-  disengageMiddleGoalMech();
-}
+void intakeOut() { setIntakeState(OUT, OUT); }
 
-void doubleParkIntakeIn() {
-  setIntakeState(DOUBLE_PARK_IN, STOPPED);
-}
+void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); }
 
-void doubleParkIntakeOut() {
-  setIntakeState(DOUBLE_PARK_OUT, STOPPED);
-}
-void intakeMiddle() {
-  setIntakeState(IN, MIDDLEGOAL);
-  // engageMiddleGoalMech();
-}
+void doubleParkIntakeOut() { setIntakeState(DOUBLE_PARK_OUT, STOPPED); }
 
-void intakeTopGoal() {
-  setIntakeState(IN, IN);
-  disengageMiddleGoalMech();
-}
+void intakeMiddle() { setIntakeState(IN, MIDDLEGOAL); }
 
-void stopIntake() {
-  setIntakeState(STOPPED, STOP_BLOCKS);
-  disengageMiddleGoalMech();
-}
+void intakeTopGoal() { setIntakeState(IN, IN); }
+
+void stopIntake() { setIntakeState(STOPPED, STOP_BLOCKS); }
 
 void runIntake() {
   if (runDoubleParkingIntake &&
@@ -72,6 +54,7 @@ void runIntake() {
     intakeMiddle();
   else if (intakeState != BLOCKED) {
     stopIntake();
-  } 
+  }
 }
+
 double getIntakeRotations() { return intake.get_position(); }

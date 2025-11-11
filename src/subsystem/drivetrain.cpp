@@ -82,10 +82,10 @@ pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
 pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 lemlib::Omniwheel::NEW_2,
-                                                4);//4
+                                                0); //4
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2,
-                                              -1.25);//1.25
+                                              0); //-1.25
 
 lemlib::OdomSensors odomSensors(
     &vertical_tracking_wheel, // vertical tracking wheel 1
@@ -112,7 +112,7 @@ void arcadeDrive(double leftAxis, double rightAxis) {
 
 void pidController() {
   
-  // --- TUNING PARAMETERS ---
+  // --- TUNING PARAMETE  RS ---
   const double KP_STEP = 0.5;
   const double KD_STEP = 5.0;
 

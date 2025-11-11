@@ -50,11 +50,11 @@ void stopIntake() {
 }
 
 void runIntake() {
-  if (doubleParking &&
+  if (runDoubleParkingIntake &&
       controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
       intakeState != BLOCKED)
     doubleParkIntakeIn();
-  else if (doubleParking &&
+  else if (runDoubleParkingIntake &&
            controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
            intakeState != BLOCKED)
     doubleParkIntakeOut();

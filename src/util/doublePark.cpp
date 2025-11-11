@@ -5,29 +5,35 @@
 #include "odomLift.h"
 #include "globals.h"
 
+
 pros::Distance doubleParkSensor(PORT_DISTANCE);
 
 pros::adi::Pneumatics doubleParkLeft(PORT_ADI_DOUBLE_PARK_LEFT, false);
 pros::adi::Pneumatics doubleParkRight(PORT_ADI_DOUBLE_PARK_RIGHT, false);
 
-bool holdingBlock = true;
+bool holdingBlock = false;
 bool doubleParking = false;
+bool runDoubleParkingIntake = false;
 
 void doublePark() {
-  while (!holdingBlock) {
-    double distance = doubleParkSensor.get_distance();
-    if (distance < 150) { //first stage
-        setIntakeState(STOPPED, STOPPED);
-        engageOdomLift();
-        holdingBlock = true;
+  if (doubleParking) {
+    int distance = doubleParkSensor.get_distance();
+    intakeOut();
+    while (distance > 150) {
+      distance = doubleParkSensor.get_distance();
+      pros::delay(20);
     }
-    pros::delay(20);
+    stopIntake();
+    holdingBlock = true;
+    
+    }
   }
-}
+
 
 void engageDoublePark() {
     doubleParkLeft.extend();
     doubleParkRight.extend();
+    engageOdomLift();
 }
 void disengageDoublePark() {
     doubleParkLeft.retract();
@@ -37,24 +43,18 @@ void disengageDoublePark() {
 void runDoubleParkToggle() {
   static bool toggle{false};
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-     if (!doubleParking) {
-       engageDoublePark();
-       doubleParking = !doubleParking;
-     } else {
-       disengageDoublePark();
-       doubleParking = !doubleParking;
-     }
+    runDoubleParkingIntake = true;
+    if (!doubleParking) {
+      doubleParking = !doubleParking;
+    }
+    else {
+      engageDoublePark();
+      doubleParking = !doubleParking;
+    }
   }
-  // if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-  //   doubleParkLeft.extend();
-  //   doubleParkRight.extend();
-  //   // if (holdingBlock){
-  //   //     setIntakeState(STOPPED, STOPPED);
-  //   //     doubleParkLeft.extend();
-  //   //     doubleParkRight.extend();
-  //   //     engageOdomLift();
-  //   // } else {
-  //   //     doublePark();
-  //   // }
-  // }
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+    runDoubleParkingIntake = false;
+    disengageDoublePark();
+    doubleParking = false;
+  }
 }

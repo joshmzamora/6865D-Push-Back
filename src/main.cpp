@@ -1,6 +1,7 @@
 #include "main.h"
 #include "auton/auton.h"
 #include "auton/selector.h"
+#include "pros/rtos.h"
 #include "util/odomLift.h"
 #include "pros/misc.h"
 #include "subsystem/drivetrain.h"
@@ -23,6 +24,7 @@ void initialize() {
   // pros::Task redirectTask(macro_redirect);
   // pros::Task collapseTask(macro_collapse);
  pros::Task printTask(printScreen);
+
  gui();
  chassis.calibrate();
   
@@ -37,7 +39,8 @@ void autonomous() { blueLeftAuton(); }
 void opcontrol() {
  
  //redRightAuton();
-  chassis.setPose(0,0,0);
+ chassis.setPose(0, 0, 0);
+
   while (true) {
     //pidController();
     runIntake();
@@ -45,6 +48,7 @@ void opcontrol() {
     runOdomLiftToggle();
     runGoalSense();
     runDoubleParkToggle();
+    doublePark();
     runWingToggle();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);

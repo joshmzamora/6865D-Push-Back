@@ -24,8 +24,8 @@ void doublePark() {
       pros::delay(20);
     }
     stopIntake();
+    runDoubleParkingIntake = true;
     holdingBlock = true;
-    
     }
   }
 
@@ -33,7 +33,7 @@ void doublePark() {
 void engageDoublePark() {
     doubleParkLeft.extend();
     doubleParkRight.extend();
-    engageOdomLift();
+    
 }
 void disengageDoublePark() {
     doubleParkLeft.retract();
@@ -43,7 +43,7 @@ void disengageDoublePark() {
 void runDoubleParkToggle() {
   static bool toggle{false};
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-    runDoubleParkingIntake = true;
+    engageOdomLift();
     if (!doubleParking) {
       doubleParking = !doubleParking;
     }
@@ -52,7 +52,7 @@ void runDoubleParkToggle() {
       doubleParking = !doubleParking;
     }
   }
-  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+  else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
     runDoubleParkingIntake = false;
     disengageDoublePark();
     //doubleParking = false;

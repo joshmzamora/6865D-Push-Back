@@ -36,12 +36,12 @@ void disabled() {}
 
 void competition_initialize() {}
 
-void autonomous() { blueLeftAuton(); }
+void autonomous() {  }
 
 void opcontrol() {
 
-  // moveForward();
-  //redRightAuton();
+  //moveForward();
+  redRightElimAuton();
 
   while (true) {
     //pidController();

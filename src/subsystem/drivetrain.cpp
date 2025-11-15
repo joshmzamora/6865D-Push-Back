@@ -85,7 +85,7 @@ lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 -4.3); //-4.3
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2,
-                                              1.28); //1.28
+                                              1.35); //1.28
 
 lemlib::OdomSensors odomSensors(
     &vertical_tracking_wheel, // vertical tracking wheel 1

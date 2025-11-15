@@ -8,38 +8,41 @@
 #include "util/odomLift.h"
 
 void redRightAuton() {
-  chassis.setPose(-50, -18, 105);
+  chassis.setPose(-50, -17, 105);
   intakeIn();
   // // Move to grab the next 2 blocks
 
-  chassis.moveToPoint(-24, -20, 5000, {.maxSpeed = 80});
+  chassis.moveToPoint(-24, -22, 2000, {.maxSpeed = 80});
   chassis.waitUntilDone();
+  // chassis.turnToHeading(160, 1000);
+  // chassis.waitUntilDone();
+  // chassis.setPose(-24, -22, 160); // reset
+  // chassis.waitUntilDone();
   //engageLoaderMech();
   // pros::delay(500); // Allow time to secure blocks
   // disengageLoaderMech();
 
   // //middle goal
-  chassis.turnToHeading(225, 1000, {.maxSpeed = 60});
-  chassis.waitUntilDone();
- 
-  chassis.moveToPoint(-12, -9, 1000, {.forwards = false, .maxSpeed = 60});
-  chassis.waitUntilDone();
-  intakeMiddle();
-  pros::delay(750); // score low
-  chassis.moveToPoint(-24, -20, 2000, {.maxSpeed = 80});
-  chassis.waitUntilDone();
-  chassis.turnToHeading(180, 1000);
-  chassis.waitUntilDone();
-  chassis.setPose(-24, -20, 180); // reset
-  chassis.waitUntilDone();
-  // Back to elim code
-  // chassis.moveToPoint(-10, -48, 5000, {.maxSpeed = 80});
+  // chassis.turnToHeading(225, 1000, {.maxSpeed = 60});
+  // chassis.waitUntilDone();
+  // chassis.setPose(-24, -22, 225); // reset
+  // chassis.waitUntilDone();
+  // chassis.moveToPoint(-12, -10, 1000, {.forwards = false, .maxSpeed = 60});
   // chassis.waitUntilDone();
   // intakeMiddle();
-  // pros::delay(5000); // Run intakes to score
-
-
-  // chassis.moveToPoint(-10, -48, 2000);
+  // pros::delay(1000); // score low
+  // chassis.moveToPoint(-24, -20, 2000, {.maxSpeed = 80});
+  // chassis.waitUntilDone();
+  // chassis.turnToHeading(160, 1000);
+  // chassis.waitUntilDone();
+  // chassis.setPose(-24, -22, 160); // reset
+  // chassis.waitUntilDone();
+  
+  // // Back to elim code
+  // intakeIn();
+  chassis.moveToPoint(-8, -48, 2000, {.maxSpeed = 80});
+  chassis.waitUntilDone();
+  pros::delay(500);
 
   // // // Move back
   // chassis.moveToPoint(-24, -35, 3000, {.forwards = false, .maxSpeed = 80});
@@ -54,7 +57,7 @@ void redRightAuton() {
   // chassis.waitUntilDone();
 
 
-  // // Approach the long goal to score
+  // // // Approach the long goal to score
   // engageOdomLift();
   // chassis.moveToPoint(-30, -48, 3000, {.forwards = false, .maxSpeed=80});
   // chassis.waitUntilDone();

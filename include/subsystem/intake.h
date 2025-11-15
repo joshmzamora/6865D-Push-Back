@@ -6,11 +6,11 @@
 enum IntakeState {
   IN = 127,
   MIDDLEGOAL = 64,
-  STOP_BLOCKS = -16,
+  STOP_BLOCKS = -20,
   OUT = -127,
   STOPPED = 0,
-  DOUBLE_PARK_IN = 15,
-  DOUBLE_PARK_OUT = -15,
+  DOUBLE_PARK_IN = 25,
+  DOUBLE_PARK_OUT = -25,
   BLOCKED
 };
 

@@ -24,6 +24,7 @@ void doublePark() {
       distance = doubleParkSensor.get_distance();
       pros::delay(20);
     }
+    pros::delay(100);
     stopIntake();
     holdingBlock = true;
     }
@@ -42,6 +43,10 @@ void disengageDoublePark() {
 void runDoubleParkToggle() {
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
     engageOdomLift();
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+      runDoubleParkingIntake = false;
+      disengageDoublePark();
+    }
     if (!doubleParking) {
       doubleParking = !doubleParking;
     }

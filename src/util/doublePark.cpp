@@ -17,6 +17,7 @@ bool runDoubleParkingIntake = false;
 
 void doublePark() {
   if (doubleParking) {
+    runDoubleParkingIntake = true;
     int distance = doubleParkSensor.get_distance();
     intakeOut();
     while (distance > 150) {
@@ -24,11 +25,9 @@ void doublePark() {
       pros::delay(20);
     }
     stopIntake();
-    runDoubleParkingIntake = true;
     holdingBlock = true;
     }
   }
-
 
 void engageDoublePark() {
     doubleParkLeft.extend();
@@ -41,7 +40,6 @@ void disengageDoublePark() {
 }
 
 void runDoubleParkToggle() {
-  static bool toggle{false};
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
     engageOdomLift();
     if (!doubleParking) {
@@ -55,6 +53,5 @@ void runDoubleParkToggle() {
   else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
     runDoubleParkingIntake = false;
     disengageDoublePark();
-    //doubleParking = false;
   }
 }

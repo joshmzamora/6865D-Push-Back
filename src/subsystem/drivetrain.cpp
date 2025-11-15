@@ -28,7 +28,7 @@ lemlib::Drivetrain drivetrain(
     &driveRight,                // right motor group
     13,                         // 13 inch track width
     lemlib::Omniwheel::NEW_325, // using new 4" omnis
-    480,                        // drivetrain rpm is 450
+    450,                        // drivetrain rpm is 450
     2 // chase power is 2. If we had traction wheels, it would have been 8
 );
 
@@ -40,9 +40,9 @@ lemlib::Drivetrain drivetrain(
 
 // lateral motion controller
 lemlib::ControllerSettings
-    linearController(9,  // proportional gain (kP)
+    linearController(15,  // proportional gain (kP)
                      0,   // integral gain (kI)
-                     45,   // derivative gain (kD)
+                     75,   // derivative gain (kD)
                      3,   // anti windup
                      1,   // small error range, in inches
                      100, // small error range timeout, in milliseconds
@@ -82,10 +82,10 @@ pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
 pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 lemlib::Omniwheel::NEW_2,
-                                                0); //4
+                                                -4.3); //-4.3
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2,
-                                              0); //-1.25
+                                              1.28); //1.28
 
 lemlib::OdomSensors odomSensors(
     &vertical_tracking_wheel, // vertical tracking wheel 1
@@ -149,11 +149,11 @@ void pidController() {
     chassis.setPose(0,0,0);
   } 
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-    //chassis.moveToPoint(0,24,10000);
-    chassis.turnToHeading(90, 10000);
+    chassis.moveToPoint(0,24,10000);
+    //chassis.turnToHeading(90, 10000);
   } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
-    //chassis.moveToPoint(0,0,10000, {.forwards=false});
-    chassis.turnToHeading(0, 10000);
+    chassis.moveToPoint(0,0,10000, {.forwards=false});
+    //chassis.turnToHeading(0, 10000);
     }
 
   // --- APPLY NEW SETTINGS ---

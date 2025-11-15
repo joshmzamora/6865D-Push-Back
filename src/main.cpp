@@ -18,19 +18,18 @@ void printScreen() {
     controller.print(0, 0, "X:%.2f Y: %.2f T: %.2f", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
     pros::delay(20);
     std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
-              << ")" << std::endl;
+              << "), " << std::endl;
   }
 }
 
 void initialize() {
  //pros::Task colorSortTask(colorSort);
-  // pros::Task redirectTask(macro_redirect);
-  // pros::Task collapseTask(macro_collapse);
+ // pros::Task redirectTask(macro_redirect);
+ // pros::Task collapseTask(macro_collapse);
  pros::Task printTask(printScreen);
 
  gui();
  chassis.calibrate();
-  
 }
 
 void disabled() {}
@@ -40,8 +39,9 @@ void competition_initialize() {}
 void autonomous() { blueLeftAuton(); }
 
 void opcontrol() {
- 
-  //moveForward();
+
+  // moveForward();
+  //redRightAuton();
 
   while (true) {
     //pidController();
@@ -51,7 +51,7 @@ void opcontrol() {
     runGoalSense();
     runDoubleParkToggle();
     doublePark();
-    runWingToggle();
+    runWingToggle();     
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
     int xAxis = returnExponential(

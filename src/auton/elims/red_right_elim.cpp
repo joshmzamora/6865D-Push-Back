@@ -14,18 +14,18 @@ void redRightElimAuton() {
   intakeIn();
   // Move to grab the next 2 blocks
   chassis.moveToPoint(-24, -22, 2000, {.maxSpeed = 80});
-  chassis.waitUntil(21);
+  chassis.waitUntilDone();
   engageLoaderMech();
   pros::delay(500); // Allow time to secure blocks
   disengageLoaderMech();
-  chassis.turnToHeading(155, 1000);
+  chassis.turnToHeading(210, 1000);
   chassis.waitUntilDone();
-  chassis.setPose(-24, -24, 155); // reset
+  chassis.setPose(-22, -24, 210); // reset
   chassis.waitUntilDone();
   
   // // Back to elim code
   intakeIn();
-  chassis.moveToPoint(-8, -48, 2000, {.maxSpeed = 80});
+  chassis.moveToPoint(-10, -48, 2000, {.maxSpeed = 60});
   chassis.waitUntilDone();
   pros::delay(500);
 
@@ -44,7 +44,7 @@ void redRightElimAuton() {
 
   // // // Approach the long goal to score
   // engageOdomLift();
-  chassis.moveToPoint(-30, -48, 3000, {.forwards = false, .maxSpeed=80});
+  chassis.moveToPoint(-24, -48, 3000, {.forwards = false, .maxSpeed=80});
   chassis.waitUntilDone();
  
   // //  // Score the blocks
@@ -55,10 +55,12 @@ void redRightElimAuton() {
   // // // Move to the match loader area
   chassis.moveToPoint(-60, -48, 3000, {.maxSpeed= 60});
   chassis.waitUntilDone();
-
+  chassis.setPose(-60,-48,-90);
+  chassis.waitUntilDone();
   pros::delay(2000);
-  chassis.moveToPoint(-30, -48, 3000, {.forwards = false});
+  chassis.moveToPose(-24, -46, -90, 3000, {.forwards = false, .minSpeed = 80});
   chassis.waitUntilDone();
 
   intakeTopGoal();
+  
 }

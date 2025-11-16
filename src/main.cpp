@@ -35,14 +35,17 @@ void initialize() {
 void disabled() {}
 
 void competition_initialize() {}
-
-void autonomous() {  }
+// redRightElimAuton();
+void autonomous() {
+  redLeftElimAuton();
+}
 
 void opcontrol() {
+  //redLeftElimAuton();
 
-  //moveForward();
-  redRightElimAuton();
-
+ //moveForward();
+  engageOdomLift();
+  //engageLeftWing();
   while (true) {
     //pidController();
     runIntake();
@@ -51,7 +54,7 @@ void opcontrol() {
     runGoalSense();
     runDoubleParkToggle();
     doublePark();
-    runWingToggle();     
+    runWingToggle();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
     int xAxis = returnExponential(

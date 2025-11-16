@@ -10,7 +10,7 @@
 
 
 void blueRightElimAuton() {
-  chassis.setPose(50, -17, 285);
+  chassis.setPose(50, -17, 305);
   intakeIn();
   // Move to grab the next 2 blocks
   chassis.moveToPoint(24, -22, 2000, {.maxSpeed = 80});
@@ -44,7 +44,7 @@ void blueRightElimAuton() {
 
   // // // Approach the long goal to score
   // engageOdomLift();
-  chassis.moveToPoint(30, -48, 3000, {.forwards = false, .maxSpeed = 80});
+  chassis.moveToPoint(25, -48, 3000, {.forwards = false, .maxSpeed = 80});
   chassis.waitUntilDone();
 
   // //  // Score the blocks
@@ -57,7 +57,7 @@ void blueRightElimAuton() {
   chassis.waitUntilDone();
 
   pros::delay(2000);
-  chassis.moveToPoint(30, -48, 3000, {.forwards = false});
+  chassis.moveToPoint(25, -48, 3000, {.forwards = false});
   chassis.waitUntilDone();
 
   intakeTopGoal();

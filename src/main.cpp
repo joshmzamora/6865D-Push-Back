@@ -42,8 +42,8 @@ void autonomous() {
 
 void opcontrol() {
   //redLeftElimAuton();
-
- //moveForward();
+  // moveForward();
+  //skillsAuton();
   engageOdomLift();
   //engageLeftWing();
   while (true) {

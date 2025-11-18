@@ -11,3 +11,4 @@ void redLeftElimAuton();
 void blueLeftAuton();
 void blueLeftElimAuton();
 void moveForward();
+void soloAWP();

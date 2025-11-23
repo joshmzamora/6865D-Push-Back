@@ -16,11 +16,12 @@ bool runDoubleParkingIntake = false;
 bool hasDoubleParked = false;
 
 void doublePark() {
+  int startTime = pros::millis();
   if (doubleParking) {
     //runDoubleParkingIntake = true;
     int distance = doubleParkSensor.get_distance();
     intakeOut();
-    while (distance > 100) {
+    while (distance > 100 || pros::millis() - startTime > 2000) {
       distance = doubleParkSensor.get_distance();
       pros::delay(20);
     }

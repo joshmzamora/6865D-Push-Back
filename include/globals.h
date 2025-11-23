@@ -6,7 +6,7 @@ extern bool runDoubleParkingIntake;
 #define PORT_INERTIAL 9
 #define PORT_ROTATION_HORIZONTAL 6
 #define PORT_ROTATION_VERTICAL (2)
-#define PORT_DISTANCE 3
+#define PORT_DISTANCE 10
 
 #define PORT_INTAKE (-1)
 #define PORT_HOOD (-8)
@@ -23,5 +23,5 @@ extern bool runDoubleParkingIntake;
 #define PORT_ADI_DOUBLE_PARK_LEFT 'A'
 #define PORT_ADI_DOUBLE_PARK_RIGHT 'E'
 #define PORT_ADI_ODOM_LIFT 'C'
-#define PORT_ADI_MIDDLE_GOAL 'Z'
+#define PORT_ADI_MIDDLE_GOAL 'H'
 #define PORT_ADI_WING_LEFT 'G'

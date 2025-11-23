@@ -1,5 +1,6 @@
 #include "intake.h"
 #include "globals.h"
+#include "loaderMech.h"
 #include "subsystem/middleGoalMech.h"
 
 pros::Motor intake(PORT_INTAKE);
@@ -17,19 +18,27 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
   hood.move(hoodState);
 }
 
-void intakeIn() { setIntakeState(IN, STOP_BLOCKS); }
+void intakeIn() { setIntakeState(IN, STOP_BLOCKS); engageMiddleGoalMech();}
 
-void intakeOut() { setIntakeState(OUT, OUT); }
+void intakeOut() { setIntakeState(OUT, OUT); engageMiddleGoalMech();}
 
-void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); }
+void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); engageMiddleGoalMech();}
 
 void doubleParkIntakeOut() { setIntakeState(DOUBLE_PARK_OUT, STOPPED); }
 
-void intakeMiddle() { setIntakeState(IN, MIDDLEGOAL); }
+void intakeMiddle() { setIntakeState(IN, IN);
+  engageMiddleGoalMech();
+}
 
-void intakeTopGoal() { setIntakeState(IN, IN); }
+void intakeTopGoal() {
+  setIntakeState(IN, IN); 
+  disengageMiddleGoalMech();
+}
 
-void stopIntake() { setIntakeState(STOPPED, STOP_BLOCKS); }
+void stopIntake() {
+  setIntakeState(STOPPED, STOP_BLOCKS);
+  engageMiddleGoalMech();
+}
 
 void runIntake() {
   if (runDoubleParkingIntake &&

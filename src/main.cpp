@@ -41,11 +41,13 @@ void autonomous() {
 }
 
 void opcontrol() {
-  //redLeftElimAuton();
-  // moveForward();
+  // redLeftElimAuton();
+  //moveForward();
   //skillsAuton();
+  //soloAWP();
+  
   engageOdomLift();
-  //engageLeftWing();
+  engageLeftWing();
   while (true) {
     //pidController();
     runIntake();

@@ -11,22 +11,24 @@ pros::Distance doubleParkSensor(PORT_DISTANCE);
 pros::adi::Pneumatics doubleParkLeft(PORT_ADI_DOUBLE_PARK_LEFT, false);
 pros::adi::Pneumatics doubleParkRight(PORT_ADI_DOUBLE_PARK_RIGHT, false);
 
-bool holdingBlock = false;
 bool doubleParking = false;
 bool runDoubleParkingIntake = false;
+bool hasDoubleParked = false;
 
 void doublePark() {
   if (doubleParking) {
-    runDoubleParkingIntake = true;
+    //runDoubleParkingIntake = true;
     int distance = doubleParkSensor.get_distance();
     intakeOut();
-    while (distance > 150) {
+    while (distance > 100) {
       distance = doubleParkSensor.get_distance();
       pros::delay(20);
     }
-    pros::delay(100);
+    pros::delay(200);
     stopIntake();
-    holdingBlock = true;
+    engageDoublePark();
+    doubleParking = false;
+    hasDoubleParked = true;
     }
   }
 
@@ -42,21 +44,12 @@ void disengageDoublePark() {
 
 void runDoubleParkToggle() {
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-    engageOdomLift();
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-      runDoubleParkingIntake = false;
-      disengageDoublePark();
-    }
     if (!doubleParking) {
       doubleParking = !doubleParking;
     }
-    else {
-      engageDoublePark();
-      doubleParking = !doubleParking;
+    if (hasDoubleParked) {
+      disengageDoublePark();
+      //doubleParking = true;
     }
-  }
-  else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-    runDoubleParkingIntake = false;
-    disengageDoublePark();
   }
 }

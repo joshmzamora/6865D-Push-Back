@@ -22,23 +22,15 @@ void intakeIn() { setIntakeState(IN, STOP_BLOCKS); engageMiddleGoalMech();}
 
 void intakeOut() { setIntakeState(OUT, OUT); engageMiddleGoalMech();}
 
-void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); engageMiddleGoalMech();}
+void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); }
 
 void doubleParkIntakeOut() { setIntakeState(DOUBLE_PARK_OUT, STOPPED); }
 
-void intakeMiddle() { setIntakeState(IN, IN);
-  engageMiddleGoalMech();
-}
+void intakeMiddle() { setIntakeState(IN, IN); engageMiddleGoalMech(); }
 
-void intakeTopGoal() {
-  setIntakeState(IN, IN); 
-  disengageMiddleGoalMech();
-}
+void intakeTopGoal() { setIntakeState(IN, IN); disengageMiddleGoalMech(); }
 
-void stopIntake() {
-  setIntakeState(STOPPED, STOP_BLOCKS);
-  engageMiddleGoalMech();
-}
+void stopIntake() { setIntakeState(STOPPED, STOP_BLOCKS); engageMiddleGoalMech(); } 
 
 void runIntake() {
   if (runDoubleParkingIntake &&

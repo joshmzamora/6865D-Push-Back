@@ -1,14 +1,12 @@
 #include "main.h"
 #include "auton/auton.h"
 #include "auton/selector.h"
-#include "pros/rtos.h"
 #include "util/odomLift.h"
 #include "pros/misc.h"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
 #include "subsystem/wing.h"
 #include "subsystem/loaderMech.h"
-#include "util/goalSense.h"
 #include "util/doublePark.h"
 #include <iostream>
 
@@ -24,10 +22,7 @@ void printScreen() {
 
 void initialize() {
  //pros::Task colorSortTask(colorSort);
- // pros::Task redirectTask(macro_redirect);
- // pros::Task collapseTask(macro_collapse);
  pros::Task printTask(printScreen);
-
  gui();
  chassis.calibrate();
 }
@@ -35,13 +30,13 @@ void initialize() {
 void disabled() {}
 
 void competition_initialize() {}
-// redRightElimAuton();
+
 void autonomous() {
   redLeftElimAuton();
 }
 
 void opcontrol() {
-  // redLeftElimAuton();
+  //redLeftElimAuton();
   //moveForward();
   //skillsAuton();
   //soloAWP();
@@ -52,8 +47,6 @@ void opcontrol() {
     //pidController();
     runIntake();
     runLoaderMechToggle();
-    runOdomLiftToggle();
-    runGoalSense();
     runDoubleParkToggle();
     doublePark();
     runWingToggle();

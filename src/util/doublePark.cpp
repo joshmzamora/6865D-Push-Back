@@ -14,24 +14,47 @@ pros::adi::Pneumatics doubleParkRight(PORT_ADI_DOUBLE_PARK_RIGHT, false);
 bool doubleParking = false;
 bool runDoubleParkingIntake = false;
 bool hasDoubleParked = false;
-
+extern DoubleParkState dpState;
+DoubleParkState dpState = IDLE;
 void doublePark() {
-  int startTime = pros::millis();
-  if (doubleParking) {
-    //runDoubleParkingIntake = true;
+  static int startTime = 0; // Tracks time locally for the waiting step
+
+  switch (dpState) {
+  case IDLE:
+    // Do nothing, waiting for runDoubleParkToggle() to set state to SEARCHING.
+    break;
+
+  case SEARCHING: {
     int distance = doubleParkSensor.get_distance();
-    intakeOut();
-    while (distance > 100 || pros::millis() - startTime > 2000) {
-      distance = doubleParkSensor.get_distance();
-      pros::delay(20);
+    intakeOut(); // Keep intake running out
+
+    if (distance < 100) {
+      // Block detected! Move to the next state.
+      stopIntake();
+      startTime = pros::millis(); // Start the timer for the delay
+      dpState = WAITING_FOR_STOP;
     }
-    pros::delay(200);
-    stopIntake();
-    engageDoublePark();
-    doubleParking = false;
-    hasDoubleParked = true;
-    }
+    // If not detected, the function exits and opcontrol() continues.
+    break;
   }
+
+  case WAITING_FOR_STOP:
+    // Wait 200ms before engaging pneumatics
+    if (pros::millis() - startTime >= 200) {
+      engageDoublePark();
+      dpState = ENGAGED_COMPLETE;
+    }
+    break;
+
+  case ENGAGED_COMPLETE:
+    // Routine is complete, do nothing until disengaged.
+    break;
+
+  case DISENGAGED:
+    // Ready for a new cycle. The toggle will handle the rest.
+    break;
+  }
+}
 
 void engageDoublePark() {
     doubleParkLeft.extend();
@@ -45,12 +68,17 @@ void disengageDoublePark() {
 
 void runDoubleParkToggle() {
   if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-    if (!doubleParking) {
-      doubleParking = !doubleParking;
-    }
-    if (hasDoubleParked) {
+
+    if (dpState == IDLE || dpState == DISENGAGED) {
+      // Initiate the sequence: Start SEARCHING for the block
+      disengageDoublePark(); // Ensure pneumatics are retracted before starting
+      dpState = SEARCHING;
+
+    } else if (dpState == ENGAGED_COMPLETE) {
+      // Disengage the mechanism, making it ready for the next run
       disengageDoublePark();
-      //doubleParking = true;
+      dpState = IDLE; // Back to IDLE state, allowing the next press to start
+                      // the search
     }
   }
 }

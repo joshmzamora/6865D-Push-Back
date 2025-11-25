@@ -1,4 +1,5 @@
 #include "intake.h"
+#include "drivetrain.h"
 #include "globals.h"
 #include "loaderMech.h"
 #include "subsystem/middleGoalMech.h"
@@ -18,9 +19,9 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
   hood.move(hoodState);
 }
 
-void intakeIn() { setIntakeState(IN, STOP_BLOCKS); engageMiddleGoalMech();}
+void intakeIn() { setIntakeState(IN, STOPPED); disengageMiddleGoalMech();}
 
-void intakeOut() { setIntakeState(OUT, OUT); engageMiddleGoalMech();}
+void intakeOut() { setIntakeState(OUT, OUT); disengageMiddleGoalMech();}
 
 void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); }
 
@@ -30,7 +31,7 @@ void intakeMiddle() { setIntakeState(IN, IN); engageMiddleGoalMech(); }
 
 void intakeTopGoal() { setIntakeState(IN, IN); disengageMiddleGoalMech(); }
 
-void stopIntake() { setIntakeState(STOPPED, STOP_BLOCKS); engageMiddleGoalMech(); } 
+void stopIntake() { setIntakeState(STOPPED, STOPPED); disengageMiddleGoalMech(); } 
 
 void runIntake() {
   if (runDoubleParkingIntake &&
@@ -53,6 +54,9 @@ void runIntake() {
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
            intakeState != BLOCKED)
     intakeMiddle();
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) &&
+           intakeState != BLOCKED)
+    engageMiddleGoalMech();
   else if (intakeState != BLOCKED) {
     stopIntake();
   }

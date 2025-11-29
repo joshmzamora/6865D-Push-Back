@@ -1,5 +1,6 @@
 #include "auton/selector.h"
 #include "subsystem/intake.h"
+#include "util/colorsort.h"
 #include <vector>
 
 pros::Optical optical(PORT_OPTICAL);
@@ -18,7 +19,7 @@ Alliance getColor(double hue) {
   return OTHER;
 }
 
-void colorSort() {
+void intakeColorSort() {
   optical.set_led_pwm(0);
   
   while (true) {
@@ -31,7 +32,7 @@ void colorSort() {
     if (seenColor != currentAlliance && seenColor != OTHER) {
         setIntakeState(STOPPED, STOPPED);
         setIntakeState(BLOCKED, BLOCKED);
-        hood.move(127);
+        hood.move(-127);
         intake.move(127);
         while (true) {
           pros::delay(20);
@@ -49,6 +50,9 @@ void colorSort() {
   }
 }
 
+void longGoalColorSort() {
+
+}
 // double getOpticalColor()
 // {
 // return optical.get_hue();

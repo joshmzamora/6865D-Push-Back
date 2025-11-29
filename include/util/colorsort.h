@@ -1,5 +1,6 @@
 #pragma once
 #include "main.h"
 
-void colorSort();
+void intakeColorSort();
+void longGoalColorSort();
 void setIntakeHold(bool);

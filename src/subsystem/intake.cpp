@@ -67,8 +67,8 @@ void runIntake() {
 }
 
 void jamIntake() {
-  intakeOut();
-  pros::delay(50);
+  setIntakeState(OUT, OUT);
+  pros::delay(60);
   intakeIn();
 }
 double getIntakeRotations() { return intake.get_position(); }

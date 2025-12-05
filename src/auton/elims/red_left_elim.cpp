@@ -7,6 +7,7 @@
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
 #include "util/odomLift.h"
+#include "subsystem/middleGoalMech.h"
 
 
 void redLeftElimAuton() {
@@ -18,52 +19,31 @@ void redLeftElimAuton() {
   engageLoaderMech();
   pros::delay(500); // Allow time to secure blocks
   disengageLoaderMech();
-  chassis.turnToHeading(245, 1000);
+  chassis.turnToHeading(315, 1000);
   chassis.waitUntilDone();
-  chassis.setPose(24, -24, 245); // reset
+  chassis.setPose(24, -24, 315); // reset
   chassis.waitUntilDone();
-
-  // // Back to elim code
+  chassis.moveToPoint(12, -17, 3000, {.forwards = false}); // go to middle goal
+  chassis.waitUntilDone();
+  setIntakeState(IN, IN);
+  engageMiddleGoalMech();
+  pros::delay(500); // score
   intakeIn();
-  chassis.moveToPoint(20, -52, 2000, {.maxSpeed = 80});
-  chassis.waitUntil(21);
-  pros::delay(250);
-
-  chassis.moveToPoint(30, -35, 3000, {.forwards = false, .maxSpeed = 80});
+  chassis.moveToPoint(
+      48, -48, 2000,
+      {.minSpeed = 90, .earlyExitRange = 8}); // go to match loader
   chassis.waitUntilDone();
-  chassis.moveToPoint(48, -43, 3000, {.forwards = false, .maxSpeed = 80});
+  chassis.turnToHeading(270, 500);
   chassis.waitUntilDone();
-  // chassis.moveToPose(48, -48, 225, 3000, {.forwards = false, .maxSpeed=80});
-  // // Note: This line was commented out in the original. The values have been
-  // transformed. chassis.waitUntilDone();
-
-  chassis.turnToHeading(85, 1000);
-  chassis.waitUntilDone();
-  chassis.setPose(48, -48, 90); // reset
-  chassis.waitUntilDone();
-
-  // // // Approach the long goal to score
-  engageOdomLift();
-
-  intakeIn();
-  chassis.moveToPoint(27, -49, 2000, {.forwards = false, .maxSpeed = 70});
-  chassis.waitUntilDone();
-  disengageOdomLift();
-  // //  // Score the blocks
+  jamIntake();
+  chassis.setPose(48, -48, 270);
   engageLoaderMech();
+  pros::delay(250);
+  chassis.moveToPoint(66, -48, 2000, {.maxSpeed = 80}); // go to match loader
+  chassis.waitUntilDone();
+  chassis.moveToPoint(24, -48, 1000, {.forwards = false}); // go to long goal
+  chassis.waitUntilDone();
+  jamIntake();
   intakeTopGoal();
-  pros::delay(2500); // Run intakes to score
-  // // // Move to the match loader area
-  chassis.moveToPoint(67, -46, 3000, {.maxSpeed = 80});
-  chassis.waitUntilDone();
-  intakeIn();
-  pros::delay(1500);
-  chassis.setPose(60, -46, 90);
-  chassis.waitUntilDone();
-  chassis.moveToPoint(30, -48, 3000, {.forwards = false});
-  chassis.waitUntilDone();
-
-  intakeTopGoal();
-  pros::delay(3000);
-
+  pros::delay(2000); // score
 }

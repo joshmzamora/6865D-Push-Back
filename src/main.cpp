@@ -20,7 +20,7 @@ void printScreen() {
 }
 
 void initialize() {
- //pros::Task colorSortTask(intakeColorSort);
+ //pros::Task colorSortTask(colorSort);
  pros::Task printTask(printScreen);
  gui();
  chassis.calibrate();
@@ -35,10 +35,11 @@ void autonomous() {
 }
 
 void opcontrol() {
-  //redLeftElimAuton();
-  //moveForward();
-  //skillsAuton();
-  soloAWP();
+  // redLeftElimAuton();
+  // moveForward();
+  skillsAuton();
+  // blueLeftElimAuton();
+  // soloAWP();
   
   engageOdomLift();
   engageLeftWing();

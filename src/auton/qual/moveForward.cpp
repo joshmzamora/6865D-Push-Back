@@ -10,12 +10,11 @@ void moveForward() {
   //test
   chassis.setPose(0, 0, 0);
   chassis.turnToHeading(90, 1000);
-   chassis.setPose(0, 0, 0);
-  chassis.turnToHeading(90, 1000);
-  chassis.setPose(0, 0, 0);
-  chassis.turnToHeading(90, 1000);
-  chassis.setPose(0, 0, 0);
-  chassis.turnToHeading(90, 1000);
-  chassis.setPose(0, 0, 0);
-  chassis.turnToHeading(90, 1000);
+  chassis.waitUntilDone();
+  chassis.turnToHeading(180, 1000);
+  chassis.waitUntilDone();
+  chassis.turnToHeading(270, 1000);
+  chassis.waitUntilDone();
+  chassis.turnToHeading(0, 1000);
+  chassis.waitUntilDone();
 }

@@ -27,7 +27,7 @@ void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); }
 
 void doubleParkIntakeOut() { setIntakeState(DOUBLE_PARK_OUT, STOPPED); }
 
-void intakeMiddle() { setIntakeState(IN, IN); engageMiddleGoalMech(); }
+void intakeMiddle() { setIntakeState(IN, MIDDLEGOAL); engageMiddleGoalMech(); }
 
 void intakeTopGoal() { setIntakeState(IN, IN); disengageMiddleGoalMech(); }
 
@@ -57,9 +57,18 @@ void runIntake() {
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) &&
            intakeState != BLOCKED)
     engageMiddleGoalMech();
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+    setIntakeState(IN, OUT);
+  }
   else if (intakeState != BLOCKED) {
     stopIntake();
   }
+
 }
 
+void jamIntake() {
+  intakeOut();
+  pros::delay(50);
+  intakeIn();
+}
 double getIntakeRotations() { return intake.get_position(); }

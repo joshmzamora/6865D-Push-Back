@@ -5,9 +5,9 @@
 
 enum IntakeState {
   IN = 127,
-  MIDDLEGOAL = 64,
-  STOP_BLOCKS = -40,
+  MIDDLEGOAL = 96,
   OUT = -127,
+  COLOR_SORT = -100,
   STOPPED = 0,
   DOUBLE_PARK_IN = 25,
   DOUBLE_PARK_OUT = -25,
@@ -24,7 +24,7 @@ void intakeTopGoal();
 void intakeMiddle();
 void stopIntake();
 void runIntake();
-
+void jamIntake();
 IntakeState getIntakeState();
 IntakeState getHoodState();
 void setIntakeState(IntakeState intake, IntakeState hood);

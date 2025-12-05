@@ -8,20 +8,19 @@
 #include "subsystem/wing.h"
 #include "subsystem/loaderMech.h"
 #include "util/doublePark.h"
-#include <iostream>
-
+#include "util/colorsort.h"
 
 void printScreen() {
   while (true) {
     controller.print(0, 0, "X:%.2f Y: %.2f T: %.2f", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
     pros::delay(20);
-    std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
-              << "), " << std::endl;
+    // std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
+    //           << "), " << std::endl;
   }
 }
 
 void initialize() {
- //pros::Task colorSortTask(colorSort);
+ //pros::Task colorSortTask(intakeColorSort);
  pros::Task printTask(printScreen);
  gui();
  chassis.calibrate();
@@ -39,7 +38,7 @@ void opcontrol() {
   //redLeftElimAuton();
   //moveForward();
   //skillsAuton();
-  //soloAWP();
+  soloAWP();
   
   engageOdomLift();
   engageLeftWing();

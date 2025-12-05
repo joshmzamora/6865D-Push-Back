@@ -3,46 +3,81 @@
 #include "subsystem/Wing.h"
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
+#include "subsystem/loaderMech.h"
+#include "subsystem/wing.h"
 #include "util/colorsort.h"
 
-
+//WING CODE
+// chassis.setPose(-48, -16, 180);
+// chassis.moveToPoint(-48, -48, 2000);
+// chassis.waitUntilDone();
+// chassis.turnToHeading(270, 1000);
+// chassis.waitUntilDone();
+// chassis.setPose(-48, -48, 270);
+// engageLoaderMech();
+// chassis.moveToPoint(-70, -48, 2000, {.maxSpeed = 30}); // go to match loader
+// chassis.waitUntilDone();
+// intakeIn();
+// pros::delay(2000);
+// stopIntake();
+// chassis.moveToPoint(-50, -48, 2000, {.forwards = false});
+// chassis.waitUntilDone();
+// disengageLoaderMech();
+// chassis.turnToHeading(125, 1000);
+// chassis.waitUntilDone();
+// chassis.setPose(-50, -48, 125);
+// chassis.moveToPoint(-30, -65, 2000);
+// chassis.waitUntilDone();
+// chassis.turnToHeading(90, 1000);
+// chassis.waitUntilDone();
+// chassis.setPose(-30, -65, 90);
+// chassis.moveToPoint(36, -65, 4000);
+// chassis.waitUntilDone();
+// chassis.turnToHeading(45, 1000);
+// chassis.waitUntilDone();
 
 void skillsAuton() {
-  chassis.setPose(-48, -16, 180);
+  engageLeftWing();
+  chassis.setPose(-48, -17, 180);
   chassis.moveToPoint(-48, -48, 2000);
   chassis.waitUntilDone();
   chassis.turnToHeading(270, 1000);
   chassis.waitUntilDone();
   chassis.setPose(-48, -48, 270);
-  chassis.moveToPoint(-62, -48, 2000); // go to match loader
-  chassis.waitUntilDone();
+  engageLoaderMech();
+  pros::delay(500);
   intakeIn();
-  pros::delay(2000);
-  chassis.moveToPoint(-48, -48, 2000, {.forwards = false});
+  chassis.moveToPoint(-70, -48, 2500, {.maxSpeed=30}); // go to match loader
   chassis.waitUntilDone();
-  // chassis.turnToHeading(135, 1000);
-  // chassis.waitUntilDone();
-  // chassis.setPose(-48, -48, 135);
-  // chassis.moveToPoint(-36, -60, 2000);
-  // chassis.waitUntilDone();
-  // chassis.turnToHeading(90, 1000);
-  // chassis.waitUntilDone();
-  // chassis.setPose(-36, -60, 90);
-  // chassis.moveToPoint(36, -60, 4000);
-  // chassis.waitUntilDone();
+  // pros::delay(2000);
+  // stopIntake();
+  chassis.moveToPoint(-50, -48, 2000, {.forwards = false});
+  chassis.waitUntilDone();
+  disengageLoaderMech();
+  chassis.turnToHeading(125,  1000);
+  chassis.waitUntilDone();
+  chassis.setPose(-50, -48, 125);
+  chassis.moveToPose(-20, -59, 90, 2000);
+  chassis.waitUntilDone();
+  // chassis.setPose(-33, -58, 90);
+  chassis.moveToPoint(36, -58, 4000);
+  chassis.waitUntilDone();
   // chassis.turnToHeading(45, 1000);
   // chassis.waitUntilDone();
+  // chassis.setPose(36, -58, 45);
   // chassis.moveToPoint(48, -48, 2000);
   // chassis.waitUntilDone();
   // chassis.turnToHeading(90, 1000);
   // chassis.waitUntilDone();
+  // chassis.setPose(48, -48, 90);
   // chassis.moveToPoint(28, -48, 2000, {.forwards=false}); // go to long goal
   // chassis.waitUntilDone();
   // intakeTopGoal();
   // pros::delay(3000); // score
-  // chassis.moveToPoint(62, -48, 2000); // go to match loader
-  // chassis.waitUntilDone();
+  // chassis.setPose(28, -48, 90);
   // intakeIn();
+  // chassis.moveToPoint(75, -48, 3000); // go to match loader
+  // chassis.waitUntilDone();
   // pros::delay(2000);
   // chassis.moveToPoint(28, -48, 2000, {.forwards=false}); // go to long goal
   // chassis.waitUntilDone();

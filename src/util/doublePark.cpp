@@ -4,9 +4,10 @@
 #include "subsystem/intake.h"
 #include "odomLift.h"
 #include "globals.h"
+#include <cstddef>
 
 
-pros::Distance doubleParkSensor(PORT_DISTANCE);
+pros::Distance doubleParkSensor(PORT_LEFT_DISTANCE);
 
 pros::adi::Pneumatics doubleParkLeft(PORT_ADI_DOUBLE_PARK_LEFT, false);
 pros::adi::Pneumatics doubleParkRight(PORT_ADI_DOUBLE_PARK_RIGHT, false);
@@ -28,9 +29,9 @@ void doublePark() {
     int distance = doubleParkSensor.get_distance();
     intakeOut(); // Keep intake running out
 
-    if (distance < 100) {
+    if (distance < 150) {
       // Block detected! Move to the next state.
-      stopIntake();
+      
       startTime = pros::millis(); // Start the timer for the delay
       dpState = WAITING_FOR_STOP;
     }
@@ -40,7 +41,8 @@ void doublePark() {
 
   case WAITING_FOR_STOP:
     // Wait 200ms before engaging pneumatics
-    if (pros::millis() - startTime >= 200) {
+    if (pros::millis() - startTime >= 500) {
+      stopIntake();
       engageDoublePark();
       dpState = ENGAGED_COMPLETE;
     }

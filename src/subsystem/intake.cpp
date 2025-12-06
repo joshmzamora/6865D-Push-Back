@@ -31,7 +31,12 @@ void intakeMiddle() { setIntakeState(IN, MIDDLEGOAL); engageMiddleGoalMech(); }
 
 void intakeTopGoal() { setIntakeState(IN, IN); disengageMiddleGoalMech(); }
 
-void stopIntake() { setIntakeState(STOPPED, STOPPED); disengageMiddleGoalMech(); } 
+void stopIntake() {
+  setIntakeState(STOPPED, STOPPED);
+  disengageMiddleGoalMech();
+}
+
+void colorSortIntake() {setIntakeState(IN, COLOR_SORT); }
 
 void runIntake() {
   if (runDoubleParkingIntake &&
@@ -59,6 +64,7 @@ void runIntake() {
     engageMiddleGoalMech();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
     setIntakeState(IN, OUT);
+
   }
   else if (intakeState != BLOCKED) {
     stopIntake();

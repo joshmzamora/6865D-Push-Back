@@ -33,13 +33,13 @@ void competition_initialize() {}
 void autonomous() {
   // skillsAuton();
   //  blueLeftElimAuton();
-  blueRightElimAuton();
+  // blueRightElimAuton();
   // soloAWP();
 }
 
 void opcontrol() {
 
-  skillsAuton();
+  //skillsAuton();
   // blueLeftElimAuton();
   //blueRightElimAuton();
   // soloAWP();
@@ -48,10 +48,11 @@ void opcontrol() {
   engageLeftWing();
   while (true) {
     //pidController();
+    //doublePark();
+    colorSort();
     runIntake();
     runLoaderMechToggle();
     runDoubleParkToggle();
-    doublePark();
     runWingToggle();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);

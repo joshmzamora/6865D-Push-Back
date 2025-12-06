@@ -22,6 +22,7 @@ void doubleParkIntakeOut();
 void intakeTopGoal();
 void intakeMiddle();
 void stopIntake();
+void colorSortIntake();
 void runIntake();
 void jamIntake();
 IntakeState getIntakeState();

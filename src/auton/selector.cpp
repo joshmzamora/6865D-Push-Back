@@ -8,7 +8,7 @@
 #include <exception>
 #include <string>
 
-Alliance currentAlliance = RED;
+Alliance currentAlliance = BLUE;
 Side currentSide = LEFT;
 bool isElim = false;
 bool isSkills = false;

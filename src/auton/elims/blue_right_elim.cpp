@@ -10,55 +10,52 @@
 
 
 void blueRightElimAuton() {
-  chassis.setPose(50, -17, 305);
+  chassis.setPose(49, 14, 285);
   intakeIn();
   // Move to grab the next 2 blocks
-  chassis.moveToPoint(24, -22, 2000, {.maxSpeed = 80});
+  chassis.moveToPoint(24, 24, 2000, {.maxSpeed = 80});
   chassis.waitUntil(21);
   engageLoaderMech();
   pros::delay(500); // Allow time to secure blocks
   disengageLoaderMech();
-  chassis.turnToHeading(335, 1000);
+  chassis.turnToHeading(45, 1000);
   chassis.waitUntilDone();
-  chassis.setPose(24, -24, 335); // reset
+  chassis.setPose(24, 24, chassis.getPose().theta); // reset
   chassis.waitUntilDone();
-
-  // // Back to elim code
   intakeIn();
-  chassis.moveToPoint(8, -48, 2000, {.maxSpeed = 80});
+  chassis.moveToPoint(48, 48, 3000, {.maxSpeed = 80});
   chassis.waitUntilDone();
-  pros::delay(500);
-
-  chassis.moveToPoint(20, -30, 3000, {.forwards = false, .maxSpeed = 80});
-  chassis.waitUntilDone();
-  chassis.moveToPoint(48, -48, 3000, {.forwards = false, .maxSpeed = 80});
-  chassis.waitUntilDone();
-  // chassis.moveToPose(48, -48, 225, 3000, {.forwards = false, .maxSpeed=80});
-  // // Note: This line was commented out in the original. The values have been
-  // transformed. chassis.waitUntilDone();
-
   chassis.turnToHeading(90, 1000);
   chassis.waitUntilDone();
-  chassis.setPose(48, -48, 90); // reset
+  chassis.setPose(48, 48, 90); // reset
   chassis.waitUntilDone();
-
-  // // // Approach the long goal to score
-  // engageOdomLift();
-  chassis.moveToPoint(25, -48, 3000, {.forwards = false, .maxSpeed = 80});
-  chassis.waitUntilDone();
-
   // //  // Score the blocks
   engageLoaderMech();
-  intakeTopGoal();
-  pros::delay(3000); // Run intakes to score
   intakeIn();
   // // // Move to the match loader area
-  chassis.moveToPoint(60, -48, 3000, {.maxSpeed = 60});
+  chassis.moveToPoint(60, 48, 3000, {.maxSpeed = 60});
   chassis.waitUntilDone();
-
   pros::delay(2000);
-  chassis.moveToPoint(25, -48, 3000, {.forwards = false});
+  chassis.moveToPoint(25, chassis.getPose().y + 1, 3000, {.forwards = false});
   chassis.waitUntilDone();
-
   intakeTopGoal();
+  pros::delay(2000); // score
+  disengageLoaderMech();
+  intakeIn();
+  chassis.moveToPoint(48, 48, 1000);
+  chassis.waitUntilDone();
+  chassis.turnToHeading(45, 1000);
+  chassis.waitUntilDone();
+  chassis.setPose(48, 48, 45);
+  engageLeftWing();
+  chassis.moveToPoint(24, 34, 3000, {.forwards = false, .maxSpeed = 80});
+  chassis.waitUntilDone();
+  chassis.turnToHeading(90, 1000);
+  chassis.waitUntilDone();
+  chassis.setPose(24, 34, 90);
+  disengageLeftWing();
+  chassis.moveToPoint(12, 34, 2000, {.forwards = false, .maxSpeed = 80});
+  chassis.waitUntilDone();
+  chassis.turnToHeading(80, 1000);
+  chassis.waitUntilDone();
 }

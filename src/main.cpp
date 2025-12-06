@@ -31,14 +31,17 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-  redLeftElimAuton();
+  // skillsAuton();
+  //  blueLeftElimAuton();
+  blueRightElimAuton();
+  // soloAWP();
 }
 
 void opcontrol() {
-  // redLeftElimAuton();
-  // moveForward();
+
   skillsAuton();
   // blueLeftElimAuton();
+  //blueRightElimAuton();
   // soloAWP();
   
   engageOdomLift();

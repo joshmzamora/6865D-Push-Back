@@ -51,32 +51,67 @@ void skillsAuton() {
   engageLoaderMech();
   pros::delay(250);
   intakeIn();
-  chassis.moveToPoint(-60, -48, 2500, {.maxSpeed = 80}); // go to match loader
+  chassis.moveToPoint(-62, -48, 2500, {.maxSpeed = 80}); // go to match loader
   chassis.waitUntilDone();
+  pros::delay(2500);
   intakeIn();
+  chassis.moveToPoint(-59, -48, 1000, {.forwards = false});
+  chassis.waitUntilDone();
+  chassis.moveToPoint(-62, -48, 2500, {.maxSpeed = 80}); // go back to match loader
+  chassis.waitUntilDone();
+pros::delay(2500);
   chassis.moveToPoint(-26, -50, 1000, {.forwards = false}); // go to long goal
   chassis.waitUntilDone();
   intakeTopGoal();
   disengageLoaderMech();
-  pros::delay(1000); // score
+  pros::delay(2500); // score
+  jamIntake();
+  intakeTopGoal();
+  pros::delay(2500); // score
+
+  //REGULAR SKILLS
+  // chassis.moveToPoint(-48, -48, 1000);
+  // chassis.waitUntilDone();
+  // chassis.turnToHeading(180, 1000);
+  // chassis.setPose(-48, -48, chassis.getPose().theta);
+  // chassis.moveToPoint(-48, -62, 1000);
+  // chassis.waitUntilDone();
+  // chassis.turnToHeading(90, 1000);
+  // chassis.setPose(-48, -62, chassis.getPose().theta);
+  // chassis.moveToPoint(48, -62, 5000, {.maxSpeed = 80});
+  // chassis.waitUntilDone();
+  // chassis.turnToHeading(0, 1000);
+  // chassis.setPose(48, -62, chassis.getPose().theta);
+  // chassis.moveToPoint(48, -48, 1000);
+  // chassis.waitUntilDone();
+  // chassis.turnToHeading(90, 1000);
+  // chassis.waitUntilDone();
+  // chassis.setPose(48, -48, chassis.getPose().theta);
+  // engageLoaderMech();
+  // pros::delay(250);
+  // intakeIn();
+  // chassis.moveToPoint(60, -48, 2000, {.maxSpeed = 80});
+  // chassis.waitUntilDone();
+
+  //solo awp
   chassis.turnToHeading(0, 3000, {.minSpeed = 100});
   chassis.waitUntilDone();
   intakeIn();
-  chassis.moveToPose(-26, -24, 0, 750, {.lead = .05, .maxSpeed = 80});
+  chassis.moveToPose(-26, -24, 0, 2000, {.lead = .05, .maxSpeed = 30});
   chassis.waitUntilDone();
   intakeIn();
-  chassis.moveToPose(chassis.getPose().x, 20, 2000, 0, {.maxSpeed = 80});
+  chassis.moveToPose(chassis.getPose().x, 20, 0, 10000, {.maxSpeed = 30});
   chassis.waitUntilDone();
-  chassis.moveToPoint(chassis.getPose().x, 26, 2000, {.maxSpeed = 80});
+  chassis.moveToPoint(chassis.getPose().x, 26, 3000, {.maxSpeed = 30});
   chassis.waitUntilDone();
   chassis.turnToHeading(315, 500);
   chassis.waitUntilDone();
   chassis.setPose(-23, 26, 315);
-  chassis.moveToPoint(-12, 17, 3000, {.forwards = false}); // go to middle goal
+  chassis.moveToPoint(-9, 15, 3000, {.forwards = false}); // go to middle goal
   chassis.waitUntilDone();
   setIntakeState(IN, IN);
   engageMiddleGoalMech();
-  pros::delay(500); // score
+  pros::delay(5000); // score
   intakeIn();
   chassis.moveToPoint(
       -48, 48, 2000,
@@ -90,16 +125,31 @@ void skillsAuton() {
   pros::delay(250);
   chassis.moveToPoint(-66, 48, 2000, {.maxSpeed = 80}); // go to match loader
   chassis.waitUntilDone();
+  pros::delay(5000);
+  // chassis.moveToPoint(-64, 48, 1000, {.forwards = false});
+  // chassis.waitUntilDone();
+  // chassis.moveToPoint(-66, 48, 2500,
+  //                     {.maxSpeed = 80}); // go back to match loader
+  // chassis.waitUntilDone();
+  // pros::delay(2500);
   chassis.moveToPoint(-24, 48, 1000, {.forwards = false}); // go to long goal
   chassis.waitUntilDone();
   disengageLoaderMech();
   jamIntake();
   intakeTopGoal();
-  pros::delay(2000); // score
+  pros::delay(5000); // score
+  chassis.setPose(-30, 48, chassis.getPose().theta);
+  chassis.moveToPoint(-48, 48, 2000);
+  chassis.waitUntilDone();
+  chassis.turnToHeading(225, 1000);
+  chassis.waitUntilDone();
+  chassis.setPose(-48, 48, 225);
   chassis.moveToPoint(-60, 20, 4000); // park on platform
   chassis.waitUntilDone();
   engageOdomLift();
   intakeIn();
+  chassis.turnToHeading(180, 1000);
+  chassis.waitUntilDone();
   chassis.moveToPoint(-60, 0, 2000);
   chassis.waitUntilDone();
 }

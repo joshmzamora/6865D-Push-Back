@@ -137,7 +137,9 @@ pros::delay(2500);
   disengageLoaderMech();
   jamIntake();
   intakeTopGoal();
-  pros::delay(5000); // score
+  pros::delay(2500); // score
+  jamIntake();
+  intakeTopGoal();
   chassis.setPose(-30, 48, chassis.getPose().theta);
   chassis.moveToPoint(-48, 48, 2000);
   chassis.waitUntilDone();

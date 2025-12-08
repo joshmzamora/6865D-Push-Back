@@ -56,11 +56,13 @@ void soloAWP() {
   chassis.setPose(-48, 48, 270);
   engageLoaderMech();
   pros::delay(250);
-  chassis.moveToPoint(-66, 48, 2000, {.maxSpeed=80}); // go to match loader
+  chassis.moveToPoint(-65, 48, 2000, {.maxSpeed=100}); // go to match loader
   chassis.waitUntilDone();
-  chassis.moveToPoint(-24, 48, 1000, {.forwards = false}); //go to long goal
+  chassis.moveToPoint(-24, 48, 1000, {.forwards = false, .minSpeed=100}); //go to long goal
   chassis.waitUntilDone();
+  intakeTopGoal();
+  pros::delay(1000); // score
   jamIntake();
   intakeTopGoal();
-  pros::delay(2000); // score
+  pros::delay(1000); // score
 }

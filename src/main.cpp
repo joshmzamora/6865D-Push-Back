@@ -33,8 +33,8 @@ void competition_initialize() {}
 void autonomous() {
   // skillsAuton();
   // blueLeftElimAuton();
-  blueRightElimAuton();
-  //soloAWP();
+  // blueRightElimAuton();
+  soloAWP();
 }
 
 void opcontrol() {
@@ -42,10 +42,12 @@ void opcontrol() {
   //skillsAuton();
   // blueLeftElimAuton();
   //blueRightElimAuton();
-  // soloAWP();
-  
-  engageOdomLift();
-  engageLeftWing();
+  //soloAWP();
+  //moveForward();
+
+  // engageOdomLift();
+  // engageLeftWing();
+
   while (true) {
     //pidController();
     //doublePark();

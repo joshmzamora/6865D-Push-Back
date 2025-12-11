@@ -82,10 +82,10 @@ pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
 pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
                                                 lemlib::Omniwheel::NEW_2,
-                                                -4.18); 
+                                                -3); //-4.18 
 lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
                                               lemlib::Omniwheel::NEW_2,
-                                              1.32); 
+                                              1.32); //1.32
 
 lemlib::OdomSensors odomSensors(
     &vertical_tracking_wheel, // vertical tracking wheel 1
@@ -177,8 +177,8 @@ void pidController() {
 }
 
 void odometryPosition() {
-  // while (true) {
-  //   std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
-  //             << ", " << chassis.getPose().theta << ")" << std::endl;
-  // }
+  while (true) {
+    std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
+              << ", " << chassis.getPose().theta << ")" << std::endl;
+  }
 }

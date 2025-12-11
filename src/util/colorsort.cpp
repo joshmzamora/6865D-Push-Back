@@ -5,7 +5,7 @@
 
 pros::Optical optical(PORT_OPTICAL);
 
-#define SORT_TIME 250
+#define SORT_TIME 400
 #define BLOCK_DISTANCE 30
 
 Alliance getColor(double hue) {
@@ -18,6 +18,7 @@ Alliance getColor(double hue) {
 }
 
 void colorSort() {
+ 
   optical.set_led_pwm(100);
     IntakeState prevIntakeState = getIntakeState();
     IntakeState prevHoodState = getHoodState();
@@ -25,7 +26,7 @@ void colorSort() {
     std::cout << "Color: " << seenColor
               << std::endl;
     if (seenColor != currentAlliance && seenColor != OTHER) {
-      // setIntakeState(STOPPED, STOPPED);
+      setIntakeState(STOPPED, STOPPED);
       setIntakeState(BLOCKED, BLOCKED);
       std::cout << "sorting" << std::endl;
       colorSortIntake(); //setIntakeState(IN, COLOR_SORT);
@@ -33,6 +34,7 @@ void colorSort() {
       std::cout << " done sorting" << std::endl;
       setIntakeState(prevIntakeState, prevHoodState);
       std::cout << " set states" << std::endl;
+      controller.rumble(".");
       }
     pros::delay(20);
   }

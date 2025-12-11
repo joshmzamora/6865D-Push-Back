@@ -211,26 +211,26 @@ void autonSelector() {
   else if (currentAlliance == BLUE) {
     if (currentSide == LEFT) {
       if (isElim)
-        blueLeftAuton();
+        blueLeftElimAuton();
       else
-        blueLeftAuton();
+        blueLeftElimAuton();
     } else if (currentSide == RIGHT) {
       if (isElim)
-        blueRightAuton();
+        blueRightElimAuton();
       else
-        blueRightAuton();
+        blueRightElimAuton();
     }
   } else if (currentAlliance == RED) {
     if (currentSide == LEFT) {
       if (isElim)
-        redLeftAuton();
+        blueLeftElimAuton();
       else
-        redLeftAuton();
+        blueLeftElimAuton();
     } else if (currentSide == RIGHT) {
       if (isElim)
-        redRightAuton();
+        blueRightElimAuton();
       else
-        redRightAuton();
+        blueRightElimAuton();
     }
   }
 }

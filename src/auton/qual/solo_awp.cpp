@@ -20,7 +20,9 @@ void soloAWP() {
   engageLoaderMech();
   pros::delay(250);
   intakeIn();
-  chassis.moveToPoint(-60, -48, 2500, {.maxSpeed=80}); // go to match loader
+  chassis.moveToPoint(-56, -48, 2000); 
+  chassis.waitUntilDone();
+  chassis.moveToPoint(-60, -48, 500, {.maxSpeed=20}); // go to match loader
   chassis.waitUntilDone();
   intakeIn();
   chassis.moveToPoint(-26, -50, 1000, {.forwards = false}); //go to long goal
@@ -34,29 +36,29 @@ void soloAWP() {
   chassis.moveToPose(-26, -24, 0, 750, {.lead=.05,.maxSpeed=80}); 
   chassis.waitUntilDone();
   intakeIn();
-  chassis.moveToPose(chassis.getPose().x, 20, 2000, 0, {.maxSpeed=80}); 
+  chassis.moveToPose(-24, 20, 2000, 0, {.maxSpeed=80}); 
   chassis.waitUntilDone();
-  chassis.moveToPoint(chassis.getPose().x, 26, 2000,
+  chassis.moveToPoint(-24, 26, 2000,
                       {.maxSpeed = 80});
   chassis.waitUntilDone();
   chassis.turnToHeading(315, 500);
   chassis.waitUntilDone();
-  chassis.setPose(-23, 26, 315);
-  chassis.moveToPoint(-12, 17, 3000, {.forwards = false}); // go to middle goal
+  chassis.setPose(chassis.getPose().x, chassis.getPose().y, 315);
+  chassis.moveToPoint(-10, 12, 3000, {.forwards = false}); // go to middle goal
   chassis.waitUntilDone();
   setIntakeState(IN, IN);
   engageMiddleGoalMech();
   pros::delay(500); // score
   intakeIn();
-  chassis.moveToPoint(-48, 48, 2000, {.minSpeed = 90, .earlyExitRange=8}); // go to match loader
+  chassis.moveToPoint(-48, 48, 2000, {.minSpeed = 90, .earlyExitRange=14}); // go to match loader
   chassis.waitUntilDone();
   chassis.turnToHeading(270, 500);
   chassis.waitUntilDone();
   jamIntake();
-  chassis.setPose(-48, 48, 270);
+  chassis.setPose(chassis.getPose().x, chassis.getPose().y, 270);
   engageLoaderMech();
   pros::delay(250);
-  chassis.moveToPoint(-65, 48, 2000, {.maxSpeed=100}); // go to match loader
+  chassis.moveToPoint(-62, 48, 2000, {.maxSpeed=100}); // go to match loader
   chassis.waitUntilDone();
   chassis.moveToPoint(-24, 48, 1000, {.forwards = false, .minSpeed=100}); //go to long goal
   chassis.waitUntilDone();

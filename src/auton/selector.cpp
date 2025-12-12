@@ -140,7 +140,7 @@ void gui() {
   lv_obj_t *screen = lv_scr_act();
 
   // 1. Scrolling Fix: Remove scrollable flag from the main screen
-  lv_obj_add_flag(screen, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_clear_flag(screen, LV_OBJ_FLAG_SCROLLABLE);
 
   // 2. INIT STYLES
   lv_style_init(&styleBtnDefault);
@@ -192,9 +192,16 @@ void gui() {
   lv_obj_set_style_bg_color(configTab, lv_color_hex(0x000000),
                             LV_STATE_DEFAULT);
 
-  lv_obj_add_flag(autonsTab, LV_OBJ_FLAG_SCROLLABLE);
-  lv_obj_add_flag(debugTab, LV_OBJ_FLAG_SCROLLABLE);
-  lv_obj_add_flag(configTab, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_width(autonsTab, lv_pct(100));
+  lv_obj_set_height(autonsTab, lv_pct(100));
+  lv_obj_set_width(debugTab, lv_pct(100));
+  lv_obj_set_height(debugTab, lv_pct(100));
+  lv_obj_set_width(configTab, lv_pct(100));
+  lv_obj_set_height(configTab, lv_pct(100));
+  
+  lv_obj_clear_flag(autonsTab, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_clear_flag(debugTab, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_clear_flag(configTab, LV_OBJ_FLAG_SCROLLABLE);
 
   lv_obj_set_scrollbar_mode(autonsTab, LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_scrollbar_mode(debugTab, LV_SCROLLBAR_MODE_OFF);
@@ -250,7 +257,7 @@ void gui() {
 
   // Add margin to push the text 5 pixels away from the left and bottom edges.
   lv_obj_set_style_pad_left(allianceLabel, 5, 0);
-  lv_obj_set_style_pad_bottom(allianceLabel, -5, 0);
+  lv_obj_set_style_pad_bottom(allianceLabel, 5, 0);
 
   // Ensure the label content does not inherit center alignment
   lv_obj_set_style_text_align(allianceLabel, LV_TEXT_ALIGN_LEFT, 0);
@@ -330,6 +337,7 @@ void gui() {
   lv_obj_add_style(menuContainer, &styleMenuContainer, 0);
   lv_obj_set_flex_flow(menuContainer, LV_FLEX_FLOW_COLUMN);
   lv_obj_add_flag(menuContainer, LV_OBJ_FLAG_HIDDEN); // Start hidden
+  lv_obj_set_scrollbar_mode(menuContainer, LV_SCROLLBAR_MODE_OFF);
 
   // 3. Navigation Buttons inside Sidebar
   auto create_nav_btn = [&](const char *txt, int targetInfo) {

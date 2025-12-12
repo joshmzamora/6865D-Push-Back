@@ -9,7 +9,7 @@
 #include "util/odomLift.h"
 
 
-void blueRightElimAuton() {
+void rightAuton() {
   chassis.setPose(49, 14, 285);
   intakeIn();
   // Move to grab the next 2 blocks

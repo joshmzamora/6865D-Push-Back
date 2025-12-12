@@ -2,13 +2,9 @@
 #include "main.h"
 
 void skillsAuton();
-void redRightAuton();
-void redRightElimAuton();
-void blueRightAuton();
-void blueRightElimAuton();
-void redLeftAuton();
-void redLeftElimAuton();
-void blueLeftAuton();
-void blueLeftElimAuton();
+void rightAuton();
+void rightElimAuton();
+void leftAuton();
+void leftElimAuton();
 void moveForward();
 void soloAWP();

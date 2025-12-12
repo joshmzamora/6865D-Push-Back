@@ -10,7 +10,7 @@
 #include "util/odomLift.h"
 #include "subsystem/middleGoalMech.h"
 
-void blueLeftElimAuton() {
+void leftAuton() {
   chassis.setPose(50, -17, 255);
   intakeIn();
   // Move to grab the next 2 blocks

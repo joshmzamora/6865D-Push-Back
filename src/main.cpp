@@ -31,10 +31,11 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
+  autonSelector();
   // skillsAuton();
   // blueLeftElimAuton();
   // blueRightElimAuton();
-  soloAWP();
+  //soloAWP();
 }
 
 void opcontrol() {

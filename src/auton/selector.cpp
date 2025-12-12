@@ -1,4 +1,6 @@
 #include "auton.h"
+#include "liblvgl/lv_api_map.h"
+#include "liblvgl/misc/lv_style.h"
 #include "main.h"
 #include "subsystem/drivetrain.h"
 
@@ -198,7 +200,7 @@ void gui() {
   lv_obj_set_height(debugTab, lv_pct(100));
   lv_obj_set_width(configTab, lv_pct(100));
   lv_obj_set_height(configTab, lv_pct(100));
-  
+
   lv_obj_clear_flag(autonsTab, LV_OBJ_FLAG_SCROLLABLE);
   lv_obj_clear_flag(debugTab, LV_OBJ_FLAG_SCROLLABLE);
   lv_obj_clear_flag(configTab, LV_OBJ_FLAG_SCROLLABLE);
@@ -213,18 +215,23 @@ void gui() {
   // Main Container for this tab
   lv_obj_t *autonCont = lv_obj_create(autonsTab);
   lv_obj_set_size(autonCont, 480, 240);
+  lv_obj_align(autonCont, LV_ALIGN_TOP_LEFT, -20, -20);
+
   lv_obj_set_style_bg_color(autonCont, lv_color_hex(0x000000), 0);
   lv_obj_set_style_border_width(autonCont, 0, 0);
   lv_obj_set_style_pad_all(autonCont, 0, 0);
+  // lv_obj_set_style_pad_top(autonCont, 35, 0); // testing
+  
   lv_obj_set_flex_flow(autonCont,
                        LV_FLEX_FLOW_ROW); // Puts Image next to Button Column
+
 
   // -- LEFT: Image & Clickable Area (Container to hold image and button
   // overlay) --
 
   // Image Container: Positioned exactly where the image should go
   lv_obj_t *imageContainer = lv_obj_create(autonCont);
-  lv_obj_set_size(imageContainer, 220, 240); // Image size
+  lv_obj_set_size(imageContainer, 240, 240); // Image size
   lv_obj_set_style_bg_opa(imageContainer, LV_OPA_0,
                           0); // Make background transparent
   lv_obj_set_style_border_width(imageContainer, 0, 0);
@@ -232,14 +239,15 @@ void gui() {
 
   // Position adjustments
   lv_obj_set_style_align(imageContainer, LV_ALIGN_TOP_LEFT, 0);
-  lv_obj_set_style_pad_left(imageContainer,-20, 0);
-  lv_obj_set_style_pad_top(imageContainer, -45,0); 
+
 
   // The actual Image
   LV_IMG_DECLARE(christmas_transparent);
   lv_obj_t *previewImage = lv_img_create(imageContainer);
   lv_img_set_src(previewImage, &christmas_transparent);
   lv_obj_set_align(previewImage, LV_ALIGN_CENTER);
+  lv_obj_set_style_pad_left(previewImage, 40, 0);
+  lv_obj_set_style_pad_top(previewImage, -10, 0);
 
   // The transparent Button OVER the image
   allianceBtn = lv_btn_create(imageContainer);
@@ -249,18 +257,20 @@ void gui() {
   lv_obj_add_event_cb(allianceBtn, allianceButtonCallback, LV_EVENT_LONG_PRESSED,
                       NULL);
 
-  // Label for RED/BLUE text (created as a child of the transparent button)
-  allianceLabel = lv_label_create(allianceBtn);
+  // Label for RED/BLUE text 
+  allianceLabel = lv_label_create(imageContainer);
   lv_label_set_text(allianceLabel, "RED"); // Initial state
   lv_obj_set_style_text_font(allianceLabel, &lv_font_montserrat_20, 0);
   lv_obj_set_style_align(allianceLabel, LV_ALIGN_BOTTOM_LEFT, 0);
 
   // Add margin to push the text 5 pixels away from the left and bottom edges.
-  lv_obj_set_style_pad_left(allianceLabel, 5, 0);
-  lv_obj_set_style_pad_bottom(allianceLabel, 5, 0);
+  lv_obj_set_style_pad_left(allianceLabel, 10, 0);
+  lv_obj_set_style_pad_bottom(allianceLabel, 15, 0);
 
   // Ensure the label content does not inherit center alignment
   lv_obj_set_style_text_align(allianceLabel, LV_TEXT_ALIGN_LEFT, 0);
+
+  lv_obj_move_background(imageContainer);
 
   // -- RIGHT: Button Column (1x4) --
   lv_obj_t *buttonColumn = lv_obj_create(autonCont);
@@ -269,14 +279,13 @@ void gui() {
   lv_obj_set_style_bg_color(buttonColumn, lv_color_hex(0x000000), 0);
   lv_obj_set_style_border_width(buttonColumn, 0, 0);
 
-  // Position shift (20px up, 40px left)
-  lv_obj_set_style_pad_top(buttonColumn, -20, 0);
-  lv_obj_set_style_pad_left(buttonColumn, -50, 0);
-
+  // Position shift
+  lv_obj_set_style_pad_top(buttonColumn, 15, 0);
+  lv_obj_set_style_pad_left(buttonColumn, -10, 0);
   // Set to COLUMN flow (1x4)
   lv_obj_set_flex_flow(buttonColumn, LV_FLEX_FLOW_COLUMN);
-  lv_obj_set_flex_align(buttonColumn, LV_FLEX_ALIGN_CENTER,
-                        LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+  lv_obj_set_flex_align(buttonColumn, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER,
+                        LV_FLEX_ALIGN_CENTER);
   lv_obj_set_style_pad_row(buttonColumn, 8, 0);
 
   // Helper to create auton buttons
@@ -296,8 +305,9 @@ void gui() {
   create_auton_btn("RIGHT SIDE", &rightBtn);
   create_auton_btn("SKILLS", &skillsBtn);
   create_auton_btn("SOLO AWP", &soloAwpBtn);
-  
+
   updateButtonStyles(leftBtn);
+
 
   lv_obj_move_foreground(buttonColumn);
   

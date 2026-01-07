@@ -6,41 +6,41 @@
 #include "subsystem/loaderMech.h"
 #include "subsystem/wing.h"
 #include "util/colorsort.h"
-#include "util/odomLift.h"
+
 #include "subsystem/middleGoalMech.h"
 
-//WING CODE
-// chassis.setPose(-48, -16, 180);
-// chassis.moveToPoint(-48, -48, 2000);
-// chassis.waitUntilDone();
-// chassis.turnToHeading(270, 1000);
-// chassis.waitUntilDone();
-// chassis.setPose(-48, -48, 270);
-// engageLoaderMech();
-// chassis.moveToPoint(-70, -48, 2000, {.maxSpeed = 30}); // go to match loader
-// chassis.waitUntilDone();
-// intakeIn();
-// pros::delay(2000);
-// stopIntake();
-// chassis.moveToPoint(-50, -48, 2000, {.forwards = false});
-// chassis.waitUntilDone();
-// disengageLoaderMech();
-// chassis.turnToHeading(125, 1000);
-// chassis.waitUntilDone();
-// chassis.setPose(-50, -48, 125);
-// chassis.moveToPoint(-30, -65, 2000);
-// chassis.waitUntilDone();
-// chassis.turnToHeading(90, 1000);
-// chassis.waitUntilDone();
-// chassis.setPose(-30, -65, 90);
-// chassis.moveToPoint(36, -65, 4000);
-// chassis.waitUntilDone();
-// chassis.turnToHeading(45, 1000);
-// chassis.waitUntilDone();
+// WING CODE
+//  chassis.setPose(-48, -16, 180);
+//  chassis.moveToPoint(-48, -48, 2000);
+//  chassis.waitUntilDone();
+//  chassis.turnToHeading(270, 1000);
+//  chassis.waitUntilDone();
+//  chassis.setPose(-48, -48, 270);
+//  engageLoaderMech();
+//  chassis.moveToPoint(-70, -48, 2000, {.maxSpeed = 30}); // go to match loader
+//  chassis.waitUntilDone();
+//  intakeIn();
+//  pros::delay(2000);
+//  stopIntake();
+//  chassis.moveToPoint(-50, -48, 2000, {.forwards = false});
+//  chassis.waitUntilDone();
+//  disengageLoaderMech();
+//  chassis.turnToHeading(125, 1000);
+//  chassis.waitUntilDone();
+//  chassis.setPose(-50, -48, 125);
+//  chassis.moveToPoint(-30, -65, 2000);
+//  chassis.waitUntilDone();
+//  chassis.turnToHeading(90, 1000);
+//  chassis.waitUntilDone();
+//  chassis.setPose(-30, -65, 90);
+//  chassis.moveToPoint(36, -65, 4000);
+//  chassis.waitUntilDone();
+//  chassis.turnToHeading(45, 1000);
+//  chassis.waitUntilDone();
 pros::Gps gps(PORT_GPS, 1.0, 1.0, true);
 
 void skillsAuton() {
-  //gps.set_position(-1.21, -.4, 180);
+  // gps.set_position(-1.21, -.4, 180);
   engageLeftWing();
   chassis.setPose(-48, -16, 180);
   chassis.moveToPoint(-48, -48, 1000, {.maxSpeed = 80}); // go to match loader
@@ -57,9 +57,10 @@ void skillsAuton() {
   intakeIn();
   chassis.moveToPoint(-59, -48, 1000, {.forwards = false});
   chassis.waitUntilDone();
-  chassis.moveToPoint(-62, -48, 2500, {.maxSpeed = 80}); // go back to match loader
+  chassis.moveToPoint(-62, -48, 2500,
+                      {.maxSpeed = 80}); // go back to match loader
   chassis.waitUntilDone();
-pros::delay(2500);
+  pros::delay(2500);
   chassis.moveToPoint(-26, -50, 1000, {.forwards = false}); // go to long goal
   chassis.waitUntilDone();
   intakeTopGoal();
@@ -69,31 +70,31 @@ pros::delay(2500);
   intakeTopGoal();
   pros::delay(2500); // score
 
-  //REGULAR SKILLS
-  // chassis.moveToPoint(-48, -48, 1000);
-  // chassis.waitUntilDone();
-  // chassis.turnToHeading(180, 1000);
-  // chassis.setPose(-48, -48, chassis.getPose().theta);
-  // chassis.moveToPoint(-48, -62, 1000);
-  // chassis.waitUntilDone();
-  // chassis.turnToHeading(90, 1000);
-  // chassis.setPose(-48, -62, chassis.getPose().theta);
-  // chassis.moveToPoint(48, -62, 5000, {.maxSpeed = 80});
-  // chassis.waitUntilDone();
-  // chassis.turnToHeading(0, 1000);
-  // chassis.setPose(48, -62, chassis.getPose().theta);
-  // chassis.moveToPoint(48, -48, 1000);
-  // chassis.waitUntilDone();
-  // chassis.turnToHeading(90, 1000);
-  // chassis.waitUntilDone();
-  // chassis.setPose(48, -48, chassis.getPose().theta);
-  // engageLoaderMech();
-  // pros::delay(250);
-  // intakeIn();
-  // chassis.moveToPoint(60, -48, 2000, {.maxSpeed = 80});
-  // chassis.waitUntilDone();
+  // REGULAR SKILLS
+  //  chassis.moveToPoint(-48, -48, 1000);
+  //  chassis.waitUntilDone();
+  //  chassis.turnToHeading(180, 1000);
+  //  chassis.setPose(-48, -48, chassis.getPose().theta);
+  //  chassis.moveToPoint(-48, -62, 1000);
+  //  chassis.waitUntilDone();
+  //  chassis.turnToHeading(90, 1000);
+  //  chassis.setPose(-48, -62, chassis.getPose().theta);
+  //  chassis.moveToPoint(48, -62, 5000, {.maxSpeed = 80});
+  //  chassis.waitUntilDone();
+  //  chassis.turnToHeading(0, 1000);
+  //  chassis.setPose(48, -62, chassis.getPose().theta);
+  //  chassis.moveToPoint(48, -48, 1000);
+  //  chassis.waitUntilDone();
+  //  chassis.turnToHeading(90, 1000);
+  //  chassis.waitUntilDone();
+  //  chassis.setPose(48, -48, chassis.getPose().theta);
+  //  engageLoaderMech();
+  //  pros::delay(250);
+  //  intakeIn();
+  //  chassis.moveToPoint(60, -48, 2000, {.maxSpeed = 80});
+  //  chassis.waitUntilDone();
 
-  //solo awp
+  // solo awp
   chassis.turnToHeading(0, 3000, {.minSpeed = 100});
   chassis.waitUntilDone();
   intakeIn();
@@ -148,7 +149,7 @@ pros::delay(2500);
   chassis.setPose(-48, 48, 225);
   chassis.moveToPoint(-60, 20, 4000); // park on platform
   chassis.waitUntilDone();
-  engageOdomLift();
+
   intakeIn();
   chassis.turnToHeading(180, 1000);
   chassis.waitUntilDone();

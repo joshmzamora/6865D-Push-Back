@@ -242,12 +242,12 @@ void gui() {
 
 
   // The actual Image
-  LV_IMG_DECLARE(christmas_transparent);
-  lv_obj_t *previewImage = lv_img_create(imageContainer);
-  lv_img_set_src(previewImage, &christmas_transparent);
-  lv_obj_set_align(previewImage, LV_ALIGN_CENTER);
-  lv_obj_set_style_pad_left(previewImage, 40, 0);
-  lv_obj_set_style_pad_top(previewImage, -10, 0);
+  //LV_IMG_DECLARE(christmas_transparent);
+  //lv_obj_t *previewImage = lv_img_create(imageContainer);
+  //lv_img_set_src(previewImage, &christmas_transparent);
+  // lv_obj_set_align(previewImage, LV_ALIGN_CENTER);
+  // lv_obj_set_style_pad_left(previewImage, 40, 0);
+  // lv_obj_set_style_pad_top(previewImage, -10, 0);
 
   // The transparent Button OVER the image
   allianceBtn = lv_btn_create(imageContainer);
@@ -263,7 +263,7 @@ void gui() {
   lv_obj_set_style_text_font(allianceLabel, &lv_font_montserrat_20, 0);
   lv_obj_set_style_align(allianceLabel, LV_ALIGN_BOTTOM_LEFT, 0);
 
-  // Add margin to push the text 5 pixels away from the left and bottom edges.
+  // Add margin to push the text away from the left and bottom edges.
   lv_obj_set_style_pad_left(allianceLabel, 10, 0);
   lv_obj_set_style_pad_bottom(allianceLabel, 15, 0);
 
@@ -282,6 +282,7 @@ void gui() {
   // Position shift
   lv_obj_set_style_pad_top(buttonColumn, 15, 0);
   lv_obj_set_style_pad_left(buttonColumn, -10, 0);
+
   // Set to COLUMN flow (1x4)
   lv_obj_set_flex_flow(buttonColumn, LV_FLEX_FLOW_COLUMN);
   lv_obj_set_flex_align(buttonColumn, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER,

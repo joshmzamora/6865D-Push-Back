@@ -3,6 +3,7 @@
 #include "globals.h"
 #include "loaderMech.h"
 #include "subsystem/middleGoalMech.h"
+#include "subsystem/ball_lock.h"
 
 pros::Motor intake(PORT_INTAKE);
 pros::Motor hood(PORT_HOOD);
@@ -19,35 +20,25 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
   hood.move(hoodState);
 }
 
-void intakeIn() { setIntakeState(IN, STOPPED); disengageMiddleGoalMech();}
 
-void intakeOut() { setIntakeState(OUT, OUT); disengageMiddleGoalMech();}
+void intakeIn() { setIntakeState(IN, HOOD_INTAKE); disengageBallLock(); }
 
-void doubleParkIntakeIn() { setIntakeState(DOUBLE_PARK_IN, STOPPED); }
+void intakeOut() { setIntakeState(OUT, OUT); disengageBallLock(); }
 
-void doubleParkIntakeOut() { setIntakeState(DOUBLE_PARK_OUT, STOPPED); }
 
-void intakeMiddle() { setIntakeState(IN, MIDDLEGOAL); engageMiddleGoalMech(); }
+void intakeMiddle() { setIntakeState(IN, IN); engageMiddleGoalMech(); engageBallLock();}
 
-void intakeTopGoal() { setIntakeState(IN, IN); disengageMiddleGoalMech(); }
+void intakeTopGoal() { setIntakeState(IN, IN); engageBallLock(); }
 
 void stopIntake() {
   setIntakeState(STOPPED, STOPPED);
-  disengageMiddleGoalMech();
+  engageMiddleGoalMech();
 }
 
 void colorSortIntake() {setIntakeState(IN, COLOR_SORT); }
 
 void runIntake() {
-  if (runDoubleParkingIntake &&
-      controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
-      intakeState != BLOCKED)
-    doubleParkIntakeIn();
-  else if (runDoubleParkingIntake &&
-           controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
-           intakeState != BLOCKED)
-    doubleParkIntakeOut();
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
+  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
     intakeIn();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
@@ -62,10 +53,6 @@ void runIntake() {
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) &&
            intakeState != BLOCKED)
     engageMiddleGoalMech();
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-    setIntakeState(IN, OUT);
-
-  }
   else if (intakeState != BLOCKED) {
     stopIntake();
   }
@@ -74,7 +61,9 @@ void runIntake() {
 
 void jamIntake() {
   setIntakeState(OUT, OUT);
-  pros::delay(400);
+  pros::delay(200);
   intakeIn();
 }
+
+
 double getIntakeRotations() { return intake.get_position(); }

@@ -7,7 +7,7 @@ pros::adi::Pneumatics loaderMechRight(PORT_ADI_LOADER_MECH_RIGHT, false);
 
 void runLoaderMechToggle() {
   static bool toggle{false};
-  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
     if (!toggle) {
       engageLoaderMech();
       toggle = !toggle;

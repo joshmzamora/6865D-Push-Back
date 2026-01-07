@@ -22,10 +22,11 @@ void soloAWP() {
   intakeIn();
   chassis.moveToPoint(-56, -48, 2000); 
   chassis.waitUntilDone();
+  intakeIn();
   chassis.moveToPoint(-60, -48, 500, {.maxSpeed=20}); // go to match loader
   chassis.waitUntilDone();
   intakeIn();
-  chassis.moveToPoint(-26, -50, 1000, {.forwards = false}); //go to long goal
+  chassis.moveToPoint(-26, -48, 1000, {.forwards = false}); //go to long goal
   chassis.waitUntilDone();
   intakeTopGoal();
   disengageLoaderMech();
@@ -33,18 +34,18 @@ void soloAWP() {
   chassis.turnToHeading(0,3000, {.minSpeed=100});
   chassis.waitUntilDone();
   intakeIn();
-  chassis.moveToPose(-26, -24, 0, 750, {.lead=.05,.maxSpeed=80}); 
+  chassis.moveToPoint(-24, -24, 1000, {.maxSpeed=80}); 
   chassis.waitUntilDone();
   intakeIn();
-  chassis.moveToPose(-24, 20, 2000, 0, {.maxSpeed=80}); 
+  chassis.moveToPose(-24, 20, 0, 2000, {.maxSpeed=80}); 
   chassis.waitUntilDone();
-  chassis.moveToPoint(-24, 26, 2000,
+  chassis.moveToPoint(-24, 28, 2000,
                       {.maxSpeed = 80});
   chassis.waitUntilDone();
   chassis.turnToHeading(315, 500);
   chassis.waitUntilDone();
   chassis.setPose(chassis.getPose().x, chassis.getPose().y, 315);
-  chassis.moveToPoint(-10, 12, 3000, {.forwards = false}); // go to middle goal
+  chassis.moveToPoint(-8, 14, 3000, {.forwards = false}); // go to middle goal
   chassis.waitUntilDone();
   setIntakeState(IN, IN);
   engageMiddleGoalMech();
@@ -54,8 +55,7 @@ void soloAWP() {
   chassis.waitUntilDone();
   chassis.turnToHeading(270, 500);
   chassis.waitUntilDone();
-  jamIntake();
-  chassis.setPose(chassis.getPose().x, chassis.getPose().y, 270);
+  chassis.setPose(-48, 48, 270);
   engageLoaderMech();
   pros::delay(250);
   chassis.moveToPoint(-62, 48, 2000, {.maxSpeed=100}); // go to match loader
@@ -63,8 +63,8 @@ void soloAWP() {
   chassis.moveToPoint(-24, 48, 1000, {.forwards = false, .minSpeed=100}); //go to long goal
   chassis.waitUntilDone();
   intakeTopGoal();
+  intakeTopGoal();
   pros::delay(1000); // score
-  jamIntake();
   intakeTopGoal();
   pros::delay(1000); // score
 }

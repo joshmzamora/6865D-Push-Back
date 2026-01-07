@@ -26,7 +26,7 @@ pros::MotorGroup driveRight({PORT_DRIVE_RIGHT_FRONT, PORT_DRIVE_RIGHT_TOP,
 lemlib::Drivetrain drivetrain(
     &driveLeft,                 // left motor group
     &driveRight,                // right motor group
-    13,                         // 13 inch track width
+    12,                         // 12 inch track width
     lemlib::Omniwheel::NEW_325, // using new 4" omnis
     450,                        // drivetrain rpm is 450
     2 // chase power is 2. If we had traction wheels, it would have been 8
@@ -40,9 +40,9 @@ lemlib::Drivetrain drivetrain(
 
 // lateral motion controller
 lemlib::ControllerSettings
-    linearController(15,  // proportional gain (kP)
+    linearController(20,  // proportional gain (kP)
                      0,   // integral gain (kI)
-                     75,   // derivative gain (kD)
+                     10,   // derivative gain (kD)
                      3,   // anti windup
                      1,   // small error range, in inches
                      100, // small error range timeout, in milliseconds
@@ -74,23 +74,20 @@ lemlib::ControllerSettings
 // PORT_ADI_XENCODER_BOTTOM, true); pros::ADIEncoder yEncoder =
 // pros::ADIEncoder(PORT_ADI_YENCODER_TOP, PORT_ADI_YENCODER_BOTTOM, false);
 
-// lemlib::TrackingWheel xTracker(&xEncoder, 2.75, -1.00393701, 1);
-// lemlib::TrackingWheel yTracker(&yEncoder, 2.75, -0.0196850394, 1);
-
 pros::Imu imu = pros::Imu(PORT_INERTIAL);
-pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
-pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
-lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
-                                                lemlib::Omniwheel::NEW_2,
-                                                -3); //-4.18 
-lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
-                                              lemlib::Omniwheel::NEW_2,
-                                              1.32); //1.32
+// pros::Rotation horizontalTracker(PORT_ROTATION_HORIZONTAL);
+// pros::Rotation verticalTracker(PORT_ROTATION_VERTICAL);
+// lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalTracker,
+//                                                 lemlib::Omniwheel::NEW_2,
+//                                                 0); //-4.18
+// lemlib::TrackingWheel vertical_tracking_wheel(&verticalTracker,
+//                                               lemlib::Omniwheel::NEW_2,
+//                                               0.1875); // 1.32
 
 lemlib::OdomSensors odomSensors(
-    &vertical_tracking_wheel, // vertical tracking wheel 1
+    nullptr, //&vertical_tracking_wheel, // vertical tracking wheel 1
     nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
-    &horizontal_tracking_wheel, // horizontal tracking wheel 1
+    nullptr, //&horizontal_tracking_wheel, // horizontal tracking wheel 1
     nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a
              // second one
     &imu     // inertial sensor

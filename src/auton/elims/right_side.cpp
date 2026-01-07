@@ -6,8 +6,6 @@
 #include "subsystem/drivetrain.h"
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
-#include "util/odomLift.h"
-
 
 void rightAuton() {
   chassis.setPose(49, 14, 285);
@@ -33,13 +31,22 @@ void rightAuton() {
   engageLoaderMech();
   intakeIn();
   // // // Move to the match loader area
-  chassis.moveToPoint(61, 46, 2000, {.maxSpeed = 65});
+  chassis.moveToPoint(61, 47, 2000, {.maxSpeed = 65});
   chassis.waitUntilDone();
-  pros::delay(2000);
-  chassis.moveToPoint(26, chassis.getPose().y + 1, 2000, {.forwards = false});
+  pros::delay(350);
+  chassis.moveToPoint(59, 47, 2000, {.forwards = false, .maxSpeed = 65});
+  chassis.waitUntilDone();
+  pros::delay(350);
+  chassis.moveToPoint(61, 47, 2000, {.maxSpeed = 65});
+  chassis.waitUntilDone();
+  pros::delay(350);
+  chassis.moveToPoint(26, chassis.getPose().y + 3, 2000, {.forwards = false});
   chassis.waitUntilDone();
   intakeTopGoal();
-  pros::delay(2000); // score
+  pros::delay(1500); // score
+  jamIntake();
+  intakeTopGoal();
+  pros::delay(1500); // score
   disengageLoaderMech();
   intakeIn();
   chassis.moveToPoint(48, 48, 1000);
@@ -48,15 +55,14 @@ void rightAuton() {
   chassis.waitUntilDone();
   chassis.setPose(48, 48, 45);
   engageLeftWing();
-  chassis.moveToPoint(24, 34, 2000, {.forwards = false, .maxSpeed = 80});
+  chassis.moveToPoint(24, 35, 2000, {.forwards = false, .maxSpeed = 80});
   chassis.waitUntilDone();
   chassis.turnToHeading(92.5, 1000);
   chassis.waitUntilDone();
-  chassis.setPose(24, 34, 90);
+  chassis.setPose(24, 35, 90);
   disengageLeftWing();
-  chassis.moveToPoint(13, 34, 1000, {.forwards = false, .maxSpeed = 80});
+  chassis.moveToPoint(12, 38, 1000, {.forwards = false, .maxSpeed = 80});
   chassis.waitUntilDone();
-  chassis.turnToHeading(80, 1000);
+  chassis.turnToHeading(70, 1000);
   chassis.waitUntilDone();
-  pros::delay(2000);
 }

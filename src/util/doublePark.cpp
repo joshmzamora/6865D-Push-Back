@@ -1,11 +1,11 @@
-#include "pros/distance.hpp"
 #include "util/doublePark.h"
 #include "main.h"
+#include "pros/distance.hpp"
 #include "subsystem/intake.h"
-#include "odomLift.h"
+
+
 #include "globals.h"
 #include <cstddef>
-
 
 pros::Distance doubleParkSensor(PORT_LEFT_DISTANCE);
 
@@ -31,7 +31,7 @@ void doublePark() {
 
     if (distance < 150) {
       // Block detected! Move to the next state.
-      
+
       startTime = pros::millis(); // Start the timer for the delay
       dpState = WAITING_FOR_STOP;
     }
@@ -59,13 +59,12 @@ void doublePark() {
 }
 
 void engageDoublePark() {
-    doubleParkLeft.extend();
-    doubleParkRight.extend();
-    
+  doubleParkLeft.extend();
+  doubleParkRight.extend();
 }
 void disengageDoublePark() {
-    doubleParkLeft.retract();
-    doubleParkRight.retract();
+  doubleParkLeft.retract();
+  doubleParkRight.retract();
 }
 
 void runDoubleParkToggle() {

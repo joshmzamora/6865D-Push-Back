@@ -7,7 +7,7 @@ enum IntakeState {
   MIDDLEGOAL = 96,
   OUT = -127,
   COLOR_SORT = -100,
-  HOOD_INTAKE = -32,
+  HOOD_INTAKE = -100,
   STOPPED = 0,
   BLOCKED
 };

@@ -21,10 +21,9 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
 }
 
 
-void intakeIn() { setIntakeState(IN, HOOD_INTAKE); disengageBallLock(); }
+void intakeIn() { setIntakeState(IN, OUT); disengageBallLock(); }
 
 void intakeOut() { setIntakeState(OUT, OUT); disengageBallLock(); }
-
 
 void intakeMiddle() { setIntakeState(IN, IN); engageMiddleGoalMech(); engageBallLock();}
 
@@ -41,18 +40,12 @@ void runIntake() {
   if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
     intakeIn();
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
            intakeState != BLOCKED)
     intakeOut();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
            intakeState != BLOCKED)
     intakeTopGoal();
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
-           intakeState != BLOCKED)
-    intakeMiddle();
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) &&
-           intakeState != BLOCKED)
-    engageMiddleGoalMech();
   else if (intakeState != BLOCKED) {
     stopIntake();
   }

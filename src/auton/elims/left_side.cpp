@@ -35,30 +35,25 @@ void leftAuton() {
   pros::delay(250);
   chassis.moveToPoint(59, -48, 2000); // go to match loader
   chassis.waitUntilDone();
-  pros::delay(350);
+  pros::delay(125);
   chassis.moveToPoint(57, -48, 2000, {.forwards=false}); // go to match loader
   chassis.waitUntilDone();
-  pros::delay(350);
+  pros::delay(125);
   chassis.moveToPoint(59, -48, 2000); // go to match loader
   chassis.waitUntilDone();
-  pros::delay(350);
+  pros::delay(125);
   chassis.moveToPoint(30, -48, 1000, {.forwards = false}); // go to long goal
   chassis.waitUntilDone();
   disengageLoaderMech();
   intakeTopGoal();
   pros::delay(2000); // score
-  chassis.moveToPoint(48, -48, 2000);
+  chassis.moveToPoint(36, -36, 2000);
   chassis.waitUntilDone();
-  chassis.turnToHeading(45, 1000);
+  chassis.turnToHeading(270, 1000);
   chassis.waitUntilDone();
   engageLeftWing();
-  chassis.moveToPoint(30, -54, 3000, {.forwards=false, .maxSpeed=80});
+  chassis.moveToPoint(10, -36, 3000);
   chassis.waitUntilDone();
-  chassis.turnToHeading(90, 1000);
-  chassis.waitUntilDone();
-  disengageLeftWing();
-  chassis.moveToPoint(9,-54,2000,{.forwards=false,.maxSpeed=80});
-  chassis.waitUntilDone();
-  chassis.turnToHeading(80, 1000);
+  chassis.turnToHeading(280, 1000);
   chassis.waitUntilDone();
 }

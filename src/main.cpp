@@ -36,9 +36,9 @@ void competition_initialize() {}
 void autonomous() {
   // autonSelector();
   //  skillsAuton();
-  // leftAuton();
+   leftAuton();
   // rightAuton();
-  soloAWP();
+  //soloAWP();
 }
 
 void opcontrol() {

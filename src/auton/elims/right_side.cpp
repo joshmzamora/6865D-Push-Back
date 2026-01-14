@@ -8,61 +8,38 @@
 #include "subsystem/loaderMech.h"
 
 void rightAuton() {
-  chassis.setPose(49, 14, 285);
+  chassis.setPose(47, 5, 270);
   intakeIn();
   // Move to grab the next 2 blocks
   chassis.moveToPoint(24, 24, 2000, {.maxSpeed = 80});
-  chassis.waitUntil(21);
+  chassis.waitUntilDone();
   engageLoaderMech();
-  pros::delay(500); // Allow time to secure blocks
+  pros::delay(500);
   disengageLoaderMech();
-  chassis.turnToHeading(45, 1000);
+  chassis.turnToHeading(45, 500);
   chassis.waitUntilDone();
-  chassis.setPose(24, 24, chassis.getPose().theta); // reset
+  chassis.moveToPoint(
+      48, 48, 2000,
+      {.maxSpeed = 80, .earlyExitRange = 8}); // go to match loader
   chassis.waitUntilDone();
-  intakeIn();
-  chassis.moveToPoint(48, 48, 3000, {.maxSpeed = 80});
+  chassis.turnToHeading(90, 1000);
   chassis.waitUntilDone();
-  chassis.turnToHeading(92, 1000);
-  chassis.waitUntilDone();
-  chassis.setPose(48, 48, 90); // reset
-  chassis.waitUntilDone();
-  // //  // Score the blocks
+  // chassis.setPose(50, -50, chassis.getPose().theta);
+  pros::delay(250);
   engageLoaderMech();
-  intakeIn();
-  // // // Move to the match loader area
-  chassis.moveToPoint(61, 47, 2000, {.maxSpeed = 65});
+  chassis.moveToPoint(65, 48, 2000); // go to match loader
   chassis.waitUntilDone();
-  pros::delay(350);
-  chassis.moveToPoint(59, 47, 2000, {.forwards = false, .maxSpeed = 65});
+  pros::delay(125);
+  chassis.moveToPoint(63, 48, 2000, {.forwards = false}); // go to match loader
   chassis.waitUntilDone();
-  pros::delay(350);
-  chassis.moveToPoint(61, 47, 2000, {.maxSpeed = 65});
+  pros::delay(125);
+  chassis.moveToPoint(65, 48, 2000); // go to match loader
   chassis.waitUntilDone();
-  pros::delay(350);
-  chassis.moveToPoint(26, chassis.getPose().y + 3, 2000, {.forwards = false});
+  pros::delay(125);
+  chassis.moveToPoint(30, 48, 1000,
+                      {.forwards = false}); // go to long goal
   chassis.waitUntilDone();
-  intakeTopGoal();
-  pros::delay(1500); // score
-  jamIntake();
-  intakeTopGoal();
-  pros::delay(1500); // score
   disengageLoaderMech();
-  intakeIn();
-  chassis.moveToPoint(48, 48, 1000);
-  chassis.waitUntilDone();
-  chassis.turnToHeading(45, 1000);
-  chassis.waitUntilDone();
-  chassis.setPose(48, 48, 45);
-  engageLeftWing();
-  chassis.moveToPoint(24, 35, 2000, {.forwards = false, .maxSpeed = 80});
-  chassis.waitUntilDone();
-  chassis.turnToHeading(92.5, 1000);
-  chassis.waitUntilDone();
-  chassis.setPose(24, 35, 90);
-  disengageLeftWing();
-  chassis.moveToPoint(12, 38, 1000, {.forwards = false, .maxSpeed = 80});
-  chassis.waitUntilDone();
-  chassis.turnToHeading(70, 1000);
-  chassis.waitUntilDone();
+  intakeTopGoal();
+  pros::delay(3000); // score
 }

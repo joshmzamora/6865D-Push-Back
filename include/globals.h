@@ -18,7 +18,7 @@ extern bool runDoubleParkingIntake;
 #define PORT_DRIVE_LEFT_BOTTOM (-6) // middle
 #define PORT_DRIVE_RIGHT_FRONT 19
 #define PORT_DRIVE_RIGHT_TOP 15 // reversed
-#define PORT_DRIVE_RIGHT_BOTTOM 14
+#define PORT_DRIVE_RIGHT_BOTTOM 13
 
 #define PORT_ADI_LOADER_MECH_LEFT 'D'
 #define PORT_ADI_LOADER_MECH_RIGHT 'A'

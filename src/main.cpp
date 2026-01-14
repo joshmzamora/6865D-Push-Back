@@ -36,18 +36,19 @@ void competition_initialize() {}
 void autonomous() {
   // autonSelector();
   //  skillsAuton();
-   leftAuton();
-  // rightAuton();
+  //leftAuton();
+   rightAuton();
   //soloAWP();
 }
 
 void opcontrol() {
   // skillsAuton();
   // leftAuton();
-  // rightAuton();
+   //rightAuton();
   // soloAWP();
   // moveForward();
-
+  
+  //leftAuton();
   engageLeftWing();
   //engageMiddleGoalMech();
   while (true) {

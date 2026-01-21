@@ -34,32 +34,25 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-  // autonSelector();
-  //  skillsAuton();
-  //leftAuton();
-   rightAuton();
-  //soloAWP();
+ 
 }
 
 void opcontrol() {
-  // skillsAuton();
-  // leftAuton();
-   //rightAuton();
-  // soloAWP();
-  // moveForward();
-  
-  //leftAuton();
+  // left();
+  // right();
+  // sawp();
+  // skills();
   engageLeftWing();
-  //engageMiddleGoalMech();
+  engageMiddleGoalMech();
   while (true) {
     // pidController();
     // doublePark();
     // runDoubleParkToggle();
     // colorSort();
+    // runBallLockToggle();
     runIntake();
     runLoaderMechToggle();
     runWingToggle();
-    // runBallLockToggle();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
     int xAxis = returnExponential(

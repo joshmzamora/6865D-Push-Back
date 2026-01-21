@@ -11,7 +11,3 @@ void engageMiddleGoalMech() {
   middleGoal.extend();
 }
 
-bool isDoinked() {
-  return middleGoal.is_extended();
-}
-

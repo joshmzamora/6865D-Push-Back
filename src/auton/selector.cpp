@@ -383,16 +383,16 @@ void gui() {
 void autonSelector() {
   switch (selectedAuton) {
   case LEFT_SIDE:
-    leftAuton();
+    left();
     break;
   case RIGHT_SIDE:
-    rightAuton();
+    right();
     break;
   case SKILLS:
-    skillsAuton();
+    skills();
     break;
   case SOLO_AWP:
-    soloAWP();
+    sawp();
     break;
   }
 }

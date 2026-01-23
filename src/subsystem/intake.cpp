@@ -20,7 +20,7 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
   hood.move(hoodState);
 }
 
-void intakeIn() { setIntakeState(IN, OUT); disengageMiddleGoalMech();}
+void intakeIn() { setIntakeState(IN, HOOD_INTAKE); disengageMiddleGoalMech();}
 
 void intakeOut() { setIntakeState(OUT, OUT); disengageMiddleGoalMech(); }
 

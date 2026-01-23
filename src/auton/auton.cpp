@@ -3,6 +3,7 @@
 #include "globals.h"
 #include "subsystem/intake.h"
 #include "subsystem/loaderMech.h"
+#include "subsystem/wing.h"
 
 pros::Distance dNorth('A');
 pros::Distance dSouth('B');
@@ -332,4 +333,30 @@ void skills() {
   pros::delay(400);
   disengageLoaderMech();
 
+}
+
+
+void runMacros() {
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+    //wing left
+    chassis.setPose(0, 0, 0);
+    chassis.moveToPoint(12, 12, 1000, {.minSpeed = 127});
+    chassis.waitUntilDone();
+    chassis.turnToHeading(0, 500);
+    chassis.waitUntilDone();
+    engageLeftWing();
+    chassis.moveToPoint(12, -12, 1000, {.minSpeed = 127});
+    chassis.waitUntilDone();
+    disengageLeftWing();
+  } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    //wing right
+    chassis.setPose(0, 0, 0);
+    chassis.moveToPoint(-12, -12, 1000, {.minSpeed = 127});
+    chassis.turnToHeading(180, 500);
+    chassis.waitUntilDone();
+    engageLeftWing();
+    chassis.moveToPoint(-12, 12, 1000, {.minSpeed = 127});
+    chassis.waitUntilDone();
+    disengageLeftWing();
+  }
 }

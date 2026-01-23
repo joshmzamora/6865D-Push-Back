@@ -2,7 +2,6 @@
 #include "auton/auton.h"
 #include "auton/selector.h"
 #include "subsystem/middleGoalMech.h"
-
 #include "pros/misc.h"
 #include "subsystem/ball_lock.h"
 #include "subsystem/drivetrain.h"
@@ -53,6 +52,7 @@ void opcontrol() {
     runIntake();
     runLoaderMechToggle();
     runWingToggle();
+    runMacros();
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
     int xAxis = returnExponential(

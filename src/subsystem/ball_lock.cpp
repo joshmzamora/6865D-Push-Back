@@ -12,8 +12,8 @@ void runBallLockToggle() {
   }
 }
 
-void engageBallLock() { ballLock.extend(); }
+void engageBallLock() { ballLock.retract(); }
 
-void disengageBallLock() { ballLock.retract(); }
+void disengageBallLock() { ballLock.extend(); }
 
 bool isBallLocked() { return ballLock.is_extended(); }

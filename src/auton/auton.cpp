@@ -123,40 +123,50 @@ void test360() {
 }
  
 void left() {
-  drive_distance_from_wall(25, 5000, 80);
-  chassis.turnToHeading(90, 1000);
-  double y_pos = chassis.getPose().y;
+  chassis.setPose(49, -10, 240);
+  intakeIn();
+  chassis.moveToPoint(20, -22, 1000);
+  chassis.waitUntil(20);
   engageLoaderMech();
-  intake.move_velocity(600);
+  chassis.turnToHeading(135, 1000);
   chassis.waitUntilDone();
-  drive_distance(999, 1100, 80);
-  chassis.moveToPoint(-30, y_pos + 3, 1500, {false, 90});
+  chassis.moveToPoint(12, -12, 1000, {.forwards=false});
   chassis.waitUntilDone();
-  intakeTopGoal();
+  // chassis.moveToPoint(13, -13, 1000, {.forwards=true});
+  // chassis.waitUntilDone();
+  intakeMiddle();
+  pros::delay(2000);
+  intakeIn();
+  chassis.moveToPoint(48, -48, 2000);
+  chassis.waitUntilDone();
   chassis.turnToHeading(90, 1000);
-  pros::delay(100);
-  chassis.moveToPoint(chassis.getPose().x + 5, y_pos + 4, 2000, {false, 90});
+  chassis.waitUntilDone();
+  // chassis.setPose(50, -50, chassis.getPose().theta);
+  pros::delay(250);
+  engageLoaderMech();
+  chassis.moveToPoint(65, -48, 2000); // go to match loader
+  chassis.waitUntilDone();
+  pros::delay(125);
+  chassis.moveToPoint(63, -48, 2000, {.forwards = false}); // go to match loader
+  chassis.waitUntilDone();
+  pros::delay(125);
+  chassis.moveToPoint(65, -48, 2000); // go to match loader
+  chassis.waitUntilDone();
+  pros::delay(125);
+  chassis.setPose(chassis.getPose().x, chassis.getPose().y, 90);
+  chassis.moveToPoint(30, chassis.getPose().y, 1000,
+                      {.forwards = false}); // go to long goal
+  chassis.waitUntilDone();
   disengageLoaderMech();
-  intake.move_velocity(600);
-  chassis.turnToHeading(200, 1000);
+  intakeTopGoal();
+  pros::delay(2000); // score
+  chassis.moveToPoint(36, -42, 2000);
   chassis.waitUntilDone();
-  drive_distance(25, 2000, 65);
-  pros::delay(700);
-  chassis.turnToHeading(220, 1000);
+  chassis.turnToHeading(90, 1000);
   chassis.waitUntilDone();
-  pros::delay(20);
-  drive_distance(15, 500, 67);
+  engageLeftWing();
+  chassis.moveToPoint(10, -42, 3000);
   chassis.waitUntilDone();
-  intake.move_velocity(-300);
-  pros::delay(1500);
-  chassis.turnToHeading(210, 1000);
-  chassis.waitUntilDone();
-  pros::delay(20);
-  drive_distance(-33, 2000, 80);
-  chassis.turnToHeading(-90, 1000);
-  chassis.waitUntilDone();
-  drive_distance(25, 2000, 127);
-  chassis.turnToHeading(-110, 5000);
 }
 void right() {
   drive_distance_from_wall(26, 5000, 80);
@@ -350,12 +360,12 @@ void runMacros() {
     disengageLeftWing();
   } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
     //wing right
-    chassis.setPose(0, 0, 0);
-    chassis.moveToPoint(-12, -12, 1000, {.minSpeed = 127});
-    chassis.turnToHeading(180, 500);
+    chassis.setPose(0, 0, 270);
+    chassis.moveToPoint(-12, -8, 1000);
+    chassis.turnToPoint(0, -8, 1000);
     chassis.waitUntilDone();
     engageLeftWing();
-    chassis.moveToPoint(-12, 12, 1000, {.minSpeed = 127});
+    chassis.moveToPoint(0, 0, 1000);
     chassis.waitUntilDone();
     disengageLeftWing();
   }

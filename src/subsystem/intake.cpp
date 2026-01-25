@@ -20,20 +20,26 @@ void setIntakeState(IntakeState intakeSt, IntakeState hoodSt) {
   hood.move(hoodState);
 }
 
-void intakeIn() { setIntakeState(IN, HOOD_INTAKE); disengageMiddleGoalMech();}
+void intakeIn() { setIntakeState(IN, IN); disengageMiddleGoalMech(); engageBallLock();}
 
-void intakeOut() { setIntakeState(OUT, OUT); disengageMiddleGoalMech(); }
+void intakeOut() { setIntakeState(OUT, OUT); disengageMiddleGoalMech();
+  engageBallLock();
+}
 
-void intakeMiddle() { setIntakeState(IN, IN); engageMiddleGoalMech();}
+void intakeMiddle() { setIntakeState(MIDDLEGOAL, MIDDLEGOAL); engageMiddleGoalMech();
+  disengageBallLock();
+}
 
 void intakeTopGoal() {
   setIntakeState(IN, IN);
   disengageMiddleGoalMech();
+  disengageBallLock();
 }
 
 void stopIntake() {
   setIntakeState(STOPPED, STOPPED);
   disengageMiddleGoalMech();
+  engageBallLock();
 }
 
 void runIntake() {

@@ -16,14 +16,14 @@ void printScreen() {
     controller.print(0, 0, "X:%.2f Y: %.2f T: %.2f", chassis.getPose().x,
                      chassis.getPose().y, chassis.getPose().theta);
     pros::delay(20);
-    std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y
+    std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y << ", " << chassis.getPose().theta
               << "), " << std::endl;
   }
 }
 
 void initialize() {
   // pros::Task colorSortTask(colorSort);
-  pros::Task printTask(printScreen);
+  //pros::Task printTask(printScreen);
   gui();
   chassis.calibrate();
 }
@@ -33,12 +33,13 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
- 
+  left();
+   //right();
 }
 
 void opcontrol() {
   //left();
-  // right();
+  //right();
   // sawp();
   // skills();
   engageLeftWing();

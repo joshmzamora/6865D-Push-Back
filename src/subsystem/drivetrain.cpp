@@ -42,7 +42,7 @@ lemlib::Drivetrain drivetrain(
 lemlib::ControllerSettings
     linearController(10,  // proportional gain (kP)
                      0,   // integral gain (kI)
-                     4.5,   // derivative gain (kD)
+                     4.4,   // derivative gain (kD)
                      3,   // anti windup
                      1,   // small error range, in inches
                      100, // small error range timeout, in milliseconds

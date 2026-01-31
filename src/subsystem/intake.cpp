@@ -43,7 +43,11 @@ void stopIntake() {
 }
 
 void runIntake() {
-  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
+  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
+      controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
+      intakeState != BLOCKED)
+    intakeMiddle();
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
            intakeState != BLOCKED)
     intakeIn();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
@@ -52,9 +56,6 @@ void runIntake() {
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
            intakeState != BLOCKED)
     intakeTopGoal();
-  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT) &&
-           intakeState != BLOCKED)
-    intakeMiddle();
   else if (intakeState != BLOCKED) {
     stopIntake();
   }

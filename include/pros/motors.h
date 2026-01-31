@@ -857,7 +857,7 @@ int32_t motor_get_voltage(int8_t port);
  * \enum motor_brake_mode_e_t
  * Indicates the current 'brake mode' of a motor.
  */
-typedef enum motor_brake_mode_e {
+typedef enum  motor_brake_mode_e {
 	/// Motor coasts when stopped, traditional behavior
 	E_MOTOR_BRAKE_COAST = 0,
 	/// Motor brakes when stopped

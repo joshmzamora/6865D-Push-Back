@@ -3,7 +3,6 @@
 #include "selector.h"
 
 enum Alliance { RED, BLUE, OTHER };
-
 enum Side { LEFT, RIGHT };
 
 extern Alliance currentAlliance;

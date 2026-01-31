@@ -4,7 +4,7 @@
 extern bool runDoubleParkingIntake;
 
 #define PORT_OPTICAL 15
-#define PORT_INERTIAL 7
+#define PORT_INERTIAL 17
 #define PORT_LEFT_DISTANCE 6
 #define PORT_RIGHT_DISTANCE 16
 #define PORT_FRONT_DISTANCE 14

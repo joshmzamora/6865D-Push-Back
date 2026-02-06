@@ -38,9 +38,9 @@ void autonomous() {
 }
 
 void opcontrol() {
-  //left();
+  left();
   //right();
-  // sawp();
+  //sawp();
   // skills();
   engageLeftWing();
   engageMiddleGoalMech();

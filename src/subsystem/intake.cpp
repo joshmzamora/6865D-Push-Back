@@ -43,8 +43,7 @@ void stopIntake() {
 }
 
 void runIntake() {
-  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
-      controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
+  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) &&
       intakeState != BLOCKED)
     intakeMiddle();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&
@@ -56,6 +55,9 @@ void runIntake() {
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
            intakeState != BLOCKED)
     intakeTopGoal();
+  else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B) &&
+           intakeState != BLOCKED)
+    engageMiddleGoalMech();
   else if (intakeState != BLOCKED) {
     stopIntake();
   }

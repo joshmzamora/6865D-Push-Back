@@ -7,7 +7,7 @@
 pros::adi::Pneumatics wingLeft(PORT_ADI_WING_LEFT, true);
 
 void runWingToggle() {
-  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) && controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)==false) {
+  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
     wingLeft.extend();
   }
   else {

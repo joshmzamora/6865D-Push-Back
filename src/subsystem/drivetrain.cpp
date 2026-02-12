@@ -2,7 +2,7 @@
 #include "auton/selector.h"
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "pros/misc.h"
-#include "pros/rotation.hpp"
+#include "globals.h"
 #include "subsystem/drivetrain.h"
 #include <iostream>
 

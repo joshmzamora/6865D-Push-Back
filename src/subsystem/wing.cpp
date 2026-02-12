@@ -4,14 +4,14 @@
 #include "pros/misc.h"
 #include "subsystem/drivetrain.h"
 
-pros::adi::Pneumatics wingLeft(PORT_ADI_WING_LEFT, true);
+pros::adi::Pneumatics wingLeft(PORT_ADI_WING_LEFT, false);
 
 void runWingToggle() {
   if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-    wingLeft.extend();
+    wingLeft.retract();
   }
   else {
-    wingLeft.retract();
+    wingLeft.extend();
   }
 }
 

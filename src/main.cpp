@@ -33,12 +33,13 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-  left();
-   //right();
+  //left();
+  //right();
+   //sawp();
 }
 
 void opcontrol() {
-  left();
+  //left();
   //right();
   //sawp();
   // skills();
@@ -51,8 +52,6 @@ void opcontrol() {
   // chassis.waitUntilDone();
   while (true) {
     // pidController();
-    // doublePark();
-    // runDoubleParkToggle();
     // colorSort();
     // runBallLockToggle();
     runIntake();

@@ -147,28 +147,28 @@ void waitForColorOrTimeout(Alliance target, int timeout_ms) {
 
 void left() {
   disengageLeftWing();
-  chassis.setPose(51, -10, 240);
+  chassis.setPose(49, -10, 240);
   intakeIn();
   chassis.moveToPoint(20, -22, 1000);
   chassis.waitUntil(20);
   engageLoaderMech();
   intakeIn();
-  chassis.moveToPoint(24, -24, 2000, {.forwards = false});
+  chassis.moveToPoint(22.5, -24, 2000, {.forwards = false});
   chassis.waitUntilDone();
   intakeIn();
   chassis.turnToHeading(135, 1000);
   chassis.waitUntilDone();
   intakeIn();
-  chassis.moveToPoint(13, -13, 1000, {.forwards=false});
+  chassis.moveToPoint(12, -12, 1000, {.forwards=false});
   chassis.waitUntilDone();
   intakeMiddle();
-  pros::delay(1500);
+  pros::delay(1100);
   intakeIn();
   chassis.moveToPoint(24, -24, 2000, {.minSpeed=90, .earlyExitRange=6});
   chassis.waitUntilDone();
   chassis.turnToHeading(135,250);
   chassis.waitUntilDone();
-  chassis.moveToPoint(48, -48, 2000, {.minSpeed=90, .earlyExitRange=14});
+  chassis.moveToPoint(48, -48, 2000, {.minSpeed=90, .earlyExitRange=13});
   chassis.waitUntilDone();
   chassis.turnToHeading(90, 750);
   chassis.waitUntilDone();
@@ -178,7 +178,7 @@ void left() {
   chassis.setPose(chassis.getPose().x, distanceFromLoader,90);
   // std::cout << "Distance from east wall: " << distanceFromLoader << " inches"
   //           << std::endl;
-  chassis.moveToPoint(66, -48, 1000,
+  chassis.moveToPoint(66, -48, 625,
                       {.maxSpeed = 60}); // go to match loader
   chassis.waitUntilDone();
   chassis.moveToPoint(62, -48, 250,
@@ -188,30 +188,12 @@ void left() {
   chassis.waitUntilDone();
   chassis.setPose(chassis.getPose().x, -48, chassis.getPose().theta);
   chassis.waitUntilDone();
-
-  // int allianceToNumber = (currentAlliance == RED) ? RED : BLUE;
-  //   while (getColor(colorSensor.get_hue()) != allianceToNumber) {
-  //     pros::delay(10);
-  //     std::cout << "Current Hue: " << getColor(colorSensor.get_hue())
-  //               << std::endl;
-  //   }
-  //  std::cout << "New Pose: x=" << chassis.getPose().x
-  //            << ", y=" << chassis.getPose().y
-  //            << ", theta=" << chassis.getPose().theta << std::endl;
-  //  chassis.moveToPoint(48, -48, 1000,
-  //                      {.forwards = false,
-  //                       .minSpeed = 100, .earlyExitRange = 10}); // go to
-  //                       long goal
-  //  chassis.waitUntilDone();  //  std::cout << "Current Pose: x=" <<
-  //  chassis.getPose().x
-  //            << ", y=" << chassis.getPose().y
-  //            << ", theta=" << chassis.getPose().theta << std::endl;
    std::cout << "Current Pose: x=" << chassis.getPose().x
              << ", y=" << chassis.getPose().y
              << ", theta=" << chassis.getPose().theta << std::endl;
   chassis.moveToPoint(
       30, -48, 2000,
-      {.forwards = false, .maxSpeed=100}); // go to long goal
+      {.forwards = false, .maxSpeed=80}); // go to long goal
   chassis.waitUntilDone();
   intakeTopGoal();
   disengageLoaderMech();
@@ -221,32 +203,31 @@ void left() {
             << ", theta=" << chassis.getPose().theta << std::endl;
 
   // WING
-  chassis.moveToPoint(45, -48, 2000, {.minSpeed = 70, .earlyExitRange = 2});
-  chassis.waitUntilDone();
-
-  chassis.turnToHeading(310, 1000);
-  chassis.waitUntilDone();
-
-  chassis.moveToPoint(30, -40, 3000,
-                      { .minSpeed = 50});
-  chassis.waitUntilDone();
-
-  disengageLeftWing();
-  // chassis.turnToHeading(270, 1000, {.minSpeed = 50, .earlyExitRange = .01});
+  // chassis.moveToPoint(45, -48, 2000, {.minSpeed = 70, .earlyExitRange = 2});
   // chassis.waitUntilDone();
 
-  chassis.moveToPoint(11, -40, 3000,
-                      { .minSpeed = 50, .earlyExitRange = 1});
-  chassis.waitUntilDone();
+  // chassis.turnToHeading(310, 1000);
+  // chassis.waitUntilDone();
 
-  chassis.swingToHeading(300, DriveSide::RIGHT, 1000);
-  chassis.waitUntilDone();
+  // chassis.moveToPoint(30, -39, 2000);
+  // chassis.waitUntilDone();
+
+  // disengageLeftWing();
+  // chassis.turnToHeading(270, 1000);
+  // chassis.waitUntilDone();
+
+  // chassis.moveToPoint(14, -39, 2000);
+  // chassis.waitUntilDone();
+
+  // chassis.swingToHeading(300, DriveSide::RIGHT, 1000);
+  // chassis.waitUntilDone();
   
-  chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+  // chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
  }
-void right() { 
+void right() {
   disengageLeftWing();
-  chassis.setPose(49, 10, 300);
+  
+  chassis.setPose(47, 10, 270);
 
   intakeIn();
   chassis.moveToPoint(20, 22, 1000);
@@ -259,7 +240,7 @@ void right() {
   chassis.turnToHeading(45, 1000);
   chassis.waitUntilDone();
   
-  chassis.moveToPoint(48, 48, 2000, {.minSpeed = 100, .earlyExitRange = 12});
+  chassis.moveToPoint(48, 48, 2000, {.minSpeed = 90, .earlyExitRange = 13});
   chassis.waitUntilDone();
   
   chassis.turnToHeading(90, 750);
@@ -270,42 +251,38 @@ void right() {
   int distanceFromLoader = 48 + (24 - distance);
   
   chassis.setPose(chassis.getPose().x, distanceFromLoader,
-  chassis.getPose().theta);
+  90);
   
   chassis.moveToPoint(66, 48, 1000, {.maxSpeed = 60});
   chassis.waitUntilDone();
 
-  std::cout << "Current Pose: x=" << chassis.getPose().x
-            << ", y=" << chassis.getPose().y
-            << ", theta=" << chassis.getPose().theta << std::endl;
-  chassis.setPose(chassis.getPose().x, 48, 90);
+  chassis.setPose(chassis.getPose().x, 48, chassis.getPose().theta);
   chassis.waitUntilDone();
-  chassis.moveToPoint(30, 48, 1500, {.forwards = false});
-  chassis.waitUntilDone();
-  chassis.moveToPoint(30, 48, 1500, {.forwards = false});
+  chassis.moveToPoint(30, 48, 1500, {.forwards = false, .maxSpeed=80});
   chassis.waitUntilDone();
 
   intakeTopGoal();
   disengageLoaderMech();
   pros::delay(3000);
-
+  // wing
+  intakeIn();
   chassis.moveToPoint(48, 48, 2000, {.minSpeed = 70, .earlyExitRange = 2});
   chassis.waitUntilDone();
 
-  chassis.turnToHeading(70, 1000, {.maxSpeed=80});
+  chassis.turnToHeading(40, 500, {.maxSpeed=80});
   chassis.waitUntilDone();
 
-  chassis.moveToPoint(30, 42, 3000, {.forwards=false,.maxSpeed = 60, .earlyExitRange = 2});
+  chassis.moveToPoint(30, 40, 3000, {.forwards=false,.maxSpeed = 60, .earlyExitRange = 2});
   chassis.waitUntilDone();
 
   disengageLeftWing();
   chassis.turnToHeading(90, 1000, {.minSpeed = 50, .earlyExitRange = .01});
   chassis.waitUntilDone();
 
-  chassis.moveToPoint(11, 42, 3000, {.forwards=false,.maxSpeed =40 , .earlyExitRange = 1}); //minSpeed = 90
+  chassis.moveToPoint(12, 41, 3000, {.forwards=false,.maxSpeed =40 , .earlyExitRange = 1}); //minSpeed = 90
   chassis.waitUntilDone();
   
-  chassis.swingToHeading(60, DriveSide::LEFT, 1000);
+  chassis.swingToHeading(50, DriveSide::LEFT, 1000);
   chassis.waitUntilDone();
   chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
 }
@@ -335,7 +312,7 @@ void sawp() {
   chassis.waitUntilDone();
   chassis.resetLocalPosition();
   intakeIn();
-  chassis.moveToPoint(0, 57, 1500, {true, 100, 80});
+  chassis.moveToPoint(0, 54, 1500, {true, 100, 80});
   chassis.waitUntilDone();
   intakeIn();
   engageLoaderMech();
@@ -356,7 +333,7 @@ void sawp() {
   chassis.turnToHeading(-90, 1000);
   chassis.waitUntilDone();
   intakeIn();
-  drive_distance(999, 1100, 75);
+  // drive_distance(999, 1100, 75);
   move_relative(30, 5, 1500, false);
   chassis.waitUntilDone();
   intakeOut();
@@ -471,26 +448,43 @@ void skills() {
 }
 
 void runMacros() {
-  // if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-  //   //wing left
-  //   chassis.setPose(0, 0, 0);
-  //   chassis.moveToPoint(12, 12, 1000, {.minSpeed = 127});
-  //   chassis.waitUntilDone();
-  //   chassis.turnToHeading(0, 500);
-  //   chassis.waitUntilDone();
-  //   engageLeftWing();
-  //   chassis.moveToPoint(12, -12, 1000, {.minSpeed = 127});
-  //   chassis.waitUntilDone();
-  //   disengageLeftWing();
-  // } else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-  //   //wing right
-  //   chassis.setPose(0, 0, 270);
-  //   chassis.moveToPoint(-12, -8, 1000);
-  //   chassis.turnToPoint(0, -8, 1000);
-  //   chassis.waitUntilDone();
-  //   engageLeftWing();
-  //   chassis.moveToPoint(0, 0, 1000);
-  //   chassis.waitUntilDone();
-  //   disengageLeftWing();
-  // }
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+    // wing left
+    chassis.setPose(30,48,90);
+    intakeIn();
+    chassis.moveToPoint(48, 48, 2000, {.minSpeed = 70, .earlyExitRange = 2});
+    chassis.waitUntilDone();
+
+    chassis.turnToHeading(40, 500, {.maxSpeed = 80});
+    chassis.waitUntilDone();
+
+    chassis.moveToPoint(
+        30, 40, 3000, {.forwards = false, .maxSpeed = 60, .earlyExitRange = 2});
+    chassis.waitUntilDone();
+
+    disengageLeftWing();
+    chassis.turnToHeading(90, 1000, {.minSpeed = 50, .earlyExitRange = .01});
+    chassis.waitUntilDone();
+
+    chassis.moveToPoint(12, 41, 3000,
+                        {.forwards = false,
+                         .maxSpeed = 40,
+                         .earlyExitRange = 1}); // minSpeed = 90
+    chassis.waitUntilDone();
+
+    chassis.swingToHeading(50, DriveSide::LEFT, 1000);
+    chassis.waitUntilDone();
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+    // } else if
+    // (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    //   //wing right
+    //   chassis.setPose(0, 0, 270);
+    //   chassis.moveToPoint(-12, -8, 1000);
+    //   chassis.turnToPoint(0, -8, 1000);
+    //   chassis.waitUntilDone();
+    //   engageLeftWing();
+    //   chassis.moveToPoint(0, 0, 1000);
+    //   chassis.waitUntilDone();
+    //   disengageLeftWing();
+    }
 }

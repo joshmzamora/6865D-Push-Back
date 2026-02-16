@@ -23,7 +23,8 @@ void printScreen() {
 
 void initialize() {
   // pros::Task colorSortTask(colorSort);
-  //pros::Task printTask(printScreen);
+  // pros::Task printTask(printScreen);
+  pros::Task *macroTask = nullptr;
   gui();
   chassis.calibrate();
 }
@@ -39,32 +40,32 @@ void autonomous() {
 }
 
 void opcontrol() {
-  //left();
-  //right();
-  //sawp();
-  // skills();
   engageLeftWing();
-  engageMiddleGoalMech();
+  engageBallLock();
   // chassis.setPose(0,0,0);
   // chassis.moveToPoint(0, 24, 24000);
   // chassis.waitUntilDone();
   // chassis.moveToPoint(0, 0, 24000, {.forwards=false});
   // chassis.waitUntilDone();
   while (true) {
-    // pidController();
-    // colorSort();
-    // runBallLockToggle();
+    runMacros();
     runIntake();
     runLoaderMechToggle();
     runWingToggle();
-    runMacros();
+
+    //macro code
+
     int yAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), 1, 10);
     int xAxis = returnExponential(
         controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), 2, 6);
     chassis.arcade(yAxis, xAxis);
+
     // printf("X: %.2f Y: %.2f Theta: %.2f\n", chassis.getPose().x,
     //        chassis.getPose().y, formatHeading(chassis.getPose().theta));
+
     pros::delay(20);
+
+    
   }
 }

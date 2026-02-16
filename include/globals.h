@@ -24,6 +24,6 @@ extern bool runDoubleParkingIntake;
 #define PORT_ADI_LOADER_MECH_RIGHT 'H'
 #define PORT_ADI_DOUBLE_PARK_LEFT 'Z'
 #define PORT_ADI_DOUBLE_PARK_RIGHT 'Z'
-#define PORT_ADI_MIDDLE_GOAL 'C'
+#define PORT_ADI_MIDDLE_GOAL 'F'
 #define PORT_ADI_WING_LEFT 'B'
 #define PORT_ADI_BALL_LOCK 'G'

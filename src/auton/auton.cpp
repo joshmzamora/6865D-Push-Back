@@ -447,44 +447,69 @@ void skills() {
 
 }
 
+bool hasAnyInput(pros::Controller master) {
+  // Check Analog Sticks (with a deadzone of 10 to ignore drift)
+  if (abs(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)) > 10 ||
+  abs(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X)) > 10 ||
+  abs(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y)) > 10 ||
+  abs(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X)) > 10) {
+    return true;
+  }
+  
+  // No input detected
+  return false;
+}
+
+pros::Task *macroTask = nullptr;
+
+void wingMacroFunctions() {
+      chassis.setPose(30, 48, 90);
+      intakeIn();
+      chassis.moveToPoint(37, 48, 2000, {.minSpeed = 90, .earlyExitRange = 2});
+      chassis.waitUntilDone();
+
+      chassis.turnToHeading(55, 500, {.maxSpeed = 80, .earlyExitRange = .01});
+
+      chassis.moveToPoint(
+          34, 44, 3000,
+          {.forwards = false, .minSpeed = 100, .earlyExitRange = .25});
+      chassis.waitUntilDone();
+      chassis.turnToHeading(90,  1000, {.minSpeed=90, .earlyExitRange=.01});
+
+      chassis.waitUntilDone();
+      chassis.setPose(chassis.getPose().x, chassis.getPose().y, 90);
+      
+      disengageLeftWing();
+      chassis.moveToPoint(
+        0, chassis.getPose().y, 3000,
+        {.forwards = false, .minSpeed = 90, .earlyExitRange = 1});
+      pros::delay(500);
+      engageLeftWing();
+      pros::delay(300);
+      disengageLeftWing();
+
+      chassis.waitUntilDone();
+      macroTask = nullptr;
+}
+
 void runMacros() {
-  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-    // wing left
-    chassis.setPose(30,48,90);
-    intakeIn();
-    chassis.moveToPoint(48, 48, 2000, {.minSpeed = 70, .earlyExitRange = 2});
-    chassis.waitUntilDone();
-
-    chassis.turnToHeading(40, 500, {.maxSpeed = 80});
-    chassis.waitUntilDone();
-
-    chassis.moveToPoint(
-        30, 40, 3000, {.forwards = false, .maxSpeed = 60, .earlyExitRange = 2});
-    chassis.waitUntilDone();
-
-    disengageLeftWing();
-    chassis.turnToHeading(90, 1000, {.minSpeed = 50, .earlyExitRange = .01});
-    chassis.waitUntilDone();
-
-    chassis.moveToPoint(12, 41, 3000,
-                        {.forwards = false,
-                         .maxSpeed = 40,
-                         .earlyExitRange = 1}); // minSpeed = 90
-    chassis.waitUntilDone();
-
-    chassis.swingToHeading(50, DriveSide::LEFT, 1000);
-    chassis.waitUntilDone();
-    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
-    // } else if
-    // (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-    //   //wing right
-    //   chassis.setPose(0, 0, 270);
-    //   chassis.moveToPoint(-12, -8, 1000);
-    //   chassis.turnToPoint(0, -8, 1000);
-    //   chassis.waitUntilDone();
-    //   engageLeftWing();
-    //   chassis.moveToPoint(0, 0, 1000);
-    //   chassis.waitUntilDone();
-    //   disengageLeftWing();
+  if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    if (macroTask == nullptr) { // Only start if not already running
+      macroTask = new pros::Task(wingMacroFunctions);
     }
+  }
+
+  // 2. DETECT INTERRUPT
+  if (macroTask != nullptr) { // If macro is currently running
+    if (hasAnyInput(controller)) {
+      macroTask->remove(); // Kill the task immediately
+      delete macroTask;    // Clean up memory
+      macroTask = nullptr;
+
+      // IMPORTANT: Stop the motors!
+      // Killing the task doesn't stop the last command sent to motors.
+      chassis.cancelAllMotions();
+      controller.rumble("."); // Feedback that macro was cancelled
+    }
+  }
 }

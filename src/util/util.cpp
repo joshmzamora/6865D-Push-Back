@@ -18,7 +18,7 @@ double returnExponential(int axisValue, int type, float t) {
         return percentage;
     }
     else if (type == 2) {
-        return (exp(-(t/10)) + exp((std::abs(percentage)-127)/10) * (1-exp(-(t/10))))*percentage;
+        return (exp(-(t/12)) + exp((std::abs(percentage)-127)/12) * (1-exp(-(t/12))))*percentage;
     }
     else if (type == 3) {
         return (exp((std::abs(percentage)-127)/1000))*percentage;

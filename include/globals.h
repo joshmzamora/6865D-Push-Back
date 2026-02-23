@@ -1,14 +1,12 @@
 #pragma once
 #include "main.h"
 
-extern bool runDoubleParkingIntake;
-
 #define PORT_OPTICAL 15
-#define PORT_INERTIAL 6
+#define PORT_INERTIAL 16
 #define PORT_LEFT_DISTANCE 7
 #define PORT_RIGHT_DISTANCE 17
 #define PORT_FRONT_DISTANCE 14
-#define PORT_BACK_DISTANCE 4
+#define PORT_BACK_DISTANCE 5
 
 #define PORT_INTAKE (1)
 #define PORT_HOOD (-11)

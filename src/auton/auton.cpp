@@ -54,7 +54,7 @@ void drive_distance_from_wall(double distance, double timeout,
       forwards = true;
 
     } else if (back_valid && !from_front) {
-      dist_from_wall = back_distance + 5.25;
+      dist_from_wall = back_distance + 5.5;
       forwards = false;
     }
     drive_distance((forwards ? 1 : -1) * (dist_from_wall - distance), 5000,
@@ -288,7 +288,7 @@ void right() {
 }
 
 void sawp() {
-  chassis.moveToPoint(0, 10, 200, {true, 80, 60});
+  chassis.moveToPoint(0, 4, 500, {true, 80, 60});
   chassis.waitUntilDone();
   intakeIn();
   chassis.moveToPoint(0, -1000, 400, {false, 127, 80});
@@ -296,29 +296,28 @@ void sawp() {
   drive_distance_from_wall(24, 5000, 80, false);
   double y_pos = chassis.getPose().y;
   engageLoaderMech();
-  chassis.turnToHeading(-90, 500);
+  chassis.turnToHeading(275, 500); //270
   chassis.waitUntilDone();
-  drive_distance(999, 1250, 80);
-  move_relative(30, -2, 1500, false, 127);
+  drive_distance(999, 1050, 80);
+  chassis.resetLocalPosition();
+  move_relative(30, 0, 1500, false, 127);
   chassis.waitUntil(22);
   intakeOut();
-  pros::delay(250);
+  pros::delay(100);
   disengageLoaderMech();
   intakeTopGoal();
-  pros::delay(1750);
+  pros::delay(1000);
   intakeIn();
-  chassis.turnToHeading(15, 700);
-  chassis.turnToHeading(15, 450);
-  chassis.waitUntilDone();
+  move_relative(-8, 0, 500, true, 127);
+  chassis.turnToHeading(30, 600);
+  move_relative(15, 15, 500, true, 127);
+  chassis.turnToHeading(0, 500);
   chassis.resetLocalPosition();
   intakeIn();
-  chassis.moveToPoint(0, 54, 1500, {true, 100, 80});
+  chassis.moveToPoint(1, 52, 1300, {true, 100, 80});
   chassis.waitUntilDone();
   intakeIn();
   engageLoaderMech();
-  chassis.turnToHeading(20, 800);
-  chassis.waitUntilDone();
-  intakeIn();
   chassis.turnToHeading(315, 500);
   chassis.waitUntilDone();
   move_relative(16.25, -16.25, 1000, false, 80);
@@ -329,11 +328,12 @@ void sawp() {
   pros::delay(1000);
   chassis.resetLocalPosition();
   intakeIn();
-  move_relative(-33.5, 33.5, 2000, 127);
-  chassis.turnToHeading(-90, 1000);
+  move_relative(-36, 36, 2000, 115);
+  chassis.turnToHeading(265, 1000);
   chassis.waitUntilDone();
   intakeIn();
-  // drive_distance(999, 1100, 75);
+  engageLoaderMech();
+  drive_distance(999, 1100, 75);
   move_relative(30, 5, 1500, false);
   chassis.waitUntilDone();
   intakeOut();
@@ -342,6 +342,7 @@ void sawp() {
   pros::delay(2000);
   disengageLoaderMech();
 }
+
 void skills() {
   intake.move_velocity(600);
   disengageLeftWing();
@@ -468,25 +469,25 @@ void wingMacroFunctions() {
       chassis.moveToPoint(37, 48, 2000, {.minSpeed = 90, .earlyExitRange = 2});
       chassis.waitUntilDone();
 
-      chassis.turnToHeading(55, 500, {.maxSpeed = 80, .earlyExitRange = .01});
+      chassis.turnToHeading(55, 300, {.maxSpeed = 80, .earlyExitRange = .01});
 
       chassis.moveToPoint(
-          34, 44, 3000,
+          34, 45, 3000,
           {.forwards = false, .minSpeed = 100, .earlyExitRange = .25});
       chassis.waitUntilDone();
       chassis.turnToHeading(90,  1000, {.minSpeed=90, .earlyExitRange=.01});
 
       chassis.waitUntilDone();
-      chassis.setPose(chassis.getPose().x, chassis.getPose().y, 90);
-      
+   
       disengageLeftWing();
       chassis.moveToPoint(
         0, chassis.getPose().y, 3000,
         {.forwards = false, .minSpeed = 90, .earlyExitRange = 1});
-      pros::delay(500);
+      pros::delay(550);
       engageLeftWing();
       pros::delay(300);
       disengageLeftWing();
+      pros::delay(800);
 
       chassis.waitUntilDone();
       macroTask = nullptr;

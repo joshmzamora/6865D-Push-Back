@@ -13,20 +13,21 @@
 
 void printScreen() {
   while (true) {
-    controller.print(0, 0, "X:%.2f Y: %.2f T: %.2f", chassis.getPose().x,
-                     chassis.getPose().y, chassis.getPose().theta);
-    pros::delay(20);
+    controller.print(0, 0, "X:%.1f Y:%.1f T:%.1f", chassis.getPose().x,
+                     chassis.getPose().y,
+                     formatHeading(chassis.getPose().theta));
+    pros::delay(50);
     std::cout << "(" << chassis.getPose().x << ", " << chassis.getPose().y << ", " << chassis.getPose().theta
               << "), " << std::endl;
   }
 }
 
 void initialize() {
-  // pros::Task colorSortTask(colorSort);
-  // pros::Task printTask(printScreen);
+  pros::Task printTask(printScreen);
   pros::Task *macroTask = nullptr;
   gui();
   chassis.calibrate();
+  
 }
 
 void disabled() {}
@@ -36,7 +37,7 @@ void competition_initialize() {}
 void autonomous() {
   //left();
   //right();
-   //sawp();
+   sawp();
 }
 
 void opcontrol() {
@@ -64,8 +65,6 @@ void opcontrol() {
     // printf("X: %.2f Y: %.2f Theta: %.2f\n", chassis.getPose().x,
     //        chassis.getPose().y, formatHeading(chassis.getPose().theta));
 
-    pros::delay(20);
-
-    
+    pros::delay(20);    
   }
 }

@@ -4,7 +4,7 @@
 
 enum IntakeState {
   IN = 127,
-  MIDDLEGOAL = 96,
+  MIDDLEGOAL = 67,
   OUT = -127,
   COLOR_SORT = -100,
   HOOD_INTAKE = -15,

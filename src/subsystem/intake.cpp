@@ -26,7 +26,10 @@ void intakeOut() { setIntakeState(OUT, OUT); disengageMiddleGoalMech();
   engageBallLock();
 }
 
-void intakeMiddle() { setIntakeState(IN, IN); disengageMiddleGoalMech();
+void intakeMiddle() {
+  setIntakeState(IN, IN);
+  // setIntakeState(MIDDLEGOAL, MIDDLEGOAL);
+  disengageMiddleGoalMech();
   disengageBallLock();
 }
 

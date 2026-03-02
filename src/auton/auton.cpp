@@ -161,16 +161,25 @@ void left() {
   intakeIn();
   chassis.moveToPoint(12, -12, 1000, {.forwards=false});
   chassis.waitUntilDone();
-  intakeMiddle();
-  pros::delay(1500);
   intakeOut();
   pros::delay(250);
+  intakeMiddle();
+  pros::delay(1600);
+  intakeOut();
+  pros::delay(400);
+  // mid goal ENSURE
+  // stopIntake();
+  // chassis.moveToPoint(15, -15, 1000, {.forwards = true});
+  // chassis.waitUntilDone();
+  // chassis.moveToPoint(10, -10, 1000, {.forwards = false});
+  // chassis.waitUntilDone();
+  // end
   intakeIn();
   chassis.moveToPoint(24, -24, 1000, {.minSpeed=90, .earlyExitRange=6});
   chassis.waitUntilDone();
   chassis.turnToHeading(135,250, {.earlyExitRange=.01});
   chassis.waitUntilDone();
-  chassis.moveToPoint(48, -48, 2000, {.minSpeed=90, .earlyExitRange=13});
+  chassis.moveToPoint(48, -48, 2000, {.minSpeed=90, .earlyExitRange=12});
   chassis.waitUntilDone();
   chassis.turnToHeading(90, 750);
   chassis.waitUntilDone();
@@ -178,18 +187,18 @@ void left() {
   int distance = (dEast.get() / 25.4) + 5;
   int distanceFromLoader = -48 - (24 - distance);
   chassis.setPose(chassis.getPose().x, distanceFromLoader,
-                  chassis.getPose().theta);
+                  90); // set y to -48, NOT DISTANCE FROM LOADER
   // std::cout << "Distance from east wall: " << distanceFromLoader << " inches"
   //           << std::endl;
   chassis.moveToPoint(70, -48, 700,
                       {.maxSpeed = 60}); // go to match loader
   chassis.waitUntilDone();
-  chassis.moveToPoint(68, -48, 200,
+  chassis.moveToPoint(68, -48, 225,
                       {.forwards = false}); // go to match loader
   chassis.waitUntilDone();
-  chassis.moveToPoint(70, -48, 200); // go to match loader
+  chassis.moveToPoint(70, -48, 225); // go to match loader
   chassis.waitUntilDone();
-  chassis.setPose(chassis.getPose().x, -48, 90 );
+  chassis.setPose(chassis.getPose().x, -48, chassis.getPose().theta);
   chassis.waitUntilDone();
    std::cout << "Current Pose: x=" << chassis.getPose().x
              << ", y=" << chassis.getPose().y
@@ -224,8 +233,9 @@ void left() {
   chassis.waitUntilDone();
 
   disengageLeftWing();
-  chassis.moveToPoint(0, chassis.getPose().y, 600,
-                      {.forwards = false, .minSpeed = 90, .earlyExitRange = 3});
+  chassis.moveToPoint(
+      0, chassis.getPose().y, 575,
+      {.forwards = false, .maxSpeed = 80, .minSpeed = 50, .earlyExitRange = 3});
   chassis.waitUntilDone();
   chassis.swingToHeading(60, DriveSide::LEFT, 1000);
   chassis.waitUntilDone();
@@ -259,7 +269,7 @@ void right() {
   chassis.setPose(chassis.getPose().x - 5, distanceFromLoader,
   chassis.getPose().theta);
   
-  chassis.moveToPoint(60, 48, 1000, {.minSpeed = 80, .earlyExitRange = 3});
+  chassis.moveToPoint(60, 48, 1000, {.minSpeed = 70, .earlyExitRange = 3}); //.minSpeed=80
   chassis.waitUntilDone();
   chassis.moveToPoint(66, 48, 1000, {.maxSpeed = 40});
   chassis.waitUntilDone();
@@ -293,7 +303,7 @@ void right() {
 
   disengageLeftWing();
   chassis.moveToPoint(14, chassis.getPose().y, 3000,
-                      {.forwards = false, .minSpeed = 90, .earlyExitRange = 1});
+                      {.forwards = false, .maxSpeed = 75, .earlyExitRange = 1}); //.minSpeed=90
   chassis.waitUntilDone();
   chassis.swingToHeading(60, DriveSide::LEFT, 1000);
   chassis.waitUntilDone();

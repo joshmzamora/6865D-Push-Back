@@ -46,7 +46,8 @@ void stopIntake() {
 }
 
 void runIntake() {
-  if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT) &&
+  if ((controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT) ||
+       controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) &&
       intakeState != BLOCKED)
     intakeMiddle();
   else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) &&

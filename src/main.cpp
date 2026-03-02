@@ -35,19 +35,19 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-   left();
-    //right();
+  left();
+  //right();
   //sawp();
    // skills();
-  //  autonSelector();
+   //  autonSelector();
+     // chassis.setPose(0,0,0);
+  // chassis.moveToPoint(0, 3, 500);
+  // chassis.waitUntilDone();
 }
 
 void opcontrol() {
-  engageLeftWing();
+  //engageLeftWing();
   engageBallLock();
-  // chassis.setPose(0,0,0);
-  // chassis.moveToPoint(0, 3, 500);
-  // chassis.waitUntilDone();
 
   while (true) {
     runMacros();

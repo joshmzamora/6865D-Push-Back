@@ -4,6 +4,8 @@ Robot code for VEX Team 6865D during the 2025-2026 Push Back season.
 
 This repository contains the code we used and tuned throughout the season. It includes autonomous routines, driver controls, intake and pneumatic subsystems, a Brain-screen autonomous selector, and testing tools for odometry and PID tuning.
 
+For a full explanation of the programming concepts, control systems, sensors, testing process, and design decisions behind the project, see [PROJECT.md](PROJECT.md).
+
 ## Project setup
 
 - PROS for the V5 project and competition framework

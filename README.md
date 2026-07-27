@@ -1,66 +1,98 @@
-# 🤖 6865D | Push-Back 2025-2026
-Official robot code for **VEX Robotics Team 6865D** for the 2025-2026 competition season, **Push-Back**.
+# 6865D Push Back
 
-This project is built using the **PROS Kernel** and utilizes **LemLib** for advanced motion profiling and PID-controlled movement.
+Robot code for VEX Team 6865D during the 2025-2026 Push Back season.
 
----
+This repository contains the code we used and tuned throughout the season. It includes autonomous routines, driver controls, intake and pneumatic subsystems, a Brain-screen autonomous selector, and testing tools for odometry and PID tuning.
 
-## 🚀 Key Software Features
+## Project setup
 
-### 🧠 Intelligent Macro System
-Our codebase features a non-blocking macro system that allows complex autonomous sequences to run during the Driver Control period without freezing the robot.
-* **Task-Based Execution:** Macros run on a separate `pros::Task` thread.
-* **Joystick Interrupt:** Using the `hasAnyInput()` method, the driver can instantly kill a running macro by moving the joysticks, ensuring total safety.
-* **State Synchronization:** Uses `extern pros::Task* macroTask` and boolean states to prevent manual buttons from fighting the autonomous macros.
+- PROS for the V5 project and competition framework
+- LemLib for chassis movement, PID control, and odometry
+- LVGL for the Brain-screen autonomous and debug menus
+- IMU and distance sensors for positioning and autonomous corrections
+- Separate subsystem files for the drivetrain, intake, loader, wing, ball lock, and middle-goal mechanism
 
-### 🏎️ Drivetrain & Motion
-* **LemLib Integration:** High-accuracy movements using PID and Pure Pursuit.
-* **Odometer Tracking:** Real-time position tracking via the Inertial Sensor and wheel encoders.
-* **Arcade Drive:** Custom-mapped curves for precise driver control.
+## How the code runs
 
----
+`initialize()` starts the Brain UI, calibrates the chassis, and starts a task that prints the robot's pose for debugging.
 
-## 🛠️ Hardware Configuration
+`autonomous()` is currently set to run `left()`. The repository also contains `right()`, `sawp()`, and `skills()` routines. The active routine should always be checked in `src/main.cpp` before a competition.
 
-| Component | Port | Details |
-| :--- | :--- | :--- |
-| **Left Drive** | 1, 2, 3 | 600 RPM - Blue Cartridges |
-| **Right Drive** | 4, 5, 6 | 600 RPM - Blue Cartridges |
-| **Intake Motor** | 10 | 600 RPM - High Torque |
-| **Left Wing** | ADI A | Pneumatic Piston |
-| **Right Wing** | ADI B | Pneumatic Piston |
-| **Inertial Sensor**| 15 | 3-Axis Gyroscope |
+During driver control, `opcontrol()` handles macros, intake controls, the loader mechanism, the wing, and arcade drive.
 
----
+## Driver controls
 
-## 🎮 Controller Mappings
+| Control | Action |
+| --- | --- |
+| Left joystick Y | Drive forward and backward |
+| Right joystick X | Turn |
+| B | Start the wing scoring macro |
+| Any joystick movement | Cancel an active macro |
+| R1 | Retract the left wing while held |
+| R2 | Intake in |
+| L1 | Intake out |
+| L2 | Top-goal intake mode |
+| Y | Toggle the loader mechanism |
+| Right or Down | Middle-goal intake mode |
 
-### Primary Driver (Master)
-* **Left Joystick:** Forward/Backward movement.
-* **Right Joystick:** Turning (Arcade style).
-* **Button B:** Execute "Wing Left" Scoring Macro.
-* **Button R1:** Manual Toggle - Left Wing.
-* **Button L1:** Manual Toggle - Right Wing.
-* **Any Joystick Input:** Interrupts and cancels currently active macro.
+The wing macro runs in a separate `pros::Task`, so it does not freeze the rest of driver control. Moving either joystick cancels the task, stops the current chassis motion, and gives the driver controller feedback.
 
----
+## Hardware map
 
-## 📂 File Structure
+Negative motor ports indicate that the motor is reversed in PROS.
 
-* `src/main.cpp`: Entry point for Autonomous, OpControl, and Global Task handling.
-* `src/subsystem/wing.cpp`: Logic for pneumatic wing toggles and hardware state.
-* `src/subsystem/intake.cpp`: Intake motor controls and macro functions.
-* `include/main.h`: Global declarations (includes the `extern` Task pointers).
+| Component | Port(s) |
+| --- | --- |
+| Left drive | -10, -8, -9 |
+| Right drive | 19, 18, 20 |
+| Intake | 1 |
+| Hood | -11 |
+| Optical sensor | 15 |
+| Inertial sensor | 16 |
+| Left distance sensor | 7 |
+| Right distance sensor | 17 |
+| Front distance sensor | 14 |
+| Back distance sensor | 5 |
+| Loader mechanism | ADI A, ADI H |
+| Middle-goal mechanism | ADI F |
+| Left wing | ADI B |
+| Ball lock | ADI G |
 
----
+Port assignments are kept in `include/globals.h`.
 
-## 🛠️ Installation & Setup
+## Code structure
 
-1. **Prerequisites:** * Install the [PROS Toolchain](https://pros.cs.purdue.edu/).
-   * Ensure [LemLib](https://lemlib.github.io/LemLib/) is included in your project template.
+| File | Purpose |
+| --- | --- |
+| `src/main.cpp` | PROS entry points, active autonomous routine, and driver loop |
+| `src/auton/auton.cpp` | Autonomous routines, movement helpers, and macro task logic |
+| `src/auton/selector.cpp` | Brain-screen autonomous selector and odometry debug display |
+| `src/subsystem/drivetrain.cpp` | Motor groups, LemLib chassis setup, PID values, and odometry |
+| `src/subsystem/intake.cpp` | Intake and hood state control |
+| `src/subsystem/loaderMech.cpp` | Loader pneumatic control |
+| `src/subsystem/wing.cpp` | Left-wing control |
+| `src/subsystem/ball_lock.cpp` | Ball-lock pneumatic control |
+| `src/subsystem/middleGoalMech.cpp` | Middle-goal pneumatic control |
+| `src/util/util.cpp` | Joystick curves and heading helpers |
+| `src/util/colorsort.cpp` | Color-sorting work in progress |
 
-2. **Clone and Build:**
-   ```bash
-   git clone [https://github.com/YourUsername/6865D-PushBack.git](https://github.com/YourUsername/6865D-PushBack.git)
-   pros make
-   pros upload
+## Build and upload
+
+Install the PROS toolchain, clone the repository, and run:
+
+```bash
+git clone https://github.com/joshmzamora/6865D-Push-Back.git
+cd 6865D-Push-Back
+pros make
+pros upload
+```
+
+For terminal output and pose debugging:
+
+```bash
+pros terminal
+```
+
+## Notes
+
+The repository contains both match-ready code and code that was still being tested during the season. Check the active autonomous routine, sensor configuration, and PID values before using it on a different robot or at a competition.

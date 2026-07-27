@@ -16,7 +16,7 @@ This repository contains the code we used and tuned throughout the season. It in
 
 `initialize()` starts the Brain UI, calibrates the chassis, and starts a task that prints the robot's pose for debugging.
 
-`autonomous()` is currently set to run `left()`. The repository also contains `right()`, `sawp()`, and `skills()` routines. The active routine should always be checked in `src/main.cpp` before a competition.
+At the end of the season, `autonomous()` was set to run `left()`. The repository also contains `right()`, `sawp()`, and `skills()` routines. We checked the active routine in `src/main.cpp` before each competition.
 
 During driver control, `opcontrol()` handles macros, intake controls, the loader mechanism, the wing, and arcade drive.
 
@@ -74,7 +74,7 @@ Port assignments are kept in `include/globals.h`.
 | `src/subsystem/ball_lock.cpp` | Ball-lock pneumatic control |
 | `src/subsystem/middleGoalMech.cpp` | Middle-goal pneumatic control |
 | `src/util/util.cpp` | Joystick curves and heading helpers |
-| `src/util/colorsort.cpp` | Color-sorting work in progress |
+| `src/util/colorsort.cpp` | Experimental color-sorting code |
 
 ## Build and upload
 
@@ -95,4 +95,4 @@ pros terminal
 
 ## Notes
 
-The repository contains both match-ready code and code that was still being tested during the season. Check the active autonomous routine, sensor configuration, and PID values before using it on a different robot or at a competition.
+The repository contains both match-ready code and code that was still being tested during the season. Check the active autonomous routine, sensor configuration, and PID values before using it on a different robot.
